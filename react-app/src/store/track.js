@@ -72,5 +72,6 @@ export default function reducer(state = {all_tracks: []}, action) {
 
 
     switch(action.type) {
+        default: return state 
     }
 }
