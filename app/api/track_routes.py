@@ -10,8 +10,8 @@ def tracks():
         print('--------------', track.to_dict(), '----------')
     return {'tracks': [track.to_dict() for track in tracks]}
 
-@track_routes.route('/new')
-def trackUpload():
+# @track_routes.route('/new')
+# def trackUpload():
     
     
 

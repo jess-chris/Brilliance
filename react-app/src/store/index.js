@@ -6,7 +6,7 @@ import track from './track'
 
 const rootReducer = combineReducers({
   session,
-  track
+  //track
 });
 
 
