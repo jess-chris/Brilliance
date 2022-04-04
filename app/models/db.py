@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-
+from datetime import date
 db = SQLAlchemy()
 
 class Track(db.Model):
@@ -11,8 +11,8 @@ class Track(db.Model):
   lyrics = db.Column(db.Text(), nullable=False)
   artist = db.Column(db.String(50), nullable=False)
   album_image = db.Column(db.String())
-  created_at = db.Column(db.DateTime, nullable=False)
-  updated_at = db.Column(db.DateTime, nullable=False)
+  created_at = db.Column(db.DateTime, default=, nullable=False)
+  updated_at = db.Column(db.DateTime, default=today.strftime("%B %d, %Y"), nullable=False)
 
   
   # TODO Relation

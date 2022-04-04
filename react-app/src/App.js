@@ -35,7 +35,7 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
-        <Route path='/tracks' exact={true}>
+        <Route path='/tracks/new' exact={true}>
           <TrackUploadForm/>
         </Route>
         <ProtectedRoute path='/users' exact={true} >
