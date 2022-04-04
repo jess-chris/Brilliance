@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-
+from datetime import datetime
 db = SQLAlchemy()
 
 class Track(db.Model):
@@ -41,8 +41,8 @@ class Annotation(db.Model):
   track_id = db.Column(db.Integer, db.ForeignKey("tracks.id"), nullable=False)
   content = db.Column(db.Text, nullable=False)
   vote_score = db.Column(db.Integer)
-  created_at = db.Column(db.DateTime, nullable=False)
-  updated_at = db.Column(db.DateTime, nullable=False)
+  created_at = db.Column(db.DateTime, default=datetime.now(), nullable=False)
+  updated_at = db.Column(db.DateTime, default=datetime.now(), nullable=False)
   
   # TODO Relation
   # user = db.relationship("User")

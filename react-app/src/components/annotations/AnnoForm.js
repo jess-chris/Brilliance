@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from "react-router-dom";
-import { createAnno } from "../../store/annotation";
+import { createAnnoThunk } from "../../store/annotation";
 const AnnoForm = () => {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
@@ -16,10 +16,11 @@ const AnnoForm = () => {
         const data = {
             content,
             user_id: sessionUser?.id,
-            //track_id
+            track_id: 1
         }
+        //console.log('##########', data)
 
-        await dispatch(createAnno(data))
+        await dispatch(createAnnoThunk(data))
 
     }
 
@@ -33,7 +34,7 @@ const AnnoForm = () => {
                 name='content'
                 >
                 </textarea >
-                <button>Submit</button>
+                <button type='submit'>Submit</button>
             </form>
         </div>
     )
