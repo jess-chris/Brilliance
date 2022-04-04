@@ -6,7 +6,8 @@ import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
-import TrackUploadForm from './components/TrackUpload/TrackUpload'
+import TracksPage from './components/TracksPage/TracksPage';
+import TrackUploadForm from './components/TrackUpload/TrackUpload';
 import User from './components/User';
 import { authenticate } from './store/session';
 
@@ -34,6 +35,9 @@ function App() {
         </Route>
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
+        </Route>
+        <Route exact path='/tracks'>
+          <TracksPage/>
         </Route>
         <Route path='/tracks/new' exact={true}>
           <TrackUploadForm/>
