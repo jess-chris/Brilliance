@@ -26,7 +26,9 @@ class Track(db.Model):
       'title': self.title,
       'lyrics': self.lyrics,
       'artist': self.artist,
-      'album_image': self.album_image
+      'album_image': self.album_image,
+      'annotations': self.annotations,
+      'comments': self.comments
     }
 
   # user = db.relationship("User")
@@ -58,6 +60,16 @@ class Comment(db.Model):
   vote_score = db.Column(db.Integer)
   created_at = db.Column(db.DateTime, nullable=False)
   updated_at = db.Column(db.DateTime, nullable=False)
+
+  def to_dict(self):
+    return {
+      'id': self.id,
+      'user_id': self.user_id,
+      'annotation_id': self.annotation_id,
+      'track_id': self.track_id,
+      'vote_score': self.vote_score,
+      'content': self.content
+    }
   
   # TODO Relation
   # user = db.relationship("User")
