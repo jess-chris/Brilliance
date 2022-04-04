@@ -28,6 +28,11 @@ const NavBar = () => {
           </NavLink>
         </li>
         <li>
+          <NavLink to='/tracks/new' exact={true} activeClassName='active'>
+            Upload Track
+          </NavLink> 
+        </li>
+        <li>
           <LogoutButton />
         </li>
       </ul>

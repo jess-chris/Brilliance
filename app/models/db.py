@@ -13,10 +13,21 @@ class Track(db.Model):
   album_image = db.Column(db.String())
   created_at = db.Column(db.DateTime, nullable=False)
   updated_at = db.Column(db.DateTime, nullable=False)
+
   
   # TODO Relation
   annotations = db.relationship("Annotation", backref="tracks", cascade="all, delete")
   comments = db.relationship("Comment", backref="tracks", cascade="all, delete")
+
+  def to_dict(self):
+    return {
+      'id': self.id,
+      'user_id': self.user_id,
+      'title': self.title,
+      'lyrics': self.lyrics,
+      'artist': self.artist,
+      'album_image': self.album_image
+    }
 
   # user = db.relationship("User")
   
