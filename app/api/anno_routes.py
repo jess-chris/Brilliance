@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from app.models import db, Annotation
 from app.forms import AnnotationForm 
 anno_routes = Blueprint('annotations', __name__)
@@ -21,16 +21,20 @@ def annotations():
 #         db.session.commit()
 #         return anno.anno_to_dict()
 
-@anno_routes.route('/:track_id', methods=['POST'])
-def post_annotations(track_id):
+@anno_routes.route('/new', methods=['POST'])
+def post_annotations():
     
     data = request.get_json()
 
     content = request.json['content']
+    track_id = request.json['track_id']
+
 
     annotation = Annotation(
         content=content,
-        track_id=track_id
+        user_id = 1,
+        track_id = track_id,
+        vote_score = 0
     )
     db.session.add(annotation)
     db.session.commit()

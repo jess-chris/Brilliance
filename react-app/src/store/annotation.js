@@ -25,7 +25,7 @@ export const createAnno = newAnno => ({
 
 export const createAnnoThunk = anno_data => async dispatch => {
     console.log('TOP OF THUNK', anno_data)
-    const res = await fetch(`/api/annotations/${anno_data.track_id}`, {
+    const res = await fetch(`/api/annotations/new`, {
         method: 'POST',
         headers: { "Content-Type": "application/json", },
         body: JSON.stringify(anno_data)
@@ -40,6 +40,7 @@ export const createAnnoThunk = anno_data => async dispatch => {
 const initialState = {entries: {}}
 
 const annoReducer = (state = initialState, action) => {
+    console.log('in reducer')
     let newState
     let newEntries
     switch(action.type){
