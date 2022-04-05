@@ -7,7 +7,7 @@ const AnnoForm = () => {
     const sessionUser = useSelector(state => state.session.user);
     const {id} = useParams();
     const [content, setContent] = useState('')
-    const annotations = useSelector(state => state.annotation.entries[1])
+    const annotations = useSelector(state => state.annotation.entries[+id])
     console.log('!!!!', annotations)
 
     useEffect(() => {
@@ -44,6 +44,10 @@ const AnnoForm = () => {
 
         await dispatch(editAnnoThunk(annotations?.id, updatedAnno))
     }
+
+    // const deleteAnno = async (e) => {
+    //     e.preventDefault():
+    // }
 
     return (
         <div>
