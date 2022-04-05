@@ -1,17 +1,16 @@
 const GET_TRACK = 'track/GET_TRACK'
 const GET_TRACKS = 'track/GET_TRACKS'
 const NEW_TRACK = 'track/NEW_TRACK'
-const UPDATED_TRACK = 'track/UPDATED_TRACK'
-const DEL_TRACK = 'track/DEL_TRACK'
+const DEL_TACO = 'track/DEL_TACO'
 
 const getTrack = (track) => ({
     type: GET_TRACK,
     payload: track
 })
 
-const getAllTracks = (track) => ({
+const getAllTracks = (tracks) => ({
     type: GET_TRACKS,
-    payload: track
+    payload: tracks
 })
 
 const newTrack = (track) => ({
@@ -19,18 +18,13 @@ const newTrack = (track) => ({
     payload: track
 })
 
-const updateTrack = (track) => ({
-    type: UPDATED_TRACK,
-    payload: track
-})
-
 const deleteTrack = (track) => ({
-    type: DEL_TRACK,
+    type: DEL_TACO,
     payload: track
 })
 
 
-const getTrackThunk = (trackId) => async (dispatch) => {
+export const getTrackThunk = (trackId) => async (dispatch) => {
     const res = await fetch(`/api/tracks/${trackId}`)
 
     if (res.ok){
@@ -39,7 +33,8 @@ const getTrackThunk = (trackId) => async (dispatch) => {
     }
 }
 
-const getAllTracksThunk = () => async (dispatch) => {
+export const getAllTracksThunk = () => async (dispatch) => {
+
     const res = await fetch('/api/tracks')
 
     if (res.ok){
@@ -49,29 +44,99 @@ const getAllTracksThunk = () => async (dispatch) => {
 }
 
 
-// const initialState = {};
+export const addNewTrackThunk = (track) => async (dispatch) => {
 
-export default function reducer(state = {all_tracks: []}, action) {
+    const res = await fetch('/api/tracks/new', {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify(track)
+    });
 
-    const getCommentsAndAnnotations = (array) => {
-        const stateObj = {}
-        array.forEach(track => {
-            stateObj[track.id] = track
-            if(track.hasOwnProperty("annotations")){
-                stateObj[track.id].annotations = {...getCommentsAndAnnotations(track.annotations), all: track.annotations}
-            } else if (track.annotations.hasOwnProperty("comments")){
-                stateObj[track.id].comments = {...getCommentsAndAnnotations(track.comments), all: track.comments}
-            }
-        })
-        console.log(stateObj)
-        return stateObj
-
-        
- 
+    if (res.ok) {
+        const track = await res.json();
+        dispatch(newTrack(track));
     }
 
+};
 
-    switch(action.type) {
-        default: return state 
+export const updateTrackThunk = (track) => async (dispatch) => {
+
+    const res = await fetch('/api/tracks/edit', {
+        method: "PUT",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify(track)
+    });
+
+    if (res.ok) {
+        const updatedTrack = await res.json();
+        dispatch(newTrack(updatedTrack));
+
     }
 }
+
+export const deleteTrackThunk = (trackId) => async (dispatch) => {
+
+    const res = await fetch('/api/tracks/delete', {
+        method: "DELETE",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({trackId})
+    });
+
+    if (res.ok) {
+        const deletedTrack = await res.json();
+        dispatch(deleteTrack(deletedTrack));
+        return deletedTrack
+    }
+};
+
+
+
+// export default function reducer(state = {all_tracks: []}, action) {
+    
+    //     const getCommentsAndAnnotations = (array) => {
+        //         const stateObj = {}
+        //         array.forEach(track => {
+            //             stateObj[track.id] = track
+            //             if(track.hasOwnProperty("annotations")){
+                //                 stateObj[track.id].annotations = {...getCommentsAndAnnotations(track.annotations), all: track.annotations}
+//             } else if (track.annotations.hasOwnProperty("comments")){
+    //                 stateObj[track.id].comments = {...getCommentsAndAnnotations(track.comments), all: track.comments}
+    //             }
+    //         })
+    //         console.log(stateObj)
+    //         return stateObj
+    
+    
+    
+    //     }
+const initialState = {};
+
+const trackReducer = (state = initialState, action) => {
+    let newState;
+
+    switch(action.type) {
+
+        //case GET_TRACK:
+
+
+        case GET_TRACKS:
+            newState = {...state};
+            action.payload.tracks?.forEach((track) => newState[track.id] = track)
+            return newState;
+
+        case NEW_TRACK:
+            newState = {...state};
+            newState[action.payload.id] = action.payload
+            return newState;
+
+        case DEL_TACO:
+            newState = {...state};
+            delete newState[action.payload.id];
+            return newState;
+
+        default: 
+            return state 
+    }
+}
+
+export default trackReducer

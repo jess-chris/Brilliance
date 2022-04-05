@@ -1,42 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch} from 'react-redux';
-import { Redirect, useHistory } from 'react-router-dom';
-import * as trackActions from '../../store/track'
+import { Redirect, useLocation, useHistory, useParams } from 'react-router-dom';
+import * as trackActions from '../../store/track'; 
 
-const TrackUploadForm = () => {
 
-    const userId = useSelector(state => state.session.user.id)
+const EditTrackForm = () => {
+
     const [artist, setArtist] = useState('')
     const [trackImg, setTrackImg] = useState('')
     const [title, setTitle] = useState('')
     const [lyrics, setLyrics] = useState('')
 
     const dispatch = useDispatch()
-
+    const {trackId} = useParams() 
     const history = useHistory()
 
-    const trackUpload = e => {
+    const trackUpdate = e => {
         e.preventDefault()
-        const newTrack = { artist, trackImg, title, lyrics, userId}
-        dispatch(trackActions.addNewTrackThunk(newTrack))
+        const newTrack = { artist, trackImg, title, lyrics, trackId }
+        dispatch(trackActions.updateTrackThunk(newTrack))
         history.push('/tracks')
 
     }
 
-    // const onTrackSubmit = async (e) => {
-    //     e.preventDefault();
-    //     const newTrack = { artist, trackImg, title, lyrics, userId}
-    //     const res = await fetch('/api/tracks/new', {
-    //         method: 'POST',
-    //         headers: { 'Content-Type':'application/json' },
-    //         body: JSON.stringify(newTrack)
-    //     })
-    //     const response = await res.json()
-    //     console.log(response)
-    
-
     return (
-        <form onSubmit={trackUpload}>
+        <>
+            <form onSubmit={trackUpdate}>
             <div>
                 <label>Track Title</label>
                 <input 
@@ -75,7 +64,8 @@ const TrackUploadForm = () => {
             </div>
             <button type='Submit'>Submit</button>
         </form>
+        </>
     )
 }
 
-export default TrackUploadForm;
+export default EditTrackForm;
