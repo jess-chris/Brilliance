@@ -31,7 +31,7 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
-        <Route path = '/annotations/new' >
+        <Route path = '/annotations/:id' >
           <AnnoForm/>
         </Route>
         <Route path='/login' exact={true}>

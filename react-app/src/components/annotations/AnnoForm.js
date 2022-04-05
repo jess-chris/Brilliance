@@ -5,8 +5,10 @@ import { createAnnoThunk } from "../../store/annotation";
 const AnnoForm = () => {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
-    // const id = useParams();
-    // const track_id = id.id
+    const id = useParams();
+    //console.log('###', id)
+    const track_id = id.id
+    //console.log('@@@@@', track_id)
     const [content, setContent] = useState('')
 
 

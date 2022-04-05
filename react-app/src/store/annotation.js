@@ -25,7 +25,7 @@ export const createAnno = newAnno => ({
 
 export const createAnnoThunk = anno_data => async dispatch => {
     console.log('TOP OF THUNK', anno_data)
-    const res = await fetch(`/api/annotations/new`, {
+    const res = await fetch(`/api/annotations/${anno_data.track_id}`, {
         method: 'POST',
         headers: { "Content-Type": "application/json", },
         body: JSON.stringify(anno_data)

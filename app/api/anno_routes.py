@@ -21,8 +21,8 @@ def annotations():
 #         db.session.commit()
 #         return anno.anno_to_dict()
 
-@anno_routes.route('/new', methods=['POST'])
-def post_annotations():
+@anno_routes.route('/<int:id>', methods=['POST'])
+def post_annotations(id):
     
     data = request.get_json()
 
