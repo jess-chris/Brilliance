@@ -10,7 +10,6 @@ import TracksPage from './components/TracksPage/TracksPage';
 import SpecificTrack from './components/SpecificTrack/SpecificTrack'
 import TrackUploadForm from './components/TrackUpload/TrackUpload';
 import User from './components/User';
-import * as trackActions from './store/track'
 import { authenticate } from './store/session';
 
 function App() {

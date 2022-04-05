@@ -1,19 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch} from 'react-redux';
-import { Redirect, useHistory, useLocation, useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useDispatch} from 'react-redux';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 import * as trackActions from '../../store/track'; 
 import EditTrackForm from '../EditTrack/EditTrack';
 
 
 const SpecificTrack = () => {
 
+    const dispatch = useDispatch();
 
     const [editTrackForm, showEditTrackForm] = useState(false)
-    
-    const [artist, setArtist] = useState('')
-    const [trackImg, setTrackImg] = useState('')
-    const [title, setTitle] = useState('')
-    const [lyrics, setLyrics] = useState('')
 
     const location = useLocation()
     const history = useHistory()
@@ -31,22 +27,6 @@ const SpecificTrack = () => {
         history.push('/tracks')
     }
 
-    // useEffect(() => {
-    //     if (!editTrackForm) return
-    //     const closeForm = (() => {
-    //         showEditTrackForm(false)
-    //     })
-    //     document.addEventListener('click', closeForm)
-    //     return (() => {
-    //         document.removeEventListener('click', closeForm)
-    //     })
-    // }, [editTrackForm]) 
-
-    const dispatch = useDispatch();
-
-    // useEffect(() => {
-    //     dispatch(trackActions)
-    // }, [dispatch])
 
 
     return(

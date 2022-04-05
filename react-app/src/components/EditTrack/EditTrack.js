@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch} from 'react-redux';
-import { Redirect, useLocation, useHistory, useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useDispatch} from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
 import * as trackActions from '../../store/track'; 
 
 
