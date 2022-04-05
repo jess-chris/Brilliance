@@ -1,29 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch} from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { getAllTracksThunk } from '../../store/track'; 
 
 const TracksPage = () => {
 
-    let response = {}
-
-    useEffect(async() => {
-
-        const tracks = await fetch('/api/tracks')
-        if(tracks.ok){
-
-            response = await tracks.json()
-            
-            console.log(response)
-        }
-    }, [])
-
-    let allTracks = Object.values(response)
+    const dispatch = useDispatch();
     
+    const tracksObj = useSelector(state => state.track)
+    const tracks = Object.values(tracksObj);
+
+
+    useEffect(() => {
+        dispatch(getAllTracksThunk());
+        
+    }, [dispatch])
     
+
     return(
-        <>
-          {allTracks}
-        </>
+        <li>
+          {tracks?.map(track => {
+              return track.title
+            })
+          }
+        </li>
     )
 }
 

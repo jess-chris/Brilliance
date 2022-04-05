@@ -4,16 +4,17 @@ import { Redirect } from 'react-router-dom';
 
 const TrackUploadForm = () => {
 
-
+    const userId = useSelector(state => state.session.user.id)
     const [artist, setArtist] = useState('')
     const [trackImg, setTrackImg] = useState('')
     const [title, setTitle] = useState('')
     const [lyrics, setLyrics] = useState('')
 
 
+
     const onTrackSubmit = async (e) => {
         e.preventDefault();
-        const newTrack = { artist, trackImg, title, lyrics}
+        const newTrack = { artist, trackImg, title, lyrics, userId}
         const res = await fetch('/api/tracks/new', {
             method: 'POST',
             headers: { 'Content-Type':'application/json' },

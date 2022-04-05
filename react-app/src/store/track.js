@@ -9,9 +9,9 @@ const getTrack = (track) => ({
     payload: track
 })
 
-const getAllTracks = (track) => ({
+const getAllTracks = (tracks) => ({
     type: GET_TRACKS,
-    payload: track
+    payload: tracks
 })
 
 const newTrack = (track) => ({
@@ -30,7 +30,7 @@ const deleteTrack = (track) => ({
 })
 
 
-const getTrackThunk = (trackId) => async (dispatch) => {
+export const getTrackThunk = (trackId) => async (dispatch) => {
     const res = await fetch(`/api/tracks/${trackId}`)
 
     if (res.ok){
@@ -39,7 +39,8 @@ const getTrackThunk = (trackId) => async (dispatch) => {
     }
 }
 
-const getAllTracksThunk = () => async (dispatch) => {
+export const getAllTracksThunk = () => async (dispatch) => {
+
     const res = await fetch('/api/tracks')
 
     if (res.ok){
@@ -49,29 +50,58 @@ const getAllTracksThunk = () => async (dispatch) => {
 }
 
 
-// const initialState = {};
+export const addNewTrackThunk = (track) => async (dispatch) => {
 
-export default function reducer(state = {all_tracks: []}, action) {
+    const res = await fetch('/api/tracks/new', {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify(track)
+    });
 
-    const getCommentsAndAnnotations = (array) => {
-        const stateObj = {}
-        array.forEach(track => {
-            stateObj[track.id] = track
-            if(track.hasOwnProperty("annotations")){
-                stateObj[track.id].annotations = {...getCommentsAndAnnotations(track.annotations), all: track.annotations}
-            } else if (track.annotations.hasOwnProperty("comments")){
-                stateObj[track.id].comments = {...getCommentsAndAnnotations(track.comments), all: track.comments}
-            }
-        })
-        console.log(stateObj)
-        return stateObj
-
-        
- 
+    if (res.ok) {
+        const newTrack = await res.json();
+        dispatch(newTrack(newTrack));
     }
 
+};
+
+
+
+// export default function reducer(state = {all_tracks: []}, action) {
+    
+    //     const getCommentsAndAnnotations = (array) => {
+        //         const stateObj = {}
+        //         array.forEach(track => {
+            //             stateObj[track.id] = track
+            //             if(track.hasOwnProperty("annotations")){
+                //                 stateObj[track.id].annotations = {...getCommentsAndAnnotations(track.annotations), all: track.annotations}
+//             } else if (track.annotations.hasOwnProperty("comments")){
+    //                 stateObj[track.id].comments = {...getCommentsAndAnnotations(track.comments), all: track.comments}
+    //             }
+    //         })
+    //         console.log(stateObj)
+    //         return stateObj
+    
+    
+    
+    //     }
+const initialState = {};
+
+export default function trackReducer(state = initialState, action) {
+    let newState
+    let newTracks
 
     switch(action.type) {
-        default: return state 
+
+        //case GET_TRACK:
+
+
+        case GET_TRACKS:
+            newState = {...state};
+            action.payload.tracks?.forEach((track) => newState[track.id] = track)
+            return newState;
+
+        default: 
+            return state 
     }
 }
