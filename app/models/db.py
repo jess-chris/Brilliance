@@ -11,8 +11,8 @@ class Track(db.Model):
   lyrics = db.Column(db.Text(), nullable=False)
   artist = db.Column(db.String(50), nullable=False)
   album_image = db.Column(db.String())
-  created_at = db.Column(db.DateTime, nullable=False)
-  updated_at = db.Column(db.DateTime, nullable=False)
+  created_at = db.Column(db.DateTime, default=datetime.now(), nullable=False)
+  updated_at = db.Column(db.DateTime, default=datetime.now(), nullable=False)
 
   
   # TODO Relation
@@ -68,8 +68,8 @@ class Comment(db.Model):
   track_id = db.Column(db.Integer, db.ForeignKey("tracks.id"))
   content = db.Column(db.Text, nullable=False)
   vote_score = db.Column(db.Integer)
-  created_at = db.Column(db.DateTime, nullable=False)
-  updated_at = db.Column(db.DateTime, nullable=False)
+  created_at = db.Column(db.DateTime, default=datetime.now(), nullable=False)
+  updated_at = db.Column(db.DateTime, default=datetime.now(), nullable=False)
 
   def to_dict(self):
     return {

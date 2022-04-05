@@ -6,7 +6,9 @@ import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
-import TrackUploadForm from './components/TrackUpload/TrackUpload'
+import TracksPage from './components/TracksPage/TracksPage';
+import SpecificTrack from './components/SpecificTrack/SpecificTrack'
+import TrackUploadForm from './components/TrackUpload/TrackUpload';
 import User from './components/User';
 import { authenticate } from './store/session';
 
@@ -22,6 +24,7 @@ function App() {
       setLoaded(true);
     })();
   }, [dispatch]);
+
 
   if (!loaded) {
     return null;
@@ -40,8 +43,14 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
-        <Route path='/tracks' exact={true}>
+        <Route exact path='/tracks'>
+          <TracksPage/>
+        </Route>
+        <Route path='/tracks/new' exact={true}>
           <TrackUploadForm/>
+        </Route>
+        <Route path='/tracks/:trackId' exact={true}>
+          <SpecificTrack/>
         </Route>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
