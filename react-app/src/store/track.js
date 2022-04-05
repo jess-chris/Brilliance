@@ -1,7 +1,6 @@
 const GET_TRACK = 'track/GET_TRACK'
 const GET_TRACKS = 'track/GET_TRACKS'
 const NEW_TRACK = 'track/NEW_TRACK'
-const UPDATED_TRACK = 'track/UPDATED_TRACK'
 const DEL_TRACK = 'track/DEL_TRACK'
 
 const getTrack = (track) => ({
@@ -16,11 +15,6 @@ const getAllTracks = (tracks) => ({
 
 const newTrack = (track) => ({
     type: NEW_TRACK,
-    payload: track
-})
-
-const updateTrack = (track) => ({
-    type: UPDATED_TRACK,
     payload: track
 })
 
@@ -59,11 +53,27 @@ export const addNewTrackThunk = (track) => async (dispatch) => {
     });
 
     if (res.ok) {
-        const newTrack = await res.json();
-        dispatch(newTrack(newTrack));
+        const track = await res.json();
+        dispatch(newTrack(track));
     }
 
 };
+
+export const updateTrackThunk = (track) => async (dispatch) => {
+
+    const res = await fetch('/api/tracks/edit', {
+        method: "PUT",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify(track)
+    });
+
+    if (res.ok) {
+        const updatedTrack = await res.json();
+        dispatch(newTrack(updatedTrack));
+
+}
+
+}
 
 
 
@@ -87,9 +97,8 @@ export const addNewTrackThunk = (track) => async (dispatch) => {
     //     }
 const initialState = {};
 
-export default function trackReducer(state = initialState, action) {
-    let newState
-    let newTracks
+const trackReducer = (state = initialState, action) => {
+    let newState;
 
     switch(action.type) {
 
@@ -101,7 +110,14 @@ export default function trackReducer(state = initialState, action) {
             action.payload.tracks?.forEach((track) => newState[track.id] = track)
             return newState;
 
+        case NEW_TRACK:
+            newState = {...state};
+            newState[action.payload.track] = action.payload.track
+            return newState;
+
         default: 
             return state 
     }
 }
+
+export default trackReducer

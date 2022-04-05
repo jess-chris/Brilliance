@@ -31,6 +31,28 @@ def trackUpload():
     db.session.commit()
     
     return track.to_dict()
+
+@track_routes.route('/edit', methods=['PUT'])
+def trackUpdate():
+
+    track = Track.query.get(trackId)
+
+    artist=request.json['artist']
+    trackImg=request.json['trackImg']
+    lyrics=request.json['lyrics']
+    title=request.json['title']
+
+    track.artist=artist,
+    track.album_image=trackImg,
+    track.lyrics=lyrics,
+    track.title=title,
+    
+    db.session.add(track)
+    db.session.commit()
+
+    return track.to_dict()
+
+
     
     
 

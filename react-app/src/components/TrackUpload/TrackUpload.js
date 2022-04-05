@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch} from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
+import * as trackActions from '../../store/track'
 
 const TrackUploadForm = () => {
 
@@ -10,22 +11,32 @@ const TrackUploadForm = () => {
     const [title, setTitle] = useState('')
     const [lyrics, setLyrics] = useState('')
 
+    const dispatch = useDispatch()
 
+    const history = useHistory()
 
-    const onTrackSubmit = async (e) => {
-        e.preventDefault();
+    const trackUpload = e => {
+        e.preventDefault()
         const newTrack = { artist, trackImg, title, lyrics, userId}
-        const res = await fetch('/api/tracks/new', {
-            method: 'POST',
-            headers: { 'Content-Type':'application/json' },
-            body: JSON.stringify(newTrack)
-        })
-        const response = await res.json()
-        console.log(response)
+        dispatch(trackActions.addNewTrackThunk(newTrack))
+        history.push('/tracks')
+
     }
 
+    // const onTrackSubmit = async (e) => {
+    //     e.preventDefault();
+    //     const newTrack = { artist, trackImg, title, lyrics, userId}
+    //     const res = await fetch('/api/tracks/new', {
+    //         method: 'POST',
+    //         headers: { 'Content-Type':'application/json' },
+    //         body: JSON.stringify(newTrack)
+    //     })
+    //     const response = await res.json()
+    //     console.log(response)
+    
+
     return (
-        <form onSubmit={onTrackSubmit}>
+        <form onSubmit={trackUpload}>
             <div>
                 <label>Track Title</label>
                 <input 
