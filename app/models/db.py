@@ -48,6 +48,16 @@ class Annotation(db.Model):
   # user = db.relationship("User")
   comments = db.relationship("Comment", backref="annotations", cascade="all, delete")
   votes = db.relationship("Vote", backref="annotations", cascade="all, delete")
+
+  def anno_to_dict(self):
+    return {
+      'id': self.id,
+      'user_id': self.user_id,
+      'content': self.content,
+      'track_id': self.track_id,
+      'vote_score': self.vote_score,
+      # TODO comments for annotation
+    }
   
 class Comment(db.Model):
   __tablename__ = "comments"

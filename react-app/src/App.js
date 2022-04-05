@@ -12,6 +12,8 @@ import TrackUploadForm from './components/TrackUpload/TrackUpload';
 import User from './components/User';
 import { authenticate } from './store/session';
 
+import AnnoForm from './components/annotations/AnnoForm';
+
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
@@ -32,6 +34,9 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
+        <Route path = '/annotations/:id' >
+          <AnnoForm/>
+        </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
         </Route>

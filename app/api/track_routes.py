@@ -10,6 +10,7 @@ def tracks():
     #     print('--------------', track.to_dict(), '----------')
     return {'tracks': [track.to_dict() for track in tracks]}
 
+
 @track_routes.route('/new', methods=['POST'])
 def trackUpload():
 
@@ -48,6 +49,7 @@ def trackUpdate():
     track.album_image=trackImg,
     track.lyrics=lyrics,
     track.title=title,
+
     
     db.session.add(track)
     db.session.commit()
