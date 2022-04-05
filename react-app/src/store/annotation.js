@@ -7,13 +7,18 @@ export const getAnno = annos => (
     console.log('AASDASDASDASDA', annos.annotations),
     {
     type: GET_ANNO,
-    annos 
+    annos
 })
 
 
 export const createAnno = newAnno => ({
     type: NEW_ANNO,
-    newAnno 
+    newAnno
+})
+
+export const editAnno = editedAnno => ({
+    type: EDIT_ANNO,
+    editedAnno
 })
 
 
@@ -42,6 +47,19 @@ export const createAnnoThunk = anno_data => async dispatch => {
     }
 }
 
+export const editAnnoThunk = (id, anno_data) => async dispatch => {
+    const res = await fetch(`/api/annotations/${id}`, {
+        method: 'PUT',
+        headers: {'Content-Type': "application/json"},
+        body: JSON.stringify(anno_data)
+    })
+    if (res.ok){
+        const updatedAnno = await res.json()
+        dispatch(editAnno(id, updatedAnno))
+    }
+}
+
+
 const initialState = {entries: {}}
 
 const annoReducer = (state = initialState, action) => {
@@ -63,7 +81,7 @@ const annoReducer = (state = initialState, action) => {
             newState.entries = newEntries
             return newState
         default:
-            return state 
+            return state
     }
 }
 
