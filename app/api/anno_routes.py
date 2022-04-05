@@ -30,7 +30,7 @@ def post_annotations(id):
         user_id = request.json['user_id']
         content = request.json['content']
         track_id = request.json['track_id']
-        anno_id = request.json['annotations_id']
+        #anno_id = request.json['annotations_id']
         print('\nrequest\n', request.json)
 
         annotation = Annotation(
@@ -52,12 +52,12 @@ def post_annotations(id):
         )
         found.content = updatedContent.content
         db.session.commit()
-        return redirect('/')
-    elif request.method == 'DELETE':
+        return found.anno_to_dict()
+    if request.method == 'DELETE':
         data = request.get_json()
         something = 'ok'
         to_delete = Annotation.query.get(id) 
         print('in delete req method', to_delete)
         db.session.delete(to_delete)
         db.session.commit()
-        return True
+        return to_delete.anno_to_dict()

@@ -18,8 +18,9 @@ const AnnoForm = () => {
     const submitAnno = async (e) => {
         e.preventDefault();
         //const user_id = sessionUser?.id
+        const annotations_id = annotations?.id
         const data = {
-            annotations_id: annotations?.id,
+            annotations_id,
             content,
             user_id: sessionUser?.id,
             track_id: +id
