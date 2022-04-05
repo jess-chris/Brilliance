@@ -21,7 +21,7 @@ def annotations():
 #         db.session.commit()
 #         return anno.anno_to_dict()
 
-@anno_routes.route('/<int:id>', methods=['POST', 'PATCH'])
+@anno_routes.route('/<int:id>', methods=['POST', 'PUT'])
 def post_annotations(id):
     if request.method == 'POST':
         data = request.get_json()
@@ -43,5 +43,17 @@ def post_annotations(id):
         db.session.add(annotation)
         db.session.commit()
         return annotation.anno_to_dict()
-    # if request.method == 'PATCH':
-    #     data = request.get_json()
+    if request.method == 'PUT':
+        print('idddddd', type(id))
+        data = request.get_json()
+        found = Annotation.query.get(id)
+        # print('found', found.content)
+        content = request.json['content']
+        updatedContent = Annotation(
+            content=content
+        )
+
+        found.content = updatedContent.content
+        db.session.commit()
+        # print('JSON', found.anno_to_dict())
+        return data

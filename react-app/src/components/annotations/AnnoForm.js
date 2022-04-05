@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from "react-router-dom";
-import { createAnnoThunk, getAnnoThunk } from "../../store/annotation";
+import { createAnnoThunk, editAnnoThunk, getAnnoThunk} from "../../store/annotation";
 const AnnoForm = () => {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const {id} = useParams();
     const [content, setContent] = useState('')
-    const annotations = useSelector(state => state.annotation.entries[3])
+    const annotations = useSelector(state => state.annotation.entries[1])
     console.log('!!!!', annotations)
 
     useEffect(() => {
@@ -32,7 +32,17 @@ const AnnoForm = () => {
 
     const editAnno = async (e) => {
         e.preventDefault();
-        let updatedAnno;
+
+        console.log('inside edit')
+        const updatedAnno = {
+            annotations_id: annotations?.id,
+            content,
+            user_id: sessionUser?.id,
+            track_id: +id
+        }
+
+
+        await dispatch(editAnnoThunk(annotations?.id, updatedAnno))
     }
 
     return (
@@ -48,6 +58,7 @@ const AnnoForm = () => {
                 >
                 </textarea >
                 <button type='submit'>Submit</button>
+                <button onClick={editAnno} type='submit'>Edit</button>
             </form>
         </div>
     )
