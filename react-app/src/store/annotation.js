@@ -3,10 +3,13 @@ const NEW_ANNO = 'annotation/NEW_ANNO'
 const EDIT_ANNO = 'annotation/EDIT_ANNO'
 const DEL_ANNO = 'annotation/DEL_ANNO'
 
-export const getAnno = annos => ({
+export const getAnno = annos => (
+    console.log('AASDASDASDASDA', annos.annotations),
+    {
     type: GET_ANNO,
     annos 
 })
+
 
 export const createAnno = newAnno => ({
     type: NEW_ANNO,
@@ -14,14 +17,16 @@ export const createAnno = newAnno => ({
 })
 
 
-// export const getAnnoThunk = () => async (dispatch) => {
-//     const res = await fetch('/api/annotations')
-//     //set up api ^^
-//     if (res.ok){
-//         const data = await res.json()
-//         dispatch(getAnno(data))
-//     }
-// }
+export const getAnnoThunk = () => async (dispatch) => {
+    const res = await fetch('/api/annotations')
+    //set up api ^^
+    if (res.ok){
+        const data = await res.json()
+        console.log('DATA!!!', data)
+        dispatch(getAnno(data))
+        return data
+    }
+}
 
 export const createAnnoThunk = anno_data => async dispatch => {
     console.log('TOP OF THUNK', anno_data)
@@ -47,7 +52,7 @@ const annoReducer = (state = initialState, action) => {
         case GET_ANNO:
             newState = {...state}
             newEntries = {}
-            action.annos.forEach(anno => newEntries[anno.id] = anno)
+            action.annos.annotations.forEach(anno => newEntries[anno.id] = anno)
             newState.entries = newEntries
             return newState
 
@@ -57,6 +62,8 @@ const annoReducer = (state = initialState, action) => {
             newEntries[action.newAnno.id] = action.newAnno
             newState.entries = newEntries
             return newState
+        default:
+            return state 
     }
 }
 

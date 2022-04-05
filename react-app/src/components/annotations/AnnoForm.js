@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from "react-router-dom";
-import { createAnnoThunk } from "../../store/annotation";
+import { createAnnoThunk, getAnnoThunk } from "../../store/annotation";
 const AnnoForm = () => {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
-    const id = useParams();
-    //console.log('###', id)
-    const track_id = id.id
-    //console.log('@@@@@', track_id)
+    const {id} = useParams();
     const [content, setContent] = useState('')
+    const annotations = useSelector(state => state.annotation.entries[10])
+    console.log('!!!!', annotations)
 
+    useEffect(() => {
+        dispatch(getAnnoThunk())
+    }, [])
+    
 
     const submitAnno = async (e) => {
         e.preventDefault();
@@ -18,7 +21,7 @@ const AnnoForm = () => {
         const data = {
             content,
             user_id: sessionUser?.id,
-            track_id: 1
+            track_id: +id
         }
         //console.log('##########', data)
 
@@ -28,6 +31,8 @@ const AnnoForm = () => {
 
     return (
         <div>
+            <h1>{`${annotations?.content}`}</h1>
+
             <form onSubmit={submitAnno}>
                 <textarea
                 onChange={(e) => setContent(e.target.value)}
