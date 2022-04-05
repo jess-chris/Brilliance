@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, redirect
 from app.models import db, Annotation
 from app.forms import AnnotationForm
 anno_routes = Blueprint('annotations', __name__)
@@ -21,7 +21,7 @@ def annotations():
 #         db.session.commit()
 #         return anno.anno_to_dict()
 
-@anno_routes.route('/<int:id>', methods=['POST', 'PUT'])
+@anno_routes.route('/<int:id>', methods=['POST', 'PUT', 'DELETE'])
 def post_annotations(id):
     if request.method == 'POST':
         data = request.get_json()
@@ -34,7 +34,6 @@ def post_annotations(id):
         print('\nrequest\n', request.json)
 
         annotation = Annotation(
-            # id=anno_id,
             content=content,
             user_id = user_id,
             track_id = track_id,
@@ -47,13 +46,18 @@ def post_annotations(id):
         print('idddddd', type(id))
         data = request.get_json()
         found = Annotation.query.get(id)
-        # print('found', found.content)
         content = request.json['content']
         updatedContent = Annotation(
             content=content
         )
-
         found.content = updatedContent.content
         db.session.commit()
-        # print('JSON', found.anno_to_dict())
-        return data
+        return redirect('/')
+    elif request.method == 'DELETE':
+        data = request.get_json()
+        something = 'ok'
+        to_delete = Annotation.query.get(id) 
+        print('in delete req method', to_delete)
+        db.session.delete(to_delete)
+        db.session.commit()
+        return True

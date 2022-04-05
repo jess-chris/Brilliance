@@ -21,6 +21,11 @@ export const editAnno = editedAnno => ({
     editedAnno
 })
 
+export const deleteAnno = toDelete => ({
+    type: DEL_ANNO,
+    toDelete
+})
+
 
 export const getAnnoThunk = () => async (dispatch) => {
     const res = await fetch('/api/annotations')
@@ -62,6 +67,18 @@ export const editAnnoThunk = (id, anno_data) => async dispatch => {
     }
 }
 
+export const deleteAnnoThunk = id => async dispatch => {
+    console.log('deletethunk!!!!', id)
+    const res = await fetch(`/api/annotations/${id}`, {
+        method: 'DELETE',
+    });
+    if (res.ok){
+        const deletedAnno = await res.json()
+        dispatch(deleteAnno(deletedAnno))
+        //return deletedAnno 
+    }
+}
+
 
 const initialState = {entries: {}}
 
@@ -89,6 +106,11 @@ const annoReducer = (state = initialState, action) => {
             newEntries = {...state.entries}
             newEntries[action.editedAnno.id] = action.editedAnno;
             newState.entries = newEntries
+            return newState
+        
+        case DEL_ANNO:
+            newState = {...state};
+            delete newState.entries[action.id]
             return newState
 
         default:

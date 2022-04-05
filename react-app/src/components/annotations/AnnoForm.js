@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from "react-router-dom";
-import { createAnnoThunk, editAnnoThunk, getAnnoThunk} from "../../store/annotation";
+import { createAnnoThunk, editAnnoThunk, getAnnoThunk, deleteAnnoThunk} from "../../store/annotation";
 const AnnoForm = () => {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
@@ -24,7 +24,7 @@ const AnnoForm = () => {
             user_id: sessionUser?.id,
             track_id: +id
         }
-        //console.log('##########', data)
+        console.log('##########', data)
 
         await dispatch(createAnnoThunk(data))
 
@@ -45,9 +45,11 @@ const AnnoForm = () => {
         await dispatch(editAnnoThunk(annotations?.id, updatedAnno))
     }
 
-    // const deleteAnno = async (e) => {
-    //     e.preventDefault():
-    // }
+    const deleteAnno = async (e) => {
+        e.preventDefault();
+        console.log('IN DELETE')
+        await dispatch(deleteAnnoThunk(annotations?.id))
+    }
 
     return (
         <div>
@@ -63,6 +65,7 @@ const AnnoForm = () => {
                 </textarea >
                 <button type='submit'>Submit</button>
                 <button onClick={editAnno} type='submit'>Edit</button>
+                <button onClick={deleteAnno}>Delete</button>
             </form>
         </div>
     )
