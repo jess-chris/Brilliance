@@ -1,7 +1,7 @@
 const GET_TRACK = 'track/GET_TRACK'
 const GET_TRACKS = 'track/GET_TRACKS'
 const NEW_TRACK = 'track/NEW_TRACK'
-const DEL_TRACK = 'track/DEL_TRACK'
+const DEL_TACO = 'track/DEL_TACO'
 
 const getTrack = (track) => ({
     type: GET_TRACK,
@@ -19,7 +19,7 @@ const newTrack = (track) => ({
 })
 
 const deleteTrack = (track) => ({
-    type: DEL_TRACK,
+    type: DEL_TACO,
     payload: track
 })
 
@@ -71,9 +71,23 @@ export const updateTrackThunk = (track) => async (dispatch) => {
         const updatedTrack = await res.json();
         dispatch(newTrack(updatedTrack));
 
+    }
 }
 
-}
+export const deleteTrackThunk = (trackId) => async (dispatch) => {
+
+    const res = await fetch('/api/tracks/delete', {
+        method: "DELETE",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({trackId})
+    });
+
+    if (res.ok) {
+        const deletedTrack = await res.json();
+        dispatch(deleteTrack(deletedTrack));
+        return deletedTrack
+    }
+};
 
 
 
@@ -112,7 +126,12 @@ const trackReducer = (state = initialState, action) => {
 
         case NEW_TRACK:
             newState = {...state};
-            newState[action.payload.track] = action.payload.track
+            newState[action.payload.id] = action.payload
+            return newState;
+
+        case DEL_TACO:
+            newState = {...state};
+            delete newState[action.payload.id];
             return newState;
 
         default: 

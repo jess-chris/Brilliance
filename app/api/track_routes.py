@@ -35,6 +35,8 @@ def trackUpload():
 @track_routes.route('/edit', methods=['PUT'])
 def trackUpdate():
 
+    trackId=request.json['trackId']
+
     track = Track.query.get(trackId)
 
     artist=request.json['artist']
@@ -54,5 +56,15 @@ def trackUpdate():
 
 
     
-    
+@track_routes.route('/delete', methods=['DELETE'])
+def track_delete():
+  
+  track_id=request.json['trackId']
+  
+  track = Track.query.get(track_id)
+  
+  db.session.delete(track)
+  db.session.commit()
+  
+  return track.to_dict()
 
