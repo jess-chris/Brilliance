@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from app.models import db, Annotation
-from app.forms import AnnotationForm 
+from app.forms import AnnotationForm
 anno_routes = Blueprint('annotations', __name__)
 
 @anno_routes.route('/')
@@ -21,21 +21,27 @@ def annotations():
 #         db.session.commit()
 #         return anno.anno_to_dict()
 
-@anno_routes.route('/<int:id>', methods=['POST'])
+@anno_routes.route('/<int:id>', methods=['POST', 'PATCH'])
 def post_annotations(id):
-    
-    data = request.get_json()
+    if request.method == 'POST':
+        data = request.get_json()
+        print('\nDAAATA\n', data)
 
-    content = request.json['content']
-    track_id = request.json['track_id']
+        user_id = request.json['user_id']
+        content = request.json['content']
+        track_id = request.json['track_id']
+        anno_id = request.json['annotations_id']
+        print('\nrequest\n', request.json)
 
-
-    annotation = Annotation(
-        content=content,
-        user_id = 1,
-        track_id = track_id,
-        vote_score = 0
-    )
-    db.session.add(annotation)
-    db.session.commit()
-    return annotation.anno_to_dict()
+        annotation = Annotation(
+            # id=anno_id,
+            content=content,
+            user_id = user_id,
+            track_id = track_id,
+            vote_score = 0
+        )
+        db.session.add(annotation)
+        db.session.commit()
+        return annotation.anno_to_dict()
+    # if request.method == 'PATCH':
+    #     data = request.get_json()

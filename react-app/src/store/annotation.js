@@ -80,6 +80,14 @@ const annoReducer = (state = initialState, action) => {
             newEntries[action.newAnno.id] = action.newAnno
             newState.entries = newEntries
             return newState
+
+        case EDIT_ANNO:
+            newState = {...state};
+            newEntries = {...state.entries}
+            newEntries[action.editedAnno.id] = action.editedAnno;
+            newState.entries = newEntries
+            return newState
+
         default:
             return state
     }
