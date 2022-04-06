@@ -3,6 +3,9 @@ import { useSelector, useDispatch} from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import * as trackActions from '../../store/track'; 
 
+
+import './TracksPage.css'
+
 const TracksPage = () => {
 
     const dispatch = useDispatch();
@@ -10,25 +13,24 @@ const TracksPage = () => {
 
     useEffect(() => {
         dispatch(trackActions.getAllTracksThunk());
-        
     }, [dispatch])
 
     const tracksObj = useSelector(state => state.track)
     const tracks = Object.values(tracksObj);
-    
 
     return(
-        <ul>
+        <div className='allTracksContainer'>
           {tracks?.map(({id, lyrics, title, artist, userId, album_image}) => {
               return(
-                  <li>
-                    <NavLink to={{pathname: `/tracks/${id}`, state: {id, lyrics, title, artist, userId, album_image}}}>
-                        {title}
-                    </NavLink>
-                  </li>
+                  <ul key={id}>
+                        <img src={album_image} className='trackImg'/>
+                        <NavLink to={{pathname: `/tracks/${id}`, state: {id, lyrics, title, artist, userId, album_image}}}>
+                            {title}
+                        </NavLink>
+                  </ul>
               )
           })}
-        </ul>
+        </div>
     )
 }
 

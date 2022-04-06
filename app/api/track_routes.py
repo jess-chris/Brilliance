@@ -3,12 +3,21 @@ from app.models import db, Track
 
 track_routes = Blueprint('tracks', __name__)
 
-@track_routes.route('/')
+@track_routes.route('')
 def tracks():
     tracks = Track.query.all()
     # for track in tracks: 
     #     print('--------------', track.to_dict(), '----------')
     return {'tracks': [track.to_dict() for track in tracks]}
+
+
+@track_routes.route('/<int:id>')
+def track(id):
+
+    track = Track.query.get(id)
+
+    return track.to_dict()
+
 
 @track_routes.route('/new', methods=['POST'])
 def trackUpload():
@@ -48,6 +57,7 @@ def trackUpdate():
     track.album_image=trackImg,
     track.lyrics=lyrics,
     track.title=title,
+
     
     db.session.add(track)
     db.session.commit()

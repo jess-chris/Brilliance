@@ -1,0 +1,155 @@
+.main-page {
+  display: block;
+  margin: 0 60px;
+  padding: 0px;
+  border: 0px;
+}
+
+#topTracks {
+
+  padding: 4.5rem 60px;
+  display: block;
+  box-sizing: border-box;
+  border: 1px solid black;
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  grid-column: grid-start / grid-end;
+
+}
+
+
+#typeOfTracks {
+  grid-column: grid-start / grid-end;
+  text-align: center;
+}
+
+.track-selector {
+  z-index: 1;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  text-align: left;
+  height: 44px;
+}
+
+.single-track-list {
+  display: grid;
+  -webkit-box-pack: center;
+  justify-content: center;
+  grid-template-columns: [grid-start] repeat(3, minmax(14px, 44px)) [center-start] repeat(6, minmax(14px, 44px)) [center-end] repeat(3, minmax(14px, 44px)) [grid-end];
+  gap: 40px 60px;
+  color: inherit;
+  width: 100%;
+  -webkit-box-align: center;
+  align-items: center;
+  grid-auto-rows: minmax(75px, auto);
+  border-bottom: 0.15rem solid rgb(233, 233, 233);
+  font-size: 1.5rem;
+  transition: background-color 0.1s ease 0s;
+}
+
+.track-id {
+  grid-column: span 1 / auto;
+  font-size: 1.5rem;
+  font-weight: 100;
+  align-self: flex-start;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.track-title {
+  grid-column: span 5 / auto;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.track-artist {
+  grid-column: span 3 / auto;
+  font-weight: 100;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.track-likes {
+  grid-column: span 3 / auto;
+  display: flex;
+  -webkit-box-pack: end;
+  justify-content: flex-end;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+
+.load-more-cont {
+  grid-column: center-start / center-end;
+  text-align: center;
+}
+
+.load-more {
+  border-color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  overflow-wrap: break-word;
+  word-break: break-word;
+  transition: background-color 0.1s ease 0s, color 0.1s ease 0s;
+  background-color: transparent;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 0px;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Programme, Arial, sans-serif;
+  font-size: 0.875rem;
+  line-height: 1;
+  margin: 0px;
+  text-align: center;
+  padding: 0.75rem 1.313rem;
+  vertical-align: top;
+  user-select: none;
+  appearance: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+
+#featured {
+
+  display: grid;
+  justify-content: center;
+  grid-template-columns: [grid-start] repeat(3, minmax(14px, 44px)) [center-start] repeat(6, minmax(14px, 44px)) [center-end] repeat(3, minmax(14px, 44px)) [grid-end];
+  gap: 40px 60px;
+
+  width: 100%;
+  /* height: 600px; */
+
+  border: 1px solid black;
+
+}
+
+.main-headers {
+  text-align: center;
+}
+
+#mainFeat {
+  grid-column: span 5 / auto;
+
+  display: block;
+  box-sizing: border-box;
+
+}
+
+#mainFeatLink {
+  grid-column: span 7 / auto;
+}
+
+.sub-feat {
+
+  grid-column: span 3 / auto;
+  min-height: 400px;
+  position: relative;
+
+}

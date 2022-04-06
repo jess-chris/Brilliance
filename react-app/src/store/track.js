@@ -89,26 +89,103 @@ export const deleteTrackThunk = (trackId) => async (dispatch) => {
     }
 };
 
+// --------------------------------
+
+export const getAnnoThunk = () => async (dispatch) => {
+    const res = await fetch('/api/annotations')
+    //set up api ^^
+    if (res.ok){
+        const data = await res.json()
+        return data
+    }
+}
+
+export const createAnnoThunk = anno_data => async dispatch => {
+    const res = await fetch(`/api/annotations/new`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json", },
+        body: JSON.stringify(anno_data)
+    })
+    if (res.ok){
+        const data = await res.json()
+    }
+}
+
+export const editAnnoThunk = (anno_data) => async dispatch => {
+
+    const res = await fetch(`/api/annotations/${anno_data.track_id}`, {
+        method: 'PUT',
+        headers: {'Content-Type': "application/json",
+                    'Accept': 'application/json'},
+        body: JSON.stringify(anno_data)
+    })
+    if (res.ok){
+        const updatedAnno = await res.json()
+    }
+}
+
+export const deleteAnnoThunk = id => async dispatch => {
+
+    const res = await fetch(`/api/annotations/${id}`, {
+        method: 'DELETE',
+    });
+    if (res.ok){
+        const deletedAnno = await res.json()
+        return deletedAnno 
+    }
+}
 
 
-// export default function reducer(state = {all_tracks: []}, action) {
-    
-    //     const getCommentsAndAnnotations = (array) => {
-        //         const stateObj = {}
-        //         array.forEach(track => {
-            //             stateObj[track.id] = track
-            //             if(track.hasOwnProperty("annotations")){
-                //                 stateObj[track.id].annotations = {...getCommentsAndAnnotations(track.annotations), all: track.annotations}
-//             } else if (track.annotations.hasOwnProperty("comments")){
-    //                 stateObj[track.id].comments = {...getCommentsAndAnnotations(track.comments), all: track.comments}
-    //             }
-    //         })
-    //         console.log(stateObj)
-    //         return stateObj
-    
-    
-    
-    //     }
+export const addNewCommentThunk = (comment) => async (dispatch) => {
+
+
+    const res = await fetch('/api/comments/new', {
+        method: 'POST',
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify(comment)
+    });
+
+    if (res.ok) {
+        const newComment = await res.json();
+        return newComment;
+    }
+
+};
+
+export const editCommentThunk = (comment) => async (dispatch) => {
+
+
+    const res = await fetch('/api/comments/edit', {
+        method: 'PUT',
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify(comment)
+    });
+
+    if (res.ok) {
+        const newComment = await res.json();
+        return newComment;
+    }
+
+};
+
+export const deleteCommentThunk = (comment) => async (dispatch) => {
+
+
+    const res = await fetch('/api/comments/delete', {
+        method: 'DELETE',
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify(comment)
+    });
+
+    if (res.ok) {
+        const newComment = await res.json();
+        return newComment;
+    }
+
+};
+
+
+
 const initialState = {};
 
 const trackReducer = (state = initialState, action) => {
@@ -116,9 +193,10 @@ const trackReducer = (state = initialState, action) => {
 
     switch(action.type) {
 
-        //case GET_TRACK:
-
-
+        case GET_TRACK:
+            let thisState = {};
+            thisState[action.payload.id] = action.payload
+            return thisState
         case GET_TRACKS:
             newState = {...state};
             action.payload.tracks?.forEach((track) => newState[track.id] = track)

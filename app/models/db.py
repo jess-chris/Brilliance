@@ -15,7 +15,7 @@ class Track(db.Model):
   updated_at = db.Column(db.DateTime, default=datetime.now(), nullable=False)
 
   
-  # TODO Relation
+
   annotations = db.relationship("Annotation", backref="tracks", cascade="all, delete")
   comments = db.relationship("Comment", backref="tracks", cascade="all, delete")
 
@@ -27,11 +27,14 @@ class Track(db.Model):
       'lyrics': self.lyrics,
       'artist': self.artist,
       'album_image': self.album_image,
-      'annotations': self.annotations,
-      'comments': self.comments
+      'comments': [c.to_dict() for c in self.comments],
+      'annotations': [a.anno_to_dict() for a in self.annotations]
     }
+    
+  def get_comments(self):
+    return self.comments
 
-  # user = db.relationship("User")
+
   
 class Annotation(db.Model):
   __tablename__ = "annotations"
@@ -44,10 +47,22 @@ class Annotation(db.Model):
   created_at = db.Column(db.DateTime, default=datetime.now(), nullable=False)
   updated_at = db.Column(db.DateTime, default=datetime.now(), nullable=False)
   
-  # TODO Relation
-  # user = db.relationship("User")
+
   comments = db.relationship("Comment", backref="annotations", cascade="all, delete")
   votes = db.relationship("Vote", backref="annotations", cascade="all, delete")
+
+  def anno_to_dict(self):
+    return {
+      'id': self.id,
+      'user_id': self.user_id,
+      'content': self.content,
+      'track_id': self.track_id,
+      'vote_score': self.vote_score,
+      'comments': [c.to_dict() for c in self.comments],
+      'votes': [v.to_dict() for v in self.votes]
+    }
+    
+
   
 class Comment(db.Model):
   __tablename__ = "comments"
@@ -61,6 +76,8 @@ class Comment(db.Model):
   created_at = db.Column(db.DateTime, default=datetime.now(), nullable=False)
   updated_at = db.Column(db.DateTime, default=datetime.now(), nullable=False)
 
+  votes = db.relationship("Vote", backref="comments", cascade="all, delete")
+  
   def to_dict(self):
     return {
       'id': self.id,
@@ -68,12 +85,10 @@ class Comment(db.Model):
       'annotation_id': self.annotation_id,
       'track_id': self.track_id,
       'vote_score': self.vote_score,
-      'content': self.content
+      'content': self.content,
+      'votes': [v.to_dict() for v in self.votes]
     }
   
-  # TODO Relation
-  # user = db.relationship("User")
-  votes = db.relationship("Vote", backref="comments", cascade="all, delete")
 
 class Vote(db.Model):
   __tablename__ = "votes"
@@ -84,5 +99,12 @@ class Vote(db.Model):
   annotation_id = db.Column(db.Integer, db.ForeignKey("annotations.id"))
   comment_id = db.Column(db.Integer, db.ForeignKey("comments.id"))
   
-  # TODO Relation
-  # user = db.relationship("User")
+  
+  def to_dict(self):
+    return {
+      'id': self.id,
+      'vote': self.vote,
+      'user_id': self.user_id,
+      'annotation_id': self.annotation_id,
+      'comment_id': self.comment_id
+    }

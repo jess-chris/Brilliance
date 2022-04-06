@@ -9,8 +9,12 @@ import UsersList from './components/UsersList';
 import TracksPage from './components/TracksPage/TracksPage';
 import SpecificTrack from './components/SpecificTrack/SpecificTrack'
 import TrackUploadForm from './components/TrackUpload/TrackUpload';
+import HomePage from './components/HomePage/HomePage';
 import User from './components/User';
+import Comment from './components/Comments';
 import { authenticate } from './store/session';
+
+import AnnoForm from './components/AnnoForm/AnnoForm';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -32,13 +36,16 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
+        <Route path='/annotations/:id' exact={true}>
+          <AnnoForm/>
+        </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
         </Route>
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
-        <Route exact path='/tracks'>
+        <Route path='/tracks' exact={true}>
           <TracksPage/>
         </Route>
         <Route path='/tracks/new' exact={true}>
@@ -54,8 +61,11 @@ function App() {
           <User />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
-          <h1>My Home Page</h1>
+          <HomePage />
         </ProtectedRoute>
+        <Route path='/comments' exact={true} >
+          <Comment />
+        </Route>
       </Switch>
     </BrowserRouter>
   );
