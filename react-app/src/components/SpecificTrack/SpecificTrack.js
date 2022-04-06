@@ -4,7 +4,7 @@ import { useHistory, useLocation, useParams } from 'react-router-dom';
 import * as trackActions from '../../store/track';
 import EditTrackForm from '../EditTrack/EditTrack';
 import '../SpecificTrack/specificTrack.css'
-import * as annoActions from '../../store/annotation';
+
 
 const SpecificTrack = () => {
 
@@ -13,11 +13,11 @@ const SpecificTrack = () => {
 
 
     useEffect(() => {
-      dispatch(annoActions.getAnnoThunk())
-  }, [dispatch])
+      dispatch(trackActions.getAllTracksThunk());
+  }, [dispatch]);
 
-    const annotationObj = useSelector(state => state.annotation)
-    const annos = Object.values(annotationObj);
+    const tracksObj = useSelector(state => state.track)
+    const tracks = Object.values(tracksObj);
 
     const [editTrackForm, showEditTrackForm] = useState(false)
 
