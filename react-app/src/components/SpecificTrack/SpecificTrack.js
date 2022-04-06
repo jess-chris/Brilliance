@@ -29,7 +29,7 @@ const SpecificTrack = () => {
     const [editTrackForm, showEditTrackForm] = useState(false)
     const [annotationForm, setAnnotationForm] = useState(false)
 
-    const location = useLocation()
+    //const location = useLocation()
     const history = useHistory()
 
 
@@ -56,7 +56,7 @@ const SpecificTrack = () => {
         <>
         <div>
           <div className="header">
-              <img src={track?.album_image}></img>
+              <img alt='' src={track?.album_image}></img>
               <h1>
                 {track?.title}
               </h1>
