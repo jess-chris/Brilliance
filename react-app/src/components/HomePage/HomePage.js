@@ -3,7 +3,6 @@ import { useSelector, useDispatch} from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 import * as trackActions from '../../store/track'; 
-import * as annoActions from '../../store/annotation'
 
 import './HomePage.css';
 
@@ -19,8 +18,8 @@ const HomePage = () => {
 
   const tracksObj = useSelector(state => state.track)
   const tracks = Object.values(tracksObj);
-  const annotationsObj = useSelector(state => state.annotation)
-  const annos = Object.values(annotationsObj);
+
+
 
 
 
