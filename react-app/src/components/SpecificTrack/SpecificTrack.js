@@ -19,9 +19,6 @@ const SpecificTrack = () => {
     const annotationObj = useSelector(state => state.annotation)
     const annos = Object.values(annotationObj);
 
-    console.log(annotationObj, "ANNOTATION OBJECT")
-    console.log(annos, "ANNOTATION ARRAY")
-
     const [editTrackForm, showEditTrackForm] = useState(false)
 
     const location = useLocation()

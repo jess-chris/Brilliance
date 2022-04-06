@@ -14,8 +14,6 @@ const AnnoForm = () => {
     
     const annotations = useSelector(state => state.annotation[+id])
 
-    console.log(annotations)
-
     const submitAnno = async (e) => {
         e.preventDefault();
         //const user_id = sessionUser?.id

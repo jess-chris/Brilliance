@@ -11,7 +11,7 @@ const TracksPage = () => {
 
     useEffect(() => {
         dispatch(trackActions.getAllTracksThunk());
-        // dispatch(annoActions.getAnnoThunk());
+        dispatch(annoActions.getAnnoThunk());
     }, [dispatch])
 
     const tracksObj = useSelector(state => state.track)
