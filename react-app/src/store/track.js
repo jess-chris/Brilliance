@@ -136,6 +136,56 @@ export const deleteAnnoThunk = id => async dispatch => {
 }
 
 
+export const addNewCommentThunk = (comment) => async (dispatch) => {
+
+
+    const res = await fetch('/api/comments/new', {
+        method: 'POST',
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify(comment)
+    });
+
+    if (res.ok) {
+        const newComment = await res.json();
+        return newComment;
+    }
+
+};
+
+export const editCommentThunk = (comment) => async (dispatch) => {
+
+
+    const res = await fetch('/api/comments/edit', {
+        method: 'PUT',
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify(comment)
+    });
+
+    if (res.ok) {
+        const newComment = await res.json();
+        return newComment;
+    }
+
+};
+
+export const deleteCommentThunk = (comment) => async (dispatch) => {
+
+
+    const res = await fetch('/api/comments/delete', {
+        method: 'DELETE',
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify(comment)
+    });
+
+    if (res.ok) {
+        const newComment = await res.json();
+        return newComment;
+    }
+
+};
+
+
+
 const initialState = {};
 
 const trackReducer = (state = initialState, action) => {
