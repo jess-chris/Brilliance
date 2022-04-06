@@ -23,7 +23,7 @@ const TracksPage = () => {
           {tracks?.map(({id, lyrics, title, artist, userId, album_image}) => {
               return(
                   <ul key={id}>
-                        <img src={album_image} className='trackImg'/>
+                        <img alt='' src={album_image} className='trackImg'/>
                         <NavLink to={{pathname: `/tracks/${id}`, state: {id, lyrics, title, artist, userId, album_image}}}>
                             {title}
                         </NavLink>
