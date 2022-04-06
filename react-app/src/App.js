@@ -34,7 +34,7 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
-        <Route path = '/annotations/:id' >
+        <Route path='/annotations/:id' exact={true}>
           <AnnoForm/>
         </Route>
         <Route path='/login' exact={true}>
@@ -43,7 +43,7 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
-        <Route exact path='/tracks'>
+        <Route path='/tracks' exact={true}>
           <TracksPage/>
         </Route>
         <Route path='/tracks/new' exact={true}>

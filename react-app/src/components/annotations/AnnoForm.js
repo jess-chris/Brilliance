@@ -7,13 +7,12 @@ const AnnoForm = () => {
     const sessionUser = useSelector(state => state.session.user);
     const {id} = useParams();
     const [content, setContent] = useState('')
-    const annotations = useSelector(state => state.annotation.entries[+id])
-    console.log('!!!!', annotations)
-
+    
     useEffect(() => {
         dispatch(getAnnoThunk())
-    }, [])
-
+    }, [dispatch])
+    
+    const annotations = useSelector(state => state.annotation.entries[+id])
 
     const submitAnno = async (e) => {
         e.preventDefault();

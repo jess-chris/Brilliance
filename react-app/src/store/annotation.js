@@ -3,9 +3,7 @@ const NEW_ANNO = 'annotation/NEW_ANNO'
 const EDIT_ANNO = 'annotation/EDIT_ANNO'
 const DEL_ANNO = 'annotation/DEL_ANNO'
 
-export const getAnno = annos => (
-    console.log('AASDASDASDASDA', annos.annotations),
-    {
+export const getAnno = annos => ({
     type: GET_ANNO,
     annos
 })
