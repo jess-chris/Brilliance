@@ -9,6 +9,8 @@ import * as annoActions from '../../store/annotation';
 const SpecificTrack = () => {
 
     const dispatch = useDispatch();
+    const {trackId} = useParams()
+
 
     useEffect(() => {
       dispatch(annoActions.getAnnoThunk())
@@ -24,7 +26,7 @@ const SpecificTrack = () => {
 
     const location = useLocation()
     const history = useHistory()
-    const {trackId} = useParams()
+    
 
     const openForm = () => {
         if (editTrackForm) return;
