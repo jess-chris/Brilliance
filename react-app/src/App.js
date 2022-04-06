@@ -9,6 +9,7 @@ import UsersList from './components/UsersList';
 import TracksPage from './components/TracksPage/TracksPage';
 import SpecificTrack from './components/SpecificTrack/SpecificTrack'
 import TrackUploadForm from './components/TrackUpload/TrackUpload';
+import HomePage from './components/HomePage/HomePage';
 import User from './components/User';
 import { authenticate } from './store/session';
 
@@ -59,7 +60,7 @@ function App() {
           <User />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
-          <h1>My Home Page</h1>
+          <HomePage />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
