@@ -3,7 +3,7 @@ from app.models import db, Track
 
 track_routes = Blueprint('tracks', __name__)
 
-@track_routes.route('/')
+@track_routes.route('')
 def tracks():
     tracks = Track.query.all()
     # for track in tracks: 

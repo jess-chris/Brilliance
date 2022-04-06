@@ -1,12 +1,12 @@
-const GET_TRACK = 'track/GET_TRACK'
+// const GET_TRACK = 'track/GET_TRACK'
 const GET_TRACKS = 'track/GET_TRACKS'
 const NEW_TRACK = 'track/NEW_TRACK'
 const DEL_TACO = 'track/DEL_TACO'
 
-const getTrack = (track) => ({
-    type: GET_TRACK,
-    payload: track
-})
+// const getTrack = (track) => ({
+//     type: GET_TRACK,
+//     payload: track
+// })
 
 const getAllTracks = (tracks) => ({
     type: GET_TRACKS,
@@ -24,14 +24,14 @@ const deleteTrack = (track) => ({
 })
 
 
-export const getTrackThunk = (trackId) => async (dispatch) => {
-    const res = await fetch(`/api/tracks/${trackId}`)
+// export const getTrackThunk = (trackId) => async (dispatch) => {
+//     const res = await fetch(`/api/tracks/${trackId}`)
 
-    if (res.ok){
-        const data = await res.json()
-        dispatch(getTrack(data))
-    }
-}
+//     if (res.ok){
+//         const data = await res.json()
+//         dispatch(getTrack(data))
+//     }
+// }
 
 export const getAllTracksThunk = () => async (dispatch) => {
 
@@ -90,25 +90,6 @@ export const deleteTrackThunk = (trackId) => async (dispatch) => {
 };
 
 
-
-// export default function reducer(state = {all_tracks: []}, action) {
-    
-    //     const getCommentsAndAnnotations = (array) => {
-        //         const stateObj = {}
-        //         array.forEach(track => {
-            //             stateObj[track.id] = track
-            //             if(track.hasOwnProperty("annotations")){
-                //                 stateObj[track.id].annotations = {...getCommentsAndAnnotations(track.annotations), all: track.annotations}
-//             } else if (track.annotations.hasOwnProperty("comments")){
-    //                 stateObj[track.id].comments = {...getCommentsAndAnnotations(track.comments), all: track.comments}
-    //             }
-    //         })
-    //         console.log(stateObj)
-    //         return stateObj
-    
-    
-    
-    //     }
 const initialState = {};
 
 const trackReducer = (state = initialState, action) => {

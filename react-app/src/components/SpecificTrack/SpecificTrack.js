@@ -1,19 +1,29 @@
-import React, { useState } from 'react';
-import { useDispatch} from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector} from 'react-redux';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import * as trackActions from '../../store/track'; 
 import EditTrackForm from '../EditTrack/EditTrack';
 
+import * as annoActions from '../../store/annotation';
 
 const SpecificTrack = () => {
 
     const dispatch = useDispatch();
+    const {trackId} = useParams()
+
+
+    useEffect(() => {
+      dispatch(annoActions.getAnnoThunk())
+  }, [dispatch])
+
+    const annotationObj = useSelector(state => state.annotation)
+    const annos = Object.values(annotationObj);
 
     const [editTrackForm, showEditTrackForm] = useState(false)
 
     const location = useLocation()
     const history = useHistory()
-    const {trackId} = useParams()
+    
 
     const openForm = () => {
         if (editTrackForm) return;

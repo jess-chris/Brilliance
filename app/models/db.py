@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import json
 db = SQLAlchemy()
 
 class Track(db.Model):
@@ -27,7 +28,6 @@ class Track(db.Model):
       'lyrics': self.lyrics,
       'artist': self.artist,
       'album_image': self.album_image,
-      'annotations': self.annotations,
       'comments': self.comments
     }
 
@@ -56,8 +56,11 @@ class Annotation(db.Model):
       'content': self.content,
       'track_id': self.track_id,
       'vote_score': self.vote_score,
+      'comments': self.comments,
       # TODO comments for annotation
     }
+    
+
   
 class Comment(db.Model):
   __tablename__ = "comments"
