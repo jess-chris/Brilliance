@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
-import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import * as trackActions from '../../store/track';
 
 
 const Comment = () => {
 
   const dispatch = useDispatch();
-  const userId = useSelector(state => state.session.user.id)
+  //const userId = useSelector(state => state.session.user.id)
   const [commentContent, setCommentContent] = useState('');
   const history = useHistory();
 

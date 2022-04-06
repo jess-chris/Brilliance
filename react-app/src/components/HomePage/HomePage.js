@@ -14,7 +14,6 @@ const HomePage = () => {
   useEffect(() => {
     (async () => {
       await dispatch(trackActions.getAllTracksThunk());
-      await dispatch(annoActions.getAnnoThunk(annos));
     })();
 }, [dispatch])
 
