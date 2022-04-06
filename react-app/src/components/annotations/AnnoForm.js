@@ -12,7 +12,9 @@ const AnnoForm = () => {
         dispatch(getAnnoThunk())
     }, [dispatch])
     
-    const annotations = useSelector(state => state.annotation.entries[+id])
+    const annotations = useSelector(state => state.annotation)
+
+    console.log(annotations)
 
     const submitAnno = async (e) => {
         e.preventDefault();
@@ -24,7 +26,6 @@ const AnnoForm = () => {
             user_id: sessionUser?.id,
             track_id: +id
         }
-        console.log('##########', data)
 
         await dispatch(createAnnoThunk(data))
 
@@ -33,7 +34,6 @@ const AnnoForm = () => {
     const editAnno = async (e) => {
         e.preventDefault();
 
-        console.log('inside edit')
         const updatedAnno = {
             annotations_id: annotations?.id,
             content,
@@ -47,13 +47,12 @@ const AnnoForm = () => {
 
     const deleteAnno = async (e) => {
         e.preventDefault();
-        console.log('IN DELETE')
         await dispatch(deleteAnnoThunk(annotations?.id))
     }
 
     return (
         <div>
-            <h1>{`${annotations?.content}`}</h1>
+            <h1>{annotations?.content}</h1>
 
             <form onSubmit={submitAnno}>
                 <textarea
