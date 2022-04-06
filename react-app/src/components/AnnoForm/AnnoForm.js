@@ -1,57 +1,49 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from "react-router-dom";
-import { createAnnoThunk, editAnnoThunk, getAnnoThunk, deleteAnnoThunk} from "../../store/annotation";
+import * as trackActions from '../../store/track'
+
 const AnnoForm = () => {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
-    const {id} = useParams();
+    const tracksObj = useSelector(state => state.track)
+    const track = Object.values(tracksObj)[0]
     const [content, setContent] = useState('')
-    
-    useEffect(() => {
-        dispatch(getAnnoThunk())
-    }, [dispatch])
-    
-    const annotations = useSelector(state => state.annotation[+id])
 
     const submitAnno = async (e) => {
         e.preventDefault();
         //const user_id = sessionUser?.id
-        const annotations_id = annotations?.id
+        const id = track.id
         const data = {
-            annotations_id,
             content,
             user_id: sessionUser?.id,
             track_id: +id
         }
 
-        await dispatch(createAnnoThunk(data))
+        await dispatch(trackActions.createAnnoThunk(data))
 
     }
 
     const editAnno = async (e) => {
         e.preventDefault();
 
+        const annotations_id = track.annotations.id
         const updatedAnno = {
-            annotations_id: annotations?.id,
+            annotations_id,
             content,
             user_id: sessionUser?.id,
-            track_id: +id
         }
 
 
-        await dispatch(editAnnoThunk(annotations?.id, updatedAnno))
+        await dispatch(trackActions.editAnnoThunk(updatedAnno))
     }
 
     const deleteAnno = async (e) => {
         e.preventDefault();
-        await dispatch(deleteAnnoThunk(annotations?.id))
+        await dispatch(trackActions.deleteAnnoThunk(track.annotations.id))
     }
 
     return (
         <div>
-            <h1>{annotations?.content}</h1>
-
             <form onSubmit={submitAnno}>
                 <textarea
                 onChange={(e) => setContent(e.target.value)}

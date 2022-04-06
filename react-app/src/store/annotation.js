@@ -1,6 +1,6 @@
 const GET_ANNO = 'annotation/GET_ANNO'
 const NEW_ANNO = 'annotation/NEW_ANNO'
-// const EDIT_ANNO = 'annotation/EDIT_ANNO'
+
 const DEL_ANNO = 'annotation/DEL_ANNO'
 
 export const getAnno = annos => ({
@@ -36,7 +36,7 @@ export const getAnnoThunk = () => async (dispatch) => {
 }
 
 export const createAnnoThunk = anno_data => async dispatch => {
-    const res = await fetch(`/api/annotations/${anno_data.track_id}`, {
+    const res = await fetch(`/api/annotations/new`, {
         method: 'POST',
         headers: { "Content-Type": "application/json", },
         body: JSON.stringify(anno_data)

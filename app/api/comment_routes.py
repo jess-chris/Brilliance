@@ -10,8 +10,7 @@ def create_comment():
   #annotation_id=request.json['annotationId']
   track_id=request.json['trackId']
   content=request.json['content']
-  
-  print("Hellooooooooooooooooooooo")
+
   
   if track_id != None:
     

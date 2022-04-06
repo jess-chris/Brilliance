@@ -14,7 +14,7 @@ import User from './components/User';
 import Comment from './components/Comments';
 import { authenticate } from './store/session';
 
-import AnnoForm from './components/annotations/AnnoForm';
+import AnnoForm from './components/AnnoForm/AnnoForm';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
