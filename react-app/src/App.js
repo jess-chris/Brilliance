@@ -11,6 +11,7 @@ import SpecificTrack from './components/SpecificTrack/SpecificTrack'
 import TrackUploadForm from './components/TrackUpload/TrackUpload';
 import HomePage from './components/HomePage/HomePage';
 import User from './components/User';
+import Comment from './components/Comments';
 import { authenticate } from './store/session';
 
 import AnnoForm from './components/annotations/AnnoForm';
@@ -62,6 +63,9 @@ function App() {
         <ProtectedRoute path='/' exact={true} >
           <HomePage />
         </ProtectedRoute>
+        <Route path='/comments' exact={true} >
+          <Comment />
+        </Route>
       </Switch>
     </BrowserRouter>
   );
