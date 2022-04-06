@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch} from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import * as trackActions from '../../store/track'; 
-import * as annoActions from '../../store/annotation'
+
 
 import './TracksPage.css'
 
@@ -13,7 +13,6 @@ const TracksPage = () => {
 
     useEffect(() => {
         dispatch(trackActions.getAllTracksThunk());
-        dispatch(annoActions.getAnnoThunk());
     }, [dispatch])
 
     const tracksObj = useSelector(state => state.track)
