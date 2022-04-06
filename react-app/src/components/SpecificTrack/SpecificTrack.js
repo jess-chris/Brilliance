@@ -3,6 +3,7 @@ import { useDispatch, useSelector} from 'react-redux';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import * as trackActions from '../../store/track';
 import EditTrackForm from '../EditTrack/EditTrack';
+import AnnoForm from '../AnnoForm/AnnoForm';
 import '../SpecificTrack/specificTrack.css'
 
 
@@ -12,14 +13,21 @@ const SpecificTrack = () => {
     const {trackId} = useParams()
 
 
+
+
     useEffect(() => {
-      dispatch(trackActions.getAllTracksThunk());
+      dispatch(trackActions.getTrackThunk(trackId));
   }, [dispatch]);
 
     const tracksObj = useSelector(state => state.track)
-    const tracks = Object.values(tracksObj);
+    const track = Object.values(tracksObj)[0]
+    // .find(x => x.id === trackId)
+
+    console.log(track)
+
 
     const [editTrackForm, showEditTrackForm] = useState(false)
+    const [annotationForm, setAnnotationForm] = useState(false)
 
     const location = useLocation()
     const history = useHistory()
@@ -37,24 +45,32 @@ const SpecificTrack = () => {
         history.push('/tracks')
     }
 
+    const handleMouseUp = () => {
+        console.log(`${window.getSelection().toString()}`)
+        setAnnotationForm(true)
+    }
+
 
 
     return(
         <>
         <div>
           <div className="header">
-              <img src={location.state.album_image}></img>
+              <img src={track?.album_image}></img>
               <h1>
-                {location.state.title}
+                {track?.title}
               </h1>
               <p>
-                {location.state.artist}
+                {track?.artist}
               </p>
           </div>
 
           <div className="songPage">
-            <p className='lyricTitle'>{location.state.title} lyrics</p>
-            <p className='lyrics'>{location.state.lyrics}</p>
+            <p className='lyricTitle'>{track?.title} lyrics</p>
+            <p className='lyrics' onMouseUp={handleMouseUp}>
+              {annotationForm ? (<AnnoForm track={track}/>) : null}
+              {track?.lyrics}
+            </p>
 
 
           </div>

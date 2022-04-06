@@ -11,6 +11,14 @@ def tracks():
     return {'tracks': [track.to_dict() for track in tracks]}
 
 
+@track_routes.route('/<int:id>')
+def track(id):
+
+    track = Track.query.get(id)
+
+    return track.to_dict()
+
+
 @track_routes.route('/new', methods=['POST'])
 def trackUpload():
 
