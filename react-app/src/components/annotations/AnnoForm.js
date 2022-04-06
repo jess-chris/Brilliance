@@ -12,7 +12,7 @@ const AnnoForm = () => {
         dispatch(getAnnoThunk())
     }, [dispatch])
     
-    const annotations = useSelector(state => state.annotation)
+    const annotations = useSelector(state => state.annotation[+id])
 
     console.log(annotations)
 

@@ -84,7 +84,7 @@ const annoReducer = (state = initialState, action) => {
         
         case GET_ANNO:
             newState = {...state}
-            action.payload.annos?.forEach((anno) => newState[anno.id] = anno)
+            action.payload.annotations?.forEach((anno) => newState[anno.id] = anno)
             return newState
 
         case NEW_ANNO:
