@@ -1,0 +1,12 @@
+.allTracksContainer{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
+}
+
+.trackImg{
+    height: 30px;
+    width: 30px;
+}
