@@ -8,8 +8,8 @@ def seed_tracks():
     test_track = Track(
         user_id = 1,
         title = 'Mr.Brightside',
-        lyrics = 
-    ''' 
+        lyrics =
+    '''
     Coming out of my cage and I've been doing just fine
     Gotta, gotta be down, because I want it all
     It started out with a kiss, how did it end up like this?
@@ -51,17 +51,19 @@ def seed_tracks():
     I never...
     I never...
     I never...
-    I never... 
+    I never...
     ''',
         artist = 'The Killers',
         album_image = 'https://media.pitchfork.com/photos/5929bc3513d197565213b27f/1:1/w_320,c_limit/192293f3.jpg',
         created_at = today.strftime("%B %d, %Y"),
         updated_at = today.strftime("%B %d, %Y")
     )
+
+
+
     db.session.add(test_track)
     db.session.commit()
 
 def undo_tracks():
     db.session.execute('TRUNCATE tracks RESTART IDENTITY CASCADE;')
     db.session.commit()
-
