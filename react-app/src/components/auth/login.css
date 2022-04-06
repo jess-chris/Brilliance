@@ -1,0 +1,76 @@
+body{
+    margin: 0;
+    padding: 0;
+    height:100%;
+    
+}
+
+.sign-in{
+    font-family: Cabin, sans-serif;
+    font-size: 20px;
+    color: #fff;
+    font-weight: 700;
+    line-height: 100%;
+    padding-top: 1px;
+    margin-bottom: 10px;
+}
+.large-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color:white;
+    height:100%;
+    background-color: black;
+    
+}
+
+.input-container{
+    background-color: rgba(153,153,153,.09);
+    color: #ede8e9;
+    padding: 10px;
+    margin: 10px auto;
+    max-width: 370px;
+    font-family: 'Kanit', sans-serif;
+    border-top: 1px solid rgba(153,153,153,.18);
+}
+
+.input-container div{
+    margin: 10px auto;
+    max-width: 370px;
+    width: 250px;
+}
+
+.input-container input{
+    background-color: #363636;
+    border-color: #555;
+    color: #ccc;
+    border: 1px solid #bbb;
+    min-width: 120px;
+    max-width: 100%;
+    width: 95%;
+    font-size: 15px;
+    border-radius: 2px;
+    padding: 5px;
+}
+
+.input-container button{
+    background-color: #262626;
+    color: #ccc;
+    border: 1px solid #444;
+    display: inline-block;
+    font-family: 'Kanit', sans-serif;
+    position: relative;
+    border-radius: 2px;
+    padding: 5px 9px;
+    margin: 3px 4px 5px 0;
+}
+
+.sign-up-redirect{
+    font-family: 'Kanit', sans-serif;
+}
+
+.sign-up-redirect a{
+    text-decoration: none;
+    color: #5ba7c2;
+}
