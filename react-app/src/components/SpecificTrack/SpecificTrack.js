@@ -45,18 +45,32 @@ const SpecificTrack = () => {
           <div className="header">
               <img src={location.state.album_image}></img>
               <h1>
-              {location.state.title}
+                {location.state.title}
               </h1>
+              <p>
+                {location.state.artist}
+              </p>
           </div>
+
           <div className="songPage">
+            <p className='lyricTitle'>{location.state.title} lyrics</p>
             <p className='lyrics'>{location.state.lyrics}</p>
 
+
+          </div>
+
+          <div className='annotationsRight'>
 
           </div>
 
           <button type='submit' onClick={(openForm)}>Edit</button>
           {editTrackForm && (<EditTrackForm/>)}
           <button type='submit' onClick={handleDelete}>Delete</button>
+
+          <div className='comments'>
+          <h1>Comments</h1>
+
+          </div>
         </div>
         </>
 

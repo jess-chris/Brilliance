@@ -1,3 +1,8 @@
 .lyrics {
     white-space: pre-line;
 }
+
+.header {
+    background-image: linear-gradient(whitesmoke, grey);
+    padding: 10px;
+}
