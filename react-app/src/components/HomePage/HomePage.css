@@ -1,14 +1,9 @@
 .main-page {
   display: block;
   margin: 0 60px;
-}
-
-div {
-  margin: 0px;
   padding: 0px;
   border: 0px;
 }
-
 
 #topTracks {
 
@@ -135,7 +130,7 @@ div {
 
 }
 
-h2, h1, p {
+.main-headers {
   text-align: center;
 }
 

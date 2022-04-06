@@ -28,7 +28,7 @@ const HomePage = () => {
   return (
     <div className='main-page'>
       
-      <h2>Featured News</h2>
+      <h2 className='main-headers'>Featured News</h2>
       <div id='featured'>
 
         <div id='mainFeat'>Main</div>
@@ -43,8 +43,8 @@ const HomePage = () => {
       </div>
 
       <div id='topTracks'>
-        <h1>Charts</h1>
-        <p>Trending on </p>
+        <h1 className='main-headers'>Charts</h1>
+        <p className='main-headers'>Trending on </p>
 
         <div id='typeOfTracks'>
 
