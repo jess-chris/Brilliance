@@ -8,28 +8,57 @@ import '../SpecificTrack/specificTrack.css'
 
 
 const SpecificTrack = () => {
-
+    const [loaded, setLoaded] = useState(false);
     const dispatch = useDispatch();
     const {trackId} = useParams()
-
-
-
-
+    
+    
     useEffect(() => {
-      dispatch(trackActions.getTrackThunk(trackId));
-  }, [dispatch]);
-
+      (async() => {
+        await dispatch(trackActions.getTrackThunk(trackId));
+        setLoaded(true);
+      })();
+    }, [dispatch]);
+    
     const tracksObj = useSelector(state => state.track)
     const track = Object.values(tracksObj)[0]
-    // .find(x => x.id === trackId)
+    
 
-    //console.log('track', track)
+    const setAnnotations = (track) => {
+
+      const node = track.lyrics
+      const lyricsWithAnnos = [];
+
+      const annoArr = [[157,203], [207,259]];
+
+      let prevIndex = 0;
+
+      for(let curIndex = 0; curIndex < annoArr.length; curIndex++){
+
+        const curAnno = annoArr[curIndex];
+
+        let nonAnno = node.slice(prevIndex, curAnno[0]);
+        let annoLyric = node.slice(curAnno[0], curAnno[1]);
+
+        lyricsWithAnnos.push(`<span class='nonAnno'>${nonAnno}</span>`);
+        lyricsWithAnnos.push(`<span key='${curIndex}' class='annotated'>${annoLyric}</span>`);
+        prevIndex = curAnno[1];
+
+        if(curIndex === annoArr.length - 1) {
+          nonAnno = node.slice(prevIndex, node.length)
+          lyricsWithAnnos.push(`<span class='nonAnno'>${nonAnno}</span>`);
+        }
+      }
+      //console.log(lyricsWithAnnos.join(''))
+      document.querySelector('.lyrics').innerHTML = lyricsWithAnnos.join('')
+    };
+
+
 
 
     const [editTrackForm, showEditTrackForm] = useState(false)
     const [annotationForm, setAnnotationForm] = useState(false)
 
-    //const location = useLocation()
     const history = useHistory()
 
 
@@ -45,59 +74,7 @@ const SpecificTrack = () => {
         history.push('/tracks')
     }
 
-    useEffect(() => {
-      // console.log(`${window.getSelection().toString()}`)
-      // let strObj = window.getSelection()
-      // // let paras = document.getElementsByTagName('p')[0]
-      // // let rect = strObj.getBoundingClientRect()
-      // let initialIndex = strObj.anchorOffset
-      // let finalIndex = strObj.focusOffset
-      // console.log('ind2', finalIndex)
-      // console.log('ind1', initialIndex)
-      // let newHTML = `${strObj.toString()}`
-      // console.log(newHTML)
-      // //console.log('strObj', strObj)
-      // // console.log(rect)
-      // let lyricArr = track.lyrics.split('')
-      // lyricArr.splice(initialIndex, finalIndex-initialIndex, newHTML).join('')
-      //console.log('Arr', lyricArr)
-      //const highlightedLyrics = lyricArr.join('')
-      //console.log('hiiiii', highlightedLyrics)
-      //console.log('lyrics', track.lyrics)
-      
-
-        var span = document.createElement("span");
-        
-        let node = document.querySelector(".lyrics")
-        document.getSelection().removeAllRanges()
-
-        let range = document.createRange()
-        let initialIndex = 157
-        let finalIndex = 203
-
-        // let initialIndex2 = 20
-        // let finalIndex2 = 50
-
-        // let initialIndex = sel.anchorOffset
-        // let finalIndex = sel.focusOffset
-
-        range.setStart(node.firstChild, initialIndex)
-        range.setEnd(node.firstChild, finalIndex)
     
-        range.surroundContents(span);
-
-
-        initialIndex = 0
-        finalIndex = 0
-          
-
-
-
-      //setAnnotationForm(true)
-        // return highlightedLyrics
-    }, []);
-
-
 
     return(
         <>
@@ -118,7 +95,6 @@ const SpecificTrack = () => {
             <p className='lyricTitle'>{track?.title} lyrics</p>
             <p className='lyrics'>
               {annotationForm ? (<AnnoForm track={track}/>) : null}
-              {track?.lyrics}
               {/* {highlightedLyrics} */}
             </p>
 
@@ -137,6 +113,7 @@ const SpecificTrack = () => {
           <h1>Comments</h1>
 
           </div>
+          {loaded && setAnnotations(track)}
         </div>
         </>
 
