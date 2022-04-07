@@ -8,6 +8,11 @@
 }
 
 
+span {
+    background-color: yellow;
+}
+
+
 .image-box{
     height:320px;
     width:320px;
@@ -21,5 +26,6 @@ img{
 h1{
     text-align: left;
 }
+
 
 
