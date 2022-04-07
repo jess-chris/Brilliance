@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import * as trackActions from '../../store/track';
+import * as modalActions from '../../store/modal'
 import EditTrackForm from '../EditTrack/EditTrack';
 import AnnoForm from '../AnnoForm/AnnoForm';
 import '../SpecificTrack/specificTrack.css'
@@ -12,15 +13,17 @@ const SpecificTrack = () => {
     const dispatch = useDispatch();
     const {trackId} = useParams()
 
+    const tracksObj = useSelector(state => state.track)
+    const track = Object.values(tracksObj)[0]
 
+    console.log(track.annotations[0].initialAnnoIndex)
+    console.log(track.annotations[0].finalAnnoIndex)
 
 
     useEffect(() => {
       dispatch(trackActions.getTrackThunk(trackId));
   }, [dispatch]);
 
-    const tracksObj = useSelector(state => state.track)
-    const track = Object.values(tracksObj)[0]
     // .find(x => x.id === trackId)
 
     console.log('track', track)
@@ -45,27 +48,39 @@ const SpecificTrack = () => {
         history.push('/tracks')
     }
 
-    const handleMouseUp = () => {
-      // console.log(`${window.getSelection().toString()}`)
+    const getSelectedAnnotation = () => {
+      const highlightedText = (`${window.getSelection().toString()}`)
       let strObj = window.getSelection()
-      // let paras = document.getElementsByTagName('p')[0]
-      // let rect = strObj.getBoundingClientRect()
-      let initialIndex = strObj.anchorOffset
-      let finalIndex = strObj.focusOffset
-      console.log('ind2', finalIndex)
-      console.log('ind1', initialIndex)
-      let newHTML = `<span key=${track.annotations.length+1}>${strObj.toString()}</span>`
-      console.log('html', newHTML)
-      console.log('strObj', strObj)
-      // console.log(rect)
-      let lyricArr = track.lyrics.split('')
-      lyricArr.splice(initialIndex, finalIndex-initialIndex, newHTML).join('')
-      console.log('Arr', lyricArr)
-      const highlightedLyrics = lyricArr.join('')
-      console.log('hiiiii', highlightedLyrics)
-      console.log('lyrics', track.lyrics)
+      console.log(strObj.anchorOffset)
+      console.log(strObj.focusOffset)
+
+      
+
+      track?.lyrics.replace(highlightedText, `<span>${highlightedText}</span`)
+
+    }
+
+    const handleMouseUp = () => {
+       
+        getSelectedAnnotation()
+      // let initialIndex = strObj.anchorOffset
+      // let finalIndex = strObj.focusOffset
+      // console.log('ind2', finalIndex)
+      // console.log('ind1', initialIndex)
+      // let newHTML = `<span key=${track.annotations.length+1}>${strObj.toString()}</span>`
+      // console.log('html', newHTML)
+      // console.log('strObj', strObj)
+      // // console.log(rect)
+      // let lyricArr = track.lyrics.split('')
+      // lyricArr.splice(initialIndex, finalIndex-initialIndex, newHTML).join('')
+      // console.log('Arr', lyricArr)
+      // const highlightedLyrics = lyricArr.join('')
+      // console.log('hiiiii', highlightedLyrics)
+      // console.log('lyrics', track.lyrics)
         setAnnotationForm(true)
-        // return highlightedLyrics
+        dispatch(modalActions.setCurrentModal(AnnoForm))
+        dispatch(modalActions.showModal())
+        history.push(`/tracks/${trackId}`)
     }
 
 
@@ -88,9 +103,8 @@ const SpecificTrack = () => {
           <div className="songPage">
             <p className='lyricTitle'>{track?.title} lyrics</p>
             <p className='lyrics' onMouseUp={handleMouseUp}>
-              {annotationForm ? (<AnnoForm track={track}/>) : null}
+              {/* {annotationForm ? (<AnnoForm track={track}/>) : null} */}
               {track?.lyrics}
-              {/* {highlightedLyrics} */}
             </p>
 
 
