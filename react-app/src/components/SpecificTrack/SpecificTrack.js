@@ -23,7 +23,7 @@ const SpecificTrack = () => {
     const track = Object.values(tracksObj)[0]
     // .find(x => x.id === trackId)
 
-    console.log('track', track)
+    //console.log('track', track)
 
 
     const [editTrackForm, showEditTrackForm] = useState(false)
@@ -45,28 +45,57 @@ const SpecificTrack = () => {
         history.push('/tracks')
     }
 
-    const handleMouseUp = () => {
+    useEffect(() => {
       // console.log(`${window.getSelection().toString()}`)
-      let strObj = window.getSelection()
-      // let paras = document.getElementsByTagName('p')[0]
-      // let rect = strObj.getBoundingClientRect()
-      let initialIndex = strObj.anchorOffset
-      let finalIndex = strObj.focusOffset
-      console.log('ind2', finalIndex)
-      console.log('ind1', initialIndex)
-      let newHTML = `<span key=${track.annotations.length+1}>${strObj.toString()}</span>`
-      console.log('html', newHTML)
-      console.log('strObj', strObj)
-      // console.log(rect)
-      let lyricArr = track.lyrics.split('')
-      lyricArr.splice(initialIndex, finalIndex-initialIndex, newHTML).join('')
-      console.log('Arr', lyricArr)
-      const highlightedLyrics = lyricArr.join('')
-      console.log('hiiiii', highlightedLyrics)
-      console.log('lyrics', track.lyrics)
-        setAnnotationForm(true)
+      // let strObj = window.getSelection()
+      // // let paras = document.getElementsByTagName('p')[0]
+      // // let rect = strObj.getBoundingClientRect()
+      // let initialIndex = strObj.anchorOffset
+      // let finalIndex = strObj.focusOffset
+      // console.log('ind2', finalIndex)
+      // console.log('ind1', initialIndex)
+      // let newHTML = `${strObj.toString()}`
+      // console.log(newHTML)
+      // //console.log('strObj', strObj)
+      // // console.log(rect)
+      // let lyricArr = track.lyrics.split('')
+      // lyricArr.splice(initialIndex, finalIndex-initialIndex, newHTML).join('')
+      //console.log('Arr', lyricArr)
+      //const highlightedLyrics = lyricArr.join('')
+      //console.log('hiiiii', highlightedLyrics)
+      //console.log('lyrics', track.lyrics)
+      
+
+        var span = document.createElement("span");
+        
+        let node = document.querySelector(".lyrics")
+        document.getSelection().removeAllRanges()
+
+        let range = document.createRange()
+        let initialIndex = 157
+        let finalIndex = 203
+
+        // let initialIndex2 = 20
+        // let finalIndex2 = 50
+
+        // let initialIndex = sel.anchorOffset
+        // let finalIndex = sel.focusOffset
+
+        range.setStart(node.firstChild, initialIndex)
+        range.setEnd(node.firstChild, finalIndex)
+    
+        range.surroundContents(span);
+
+
+        initialIndex = 0
+        finalIndex = 0
+          
+
+
+
+      //setAnnotationForm(true)
         // return highlightedLyrics
-    }
+    }, []);
 
 
 
@@ -87,7 +116,7 @@ const SpecificTrack = () => {
 
           <div className="songPage">
             <p className='lyricTitle'>{track?.title} lyrics</p>
-            <p className='lyrics' onMouseUp={handleMouseUp}>
+            <p className='lyrics'>
               {annotationForm ? (<AnnoForm track={track}/>) : null}
               {track?.lyrics}
               {/* {highlightedLyrics} */}
