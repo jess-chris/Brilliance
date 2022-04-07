@@ -23,7 +23,7 @@ const SpecificTrack = () => {
     const track = Object.values(tracksObj)[0]
     // .find(x => x.id === trackId)
 
-    console.log(track)
+    console.log('track', track)
 
 
     const [editTrackForm, showEditTrackForm] = useState(false)
@@ -46,8 +46,26 @@ const SpecificTrack = () => {
     }
 
     const handleMouseUp = () => {
-        console.log(`${window.getSelection().toString()}`)
+      // console.log(`${window.getSelection().toString()}`)
+      let strObj = window.getSelection()
+      // let paras = document.getElementsByTagName('p')[0]
+      // let rect = strObj.getBoundingClientRect()
+      let initialIndex = strObj.anchorOffset
+      let finalIndex = strObj.focusOffset
+      console.log('ind2', finalIndex)
+      console.log('ind1', initialIndex)
+      let newHTML = `<span key=${track.annotations.length+1}>${strObj.toString()}</span>`
+      console.log('html', newHTML)
+      console.log('strObj', strObj)
+      // console.log(rect)
+      let lyricArr = track.lyrics.split('')
+      lyricArr.splice(initialIndex, finalIndex-initialIndex, newHTML).join('')
+      console.log('Arr', lyricArr)
+      const highlightedLyrics = lyricArr.join('')
+      console.log('hiiiii', highlightedLyrics)
+      console.log('lyrics', track.lyrics)
         setAnnotationForm(true)
+        // return highlightedLyrics
     }
 
 
@@ -70,6 +88,7 @@ const SpecificTrack = () => {
             <p className='lyrics' onMouseUp={handleMouseUp}>
               {annotationForm ? (<AnnoForm track={track}/>) : null}
               {track?.lyrics}
+              {/* {highlightedLyrics} */}
             </p>
 
 

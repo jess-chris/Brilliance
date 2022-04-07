@@ -6,3 +6,7 @@
     background-image: linear-gradient(whitesmoke, grey);
     padding: 10px;
 }
+
+span {
+    background-color: yellow;
+}
