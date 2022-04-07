@@ -16,7 +16,7 @@ const SpecificTrack = () => {
 
 
     useEffect(() => {
-      dispatch(trackActions.getTrackThunk());
+      dispatch(trackActions.getTrackThunk(trackId));
   }, [dispatch]);
 
     const tracksObj = useSelector(state => state.track)
