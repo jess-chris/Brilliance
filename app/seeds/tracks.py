@@ -489,7 +489,7 @@ def seed_tracks():
             Now watch
                  ''',
         artist = 'Soulja Boy',
-        album_image = '',
+        album_image = 'https://img.discogs.com/WHcssBxzecK10nOKmsOq5U_Jp2Q=/fit-in/300x300/filters:strip_icc():format(webp):mode_rgb():quality(40)/discogs-images/R-1263083-1494598925-8726.jpeg.jpg',
         created_at = today.strftime("%B %d, %Y"),
         updated_at = today.strftime("%B %d, %Y")
 
@@ -544,7 +544,7 @@ def seed_tracks():
             Take a good hard look at the motherfuckin' boat (shorty, shorty, yeah)
                  ''',
         artist = 'The Lonely Island',
-        album_image = 'https://img.discogs.com/WHcssBxzecK10nOKmsOq5U_Jp2Q=/fit-in/300x300/filters:strip_icc():format(webp):mode_rgb():quality(40)/discogs-images/R-1263083-1494598925-8726.jpeg.jpg',
+        album_image = '',
         created_at = today.strftime("%B %d, %Y"),
         updated_at = today.strftime("%B %d, %Y")
 

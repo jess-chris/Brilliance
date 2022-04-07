@@ -56,7 +56,9 @@ const SpecificTrack = () => {
         <>
         <div>
           <div className="header">
-              <img className = 'test' alt='' src={track?.album_image}></img>
+              <div className='image-box'>
+              <img alt='' src={track?.album_image}></img>
+              </div>
               <h1>
                 {track?.title}
               </h1>
