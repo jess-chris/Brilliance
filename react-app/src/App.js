@@ -16,6 +16,7 @@ import { authenticate } from './store/session';
 
 import AnnoForm from './components/AnnoForm/AnnoForm';
 
+
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
@@ -66,6 +67,7 @@ function App() {
         <Route path='/comments' exact={true} >
           <Comment />
         </Route>
+        
       </Switch>
     </BrowserRouter>
   );

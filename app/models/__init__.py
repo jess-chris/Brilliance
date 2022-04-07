@@ -1,3 +1,3 @@
-from .db import db, Track, Annotation, Comment
+from .db import db, Track, Annotation, Comment, Vote
 from .user import User
 

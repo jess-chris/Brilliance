@@ -186,6 +186,20 @@ export const deleteCommentThunk = (comment) => async (dispatch) => {
 
 };
 
+export const createVoteThunk = (vote) => async dispatch => {
+
+    const res = await fetch('/api/votes/new', {
+        method: 'POST',
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify(vote)
+    })
+
+    if (res.ok) {
+        const newVote = await res.json();
+        return newVote;
+    }
+}
+
 
 
 const initialState = {};
