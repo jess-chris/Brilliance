@@ -20,7 +20,10 @@ const TracksPage = () => {
 
     return (
         <>
-        <h1>Tracks</h1>
+        <div className='tracks-page-title'>
+           <h1>Tracks</h1> 
+        </div>
+        
             <div className='allTracksContainer'>
                 <div></div>
                 <div>

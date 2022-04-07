@@ -21,6 +21,7 @@ ul{
 
 }
 
-h1{
-    text-align: center;
+.tracks-page-title{
+    display: flex;
+    justify-content: center;
 }
