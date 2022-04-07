@@ -7,21 +7,18 @@ comment_routes = Blueprint('comments', __name__)
 def create_comment():
   
   user_id=request.json['userId']
-  #annotation_id=request.json['annotationId']
-  track_id=request.json['trackId']
   content=request.json['content']
-
   
-  if track_id != None:
-    
+  try:
+    track_id=request.json['trackId']
     comment = Comment(
       user_id = user_id,
       track_id = track_id,
       content = content,
       vote_score = 0
     )
-  else:
-    
+  except:
+    annotation_id=request.json['annotationId']
     comment = Comment(
       user_id = user_id,
       annotation_id = annotation_id,

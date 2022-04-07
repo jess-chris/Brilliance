@@ -1,5 +1,5 @@
 import React, { useState, } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import * as trackActions from '../../store/track';
 
@@ -7,7 +7,7 @@ import * as trackActions from '../../store/track';
 const Comment = () => {
 
   const dispatch = useDispatch();
-  //const userId = useSelector(state => state.session.user.id)
+  const userId = useSelector(state => state.session.user.id)
   const [commentContent, setCommentContent] = useState('');
   const history = useHistory();
 
@@ -16,10 +16,12 @@ const Comment = () => {
     e.preventDefault()
 
     const newComment = {
-      commentId: '2'
+      userId,
+      annotationId: '1',
+      content: commentContent
     }
 
-    dispatch(trackActions.deleteCommentThunk(newComment))
+    dispatch(trackActions.addNewCommentThunk(newComment))
     history.push(`/tracks/`);
 
   };
