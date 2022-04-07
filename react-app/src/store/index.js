@@ -4,13 +4,15 @@ import session from './session'
 
 import annoReducer from './annotation';
 import trackReducer from './track'
+import annoModalReducer from './modal';
 
 
 
 const rootReducer = combineReducers({
   session,
   annotation: annoReducer,
-  track: trackReducer
+  track: trackReducer,
+  modal: annoModalReducer
 });
 
 

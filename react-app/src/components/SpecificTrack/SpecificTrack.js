@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import * as trackActions from '../../store/track';
+import * as modalActions from '../../store/modal'
 import EditTrackForm from '../EditTrack/EditTrack';
 import AnnoForm from '../AnnoForm/AnnoForm';
 import '../SpecificTrack/specificTrack.css'
@@ -23,6 +24,7 @@ const SpecificTrack = () => {
     const tracksObj = useSelector(state => state.track)
     const track = Object.values(tracksObj)[0]
     
+
 
     const setAnnotations = (track) => {
 
@@ -55,7 +57,6 @@ const SpecificTrack = () => {
 
 
 
-
     const [editTrackForm, showEditTrackForm] = useState(false)
     const [annotationForm, setAnnotationForm] = useState(false)
 
@@ -74,7 +75,33 @@ const SpecificTrack = () => {
         history.push('/tracks')
     }
 
-    
+
+
+    const handleMouseUp = () => {
+       
+
+      // let initialIndex = strObj.anchorOffset
+      // let finalIndex = strObj.focusOffset
+      // console.log('ind2', finalIndex)
+      // console.log('ind1', initialIndex)
+      // let newHTML = `<span key=${track.annotations.length+1}>${strObj.toString()}</span>`
+      // console.log('html', newHTML)
+      // console.log('strObj', strObj)
+      // // console.log(rect)
+      // let lyricArr = track.lyrics.split('')
+      // lyricArr.splice(initialIndex, finalIndex-initialIndex, newHTML).join('')
+      // console.log('Arr', lyricArr)
+      // const highlightedLyrics = lyricArr.join('')
+      // console.log('hiiiii', highlightedLyrics)
+      // console.log('lyrics', track.lyrics)
+        setAnnotationForm(true)
+        dispatch(modalActions.setCurrentModal(AnnoForm))
+        dispatch(modalActions.showModal())
+        history.push(`/tracks/${trackId}`)
+    }
+
+
+
 
     return(
         <>
@@ -93,9 +120,9 @@ const SpecificTrack = () => {
 
           <div className="songPage">
             <p className='lyricTitle'>{track?.title} lyrics</p>
-            <p className='lyrics'>
-              {annotationForm ? (<AnnoForm track={track}/>) : null}
-              {/* {highlightedLyrics} */}
+            <p className='lyrics' onMouseUp={handleMouseUp}>
+              {/* {annotationForm ? (<AnnoForm track={track}/>) : null} */}
+              {track?.lyrics}
             </p>
 
 
