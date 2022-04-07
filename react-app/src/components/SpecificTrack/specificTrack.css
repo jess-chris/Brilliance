@@ -6,3 +6,14 @@
     background-image: linear-gradient(whitesmoke, grey);
     padding: 10px;
 }
+
+
+.image-box{
+    height:320px;
+    width:320px;
+}
+
+.songPage{
+    text-align: center;
+}
+
