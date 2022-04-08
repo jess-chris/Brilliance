@@ -142,15 +142,15 @@ const SpecificTrack = () => {
             </div>
           ))}
         </div> */}
+
+
+          <button type='submit' onClick={(openForm)}>Edit Track</button>
+          {/* {editTrackForm && (<EditTrackForm/>)} */}
+          <button type='submit' onClick={handleDelete}>Delete Track</button>
+
         <div>
         <Comment/>
         </div>
-
-
-          <button type='submit' onClick={(openForm)}>Edit</button>
-          {/* {editTrackForm && (<EditTrackForm/>)} */}
-          <button type='submit' onClick={handleDelete}>Delete</button>
-
 
         <div className='comments'>
           <h1>Comments</h1>
