@@ -12,8 +12,8 @@ const AnnoForm = () => {
     const sessionUser = useSelector(state => state.session.user);
     const tracksObj = useSelector(state => state.track)
     const track = Object.values(tracksObj)[0]
-    const [initialAnnoIndex, setInitialAnnoIndex] = useState(strObj.focusOffset)
-    const [finalAnnoIndex, setFinalAnnoIndex] = useState(strObj.anchorOffset)
+    const [initialAnnoIndex] = useState(strObj.focusOffset)
+    const [finalAnnoIndex] = useState(strObj.anchorOffset)
     const [content, setContent] = useState('')
     
     console.log(initialAnnoIndex)

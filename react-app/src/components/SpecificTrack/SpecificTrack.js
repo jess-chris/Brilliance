@@ -19,7 +19,7 @@ const SpecificTrack = () => {
         await dispatch(trackActions.getTrackThunk(trackId));
         setLoaded(true);
       })();
-    }, [dispatch]);
+    }, [dispatch, trackId]);
 
     const tracksObj = useSelector(state => state.track)
     const track = Object.values(tracksObj)[0]
@@ -59,7 +59,6 @@ const SpecificTrack = () => {
 
 
     const [editTrackForm, showEditTrackForm] = useState(false)
-    const [annotationForm, setAnnotationForm] = useState(false)
 
     const history = useHistory()
 
@@ -94,7 +93,6 @@ const SpecificTrack = () => {
       console.log(strObj.focusOffset)
       console.log(strObj.anchorOffset)
 
-      setAnnotationForm(true)
       dispatch(modalActions.setCurrentModal(AnnoForm))
       dispatch(modalActions.showModal())
       dispatch(trackActions.getTrackThunk(trackId))
