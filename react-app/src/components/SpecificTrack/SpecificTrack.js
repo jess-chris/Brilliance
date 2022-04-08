@@ -65,8 +65,9 @@ const SpecificTrack = () => {
 
 
     const openForm = () => {
-        if (editTrackForm) return;
-        showEditTrackForm(true);
+        dispatch(modalActions.setCurrentModal(EditTrackForm))
+        dispatch(modalActions.showModal())
+        dispatch(trackActions.getTrackThunk(trackId))
       };
 
     const handleDelete = (e) => {
@@ -134,7 +135,7 @@ const SpecificTrack = () => {
           </div>
 
           <button type='submit' onClick={(openForm)}>Edit</button>
-          {editTrackForm && (<EditTrackForm/>)}
+          {/* {editTrackForm && (<EditTrackForm/>)} */}
           <button type='submit' onClick={handleDelete}>Delete</button>
 
           <div className='comments'>
