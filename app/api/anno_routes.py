@@ -25,39 +25,49 @@ def annotations():
 def post_annotations():
     if request.method == 'POST':
         data = request.get_json()
-        print('\nDAAATA\n', data)
+        #print('\nDAAATA\n', data)
 
         user_id = request.json['user_id']
         content = request.json['content']
         track_id = request.json['track_id']
-        #anno_id = request.json['annotations_id']
-        print('\nrequest\n', request.json)
+
+        initialAnnoIndex = request.json['initialAnnoIndex']
+        finalAnnoIndex = request.json['finalAnnoIndex']
+
+
 
         annotation = Annotation(
             content=content,
             user_id = user_id,
             track_id = track_id,
-            vote_score = 0
+            vote_score = 0,
+            initialAnnoIndex = initialAnnoIndex,
+            finalAnnoIndex = finalAnnoIndex
         )
+        
         db.session.add(annotation)
         db.session.commit()
+        
         return annotation.anno_to_dict()
+    
     elif request.method == 'PUT':
-        print('idddddd', type(id))
+
         data = request.get_json()
         found = Annotation.query.get(id)
         content = request.json['content']
         updatedContent = Annotation(
             content=content
         )
+        
         found.content = updatedContent.content
         db.session.commit()
         return found.anno_to_dict()
+    
     elif request.method == 'DELETE':
         data = request.get_json()
         something = 'ok'
         to_delete = Annotation.query.get(id) 
-        print('in delete req method', to_delete)
+        #print('in delete req method', to_delete)
         db.session.delete(to_delete)
         db.session.commit()
         return to_delete.anno_to_dict()

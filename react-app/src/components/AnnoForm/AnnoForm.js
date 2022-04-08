@@ -3,11 +3,27 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as trackActions from '../../store/track'
 
 const AnnoForm = () => {
+
+    const annoCont = document.querySelector('.lyrics')
+    const sel = document.getSelection()
+    const range = sel.getRangeAt(0)
+
+    let clone = range.cloneRange()
+    clone.selectNodeContents(annoCont)
+    clone.setEnd(range.startContainer, range.startOffset);
+    const initialIndex = clone.toString().length;
+    clone.setEnd(range.endContainer, range.endOffset);
+    const finalIndex = clone.toString().length;
+
+
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const tracksObj = useSelector(state => state.track)
     const track = Object.values(tracksObj)[0]
+    const [initialAnnoIndex] = useState(initialIndex)
+    const [finalAnnoIndex] = useState(finalIndex)
     const [content, setContent] = useState('')
+    
 
     const submitAnno = async (e) => {
         e.preventDefault();
@@ -16,7 +32,9 @@ const AnnoForm = () => {
         const data = {
             content,
             user_id: sessionUser?.id,
-            track_id: +id
+            track_id: +id,
+            initialAnnoIndex,
+            finalAnnoIndex
         }
 
         await dispatch(trackActions.createAnnoThunk(data))
