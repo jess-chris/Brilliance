@@ -26,6 +26,8 @@ const SpecificTrack = () => {
     const tracksObj = useSelector(state => state.track)
     const track = Object.values(tracksObj)[0]
 
+    const commentsObj = track?.comments
+
 
     const setAnnotations = (track) => {
 
@@ -64,10 +66,6 @@ const SpecificTrack = () => {
 
     const history = useHistory()
 
-
-  const history = useHistory()
-
-
     const openForm = () => {
         dispatch(modalActions.setCurrentModal(EditTrackForm))
         dispatch(modalActions.showModal())
@@ -81,33 +79,6 @@ const SpecificTrack = () => {
     history.push('/tracks')
   }
 
-<<<<<<< HEAD
-  const handleMouseUp = () => {
-    // console.log(`${window.getSelection().toString()}`)
-    let strObj = window.getSelection()
-    // let paras = document.getElementsByTagName('p')[0]
-    // let rect = strObj.getBoundingClientRect()
-    let initialIndex = strObj.anchorOffset
-    let finalIndex = strObj.focusOffset
-    console.log('ind2', finalIndex)
-    console.log('ind1', initialIndex)
-    let newHTML = `<span key=${track.annotations.length + 1}>${strObj.toString()}</span>`
-    console.log('html', newHTML)
-    console.log('strObj', strObj)
-    // console.log(rect)
-    let lyricArr = track.lyrics.split('')
-    lyricArr.splice(initialIndex, finalIndex - initialIndex, newHTML).join('')
-    console.log('Arr', lyricArr)
-    const highlightedLyrics = lyricArr.join('')
-    console.log('hiiiii', highlightedLyrics)
-    console.log('lyrics', track.lyrics)
-    setAnnotationForm(true)
-    // return highlightedLyrics
-  }
-
-
-=======
->>>>>>> development
 
     const handleMouseUp = () => {
         dispatch(modalActions.setCurrentModal(AnnoForm))
@@ -116,7 +87,7 @@ const SpecificTrack = () => {
         console.log(trackId)
         history.push(`/tracks/${trackId}`)
       }
-    
+
 
     return(
         <>
@@ -152,7 +123,6 @@ const SpecificTrack = () => {
 
 
 
-<<<<<<< HEAD
         <div className='annotationsRight'>
 
         </div>
@@ -172,8 +142,8 @@ const SpecificTrack = () => {
             </div>
           ))}
         </div> */}
+        <div>
         <Comment/>
-=======
         </div>
 
 
@@ -182,7 +152,6 @@ const SpecificTrack = () => {
           <button type='submit' onClick={handleDelete}>Delete</button>
 
 
->>>>>>> development
         <div className='comments'>
           <h1>Comments</h1>
 
@@ -198,8 +167,8 @@ const SpecificTrack = () => {
           </div>
           {loaded && track.annotations.length > 0 && setAnnotations(track)}
 
-        </div>
-      </div>
+
+
     </>
 
   )
