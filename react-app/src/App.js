@@ -13,7 +13,8 @@ import HomePage from './components/HomePage/HomePage';
 import User from './components/User';
 import Comment from './components/Comments';
 import { authenticate } from './store/session';
-
+import AnnoModal from './components/AnnoModal/AnnoModal'
+import EditTrackModal from './components/EditTrackModal/EditTrackModal'
 import AnnoForm from './components/AnnoForm/AnnoForm';
 
 
@@ -36,6 +37,8 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
+      <AnnoModal />
+      <EditTrackModal />
       <Switch>
         <Route path='/annotations/:id' exact={true}>
           <AnnoForm/>

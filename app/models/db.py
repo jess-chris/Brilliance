@@ -16,7 +16,7 @@ class Track(db.Model):
 
   
 
-  annotations = db.relationship("Annotation", backref="tracks", cascade="all, delete")
+  annotations = db.relationship("Annotation", backref="tracks", cascade="all, delete", order_by="Annotation.initialAnnoIndex")
   comments = db.relationship("Comment", backref="tracks", cascade="all, delete")
 
   def to_dict(self):
@@ -43,6 +43,8 @@ class Annotation(db.Model):
   user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
   track_id = db.Column(db.Integer, db.ForeignKey("tracks.id"), nullable=False)
   content = db.Column(db.Text, nullable=False)
+  initialAnnoIndex = db.Column(db.Integer)
+  finalAnnoIndex = db.Column(db.Integer)
   vote_score = db.Column(db.Integer)
   created_at = db.Column(db.DateTime, default=datetime.now(), nullable=False)
   updated_at = db.Column(db.DateTime, default=datetime.now(), nullable=False)
@@ -58,6 +60,8 @@ class Annotation(db.Model):
       'content': self.content,
       'track_id': self.track_id,
       'vote_score': self.vote_score,
+      'initialAnnoIndex': self.initialAnnoIndex,
+      'finalAnnoIndex': self.finalAnnoIndex,
       'comments': [c.to_dict() for c in self.comments],
       'votes': [v.to_dict() for v in self.votes]
     }
