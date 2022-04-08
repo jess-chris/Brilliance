@@ -10,6 +10,8 @@ const TrackUploadForm = () => {
     const [trackImg, setTrackImg] = useState('')
     const [title, setTitle] = useState('')
     const [lyrics, setLyrics] = useState('')
+    const [errors, setErrors] = useState([]);
+
 
     const dispatch = useDispatch()
 
@@ -18,17 +20,33 @@ const TrackUploadForm = () => {
     const trackUpload = e => {
         e.preventDefault()
         const newTrack = { artist, trackImg, title, lyrics, userId}
-        dispatch(trackActions.addNewTrackThunk(newTrack))
-        history.push('/tracks')
+
+        if(artist && title && lyrics) {
+            setErrors([]);
+            history.push('/tracks')
+            return dispatch(trackActions.addNewTrackThunk(newTrack))
+                .catch(async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors)
+                })
+        }
+        return setErrors(["Artist, Title, or Lyrics cannot be empty"])
+
 
     }
-    
+
 
     return (
         <form onSubmit={trackUpload}>
             <div>
+                <ul className="errors">
+                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                </ul>
+            </div>
+
+            <div>
                 <label>Track Title</label>
-                <input 
+                <input
                 type='text'
                 name='TrackTitle'
                 value={title}

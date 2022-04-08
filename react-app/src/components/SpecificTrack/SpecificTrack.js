@@ -12,18 +12,17 @@ const SpecificTrack = () => {
     const [loaded, setLoaded] = useState(false);
     const dispatch = useDispatch();
     const {trackId} = useParams()
-    
-    
+
+
     useEffect(() => {
       (async() => {
         await dispatch(trackActions.getTrackThunk(trackId));
         setLoaded(true);
       })();
     }, [dispatch]);
-    
+
     const tracksObj = useSelector(state => state.track)
     const track = Object.values(tracksObj)[0]
-    
 
 
     const setAnnotations = (track) => {
@@ -31,7 +30,7 @@ const SpecificTrack = () => {
       const node = track.lyrics
       const lyricsWithAnnos = [];
 
-      const annoArr = [[157,203], [207,259]];
+      const annoArr = track.annotations;
 
       let prevIndex = 0;
 
@@ -39,19 +38,21 @@ const SpecificTrack = () => {
 
         const curAnno = annoArr[curIndex];
 
-        let nonAnno = node.slice(prevIndex, curAnno[0]);
-        let annoLyric = node.slice(curAnno[0], curAnno[1]);
+        let nonAnno = node.slice(prevIndex, curAnno.initialAnnoIndex);
+
+        let annoLyric = node.slice(curAnno.initialAnnoIndex, curAnno.finalAnnoIndex);
+
 
         lyricsWithAnnos.push(`<span class='nonAnno'>${nonAnno}</span>`);
         lyricsWithAnnos.push(`<span key='${curIndex}' class='annotated'>${annoLyric}</span>`);
-        prevIndex = curAnno[1];
+        prevIndex = curAnno.finalAnnoIndex;
 
         if(curIndex === annoArr.length - 1) {
           nonAnno = node.slice(prevIndex, node.length)
           lyricsWithAnnos.push(`<span class='nonAnno'>${nonAnno}</span>`);
         }
       }
-      //console.log(lyricsWithAnnos.join(''))
+
       document.querySelector('.lyrics').innerHTML = lyricsWithAnnos.join('')
     };
 
@@ -78,12 +79,6 @@ const SpecificTrack = () => {
 
 
     const handleMouseUp = () => {
-       
-
-      // let initialIndex = strObj.anchorOffset
-      // let finalIndex = strObj.focusOffset
-      // console.log('ind2', finalIndex)
-      // console.log('ind1', initialIndex)
       // let newHTML = `<span key=${track.annotations.length+1}>${strObj.toString()}</span>`
       // console.log('html', newHTML)
       // console.log('strObj', strObj)
@@ -94,10 +89,16 @@ const SpecificTrack = () => {
       // const highlightedLyrics = lyricArr.join('')
       // console.log('hiiiii', highlightedLyrics)
       // console.log('lyrics', track.lyrics)
-        setAnnotationForm(true)
-        dispatch(modalActions.setCurrentModal(AnnoForm))
-        dispatch(modalActions.showModal())
-        history.push(`/tracks/${trackId}`)
+
+      const strObj = window.getSelection()
+      console.log(strObj.focusOffset)
+      console.log(strObj.anchorOffset)
+
+      setAnnotationForm(true)
+      dispatch(modalActions.setCurrentModal(AnnoForm))
+      dispatch(modalActions.showModal())
+      dispatch(trackActions.getTrackThunk(trackId))
+      history.push(`/tracks/${trackId}`)
     }
 
 
@@ -140,7 +141,7 @@ const SpecificTrack = () => {
           <h1>Comments</h1>
 
           </div>
-          {loaded && setAnnotations(track)}
+          {loaded && track.annotations.length > 0 && setAnnotations(track)}
         </div>
         </>
 
