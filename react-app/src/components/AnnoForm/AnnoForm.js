@@ -4,20 +4,29 @@ import * as trackActions from '../../store/track'
 
 const AnnoForm = () => {
 
-    const strObj = window.getSelection()
+    const annoCont = document.querySelector('.lyrics')
+    const sel = document.getSelection()
+    const range = sel.getRangeAt(0)
 
-    console.log(strObj)
+    console.log(range)
+
+    let clone = range.cloneRange()
+    clone.selectNodeContents(annoCont)
+    clone.setEnd(range.startContainer, range.startOffset);
+    const initialIndex = clone.toString().length;
+    clone.setEnd(range.endContainer, range.endOffset);
+    const finalIndex = clone.toString().length;
+
 
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const tracksObj = useSelector(state => state.track)
     const track = Object.values(tracksObj)[0]
-    const [initialAnnoIndex, setInitialAnnoIndex] = useState(strObj.focusOffset)
-    const [finalAnnoIndex, setFinalAnnoIndex] = useState(strObj.anchorOffset)
+    const [initialAnnoIndex] = useState(initialIndex)
+    const [finalAnnoIndex] = useState(finalIndex)
     const [content, setContent] = useState('')
     
-    console.log(initialAnnoIndex)
-    console.log(finalAnnoIndex)
+
     const submitAnno = async (e) => {
         e.preventDefault();
         //const user_id = sessionUser?.id

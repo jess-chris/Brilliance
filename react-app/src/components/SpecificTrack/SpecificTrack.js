@@ -80,17 +80,13 @@ const SpecificTrack = () => {
 
     const handleMouseUp = () => {
 
-
-      //const strObj = window.getSelection()
-      //console.log(strObj.focusOffset)
-      //console.log(strObj.anchorOffset)
-
-      setAnnotationForm(true)
-      dispatch(modalActions.setCurrentModal(AnnoForm))
-      dispatch(modalActions.showModal())
-      dispatch(trackActions.getTrackThunk(trackId))
-      history.push(`/tracks/${trackId}`)
-    }
+        setAnnotationForm(true)
+        dispatch(modalActions.setCurrentModal(AnnoForm))
+        dispatch(modalActions.showModal())
+        dispatch(trackActions.getTrackThunk(trackId))
+        history.push(`/tracks/${trackId}`)
+      }
+    
 
 
 
@@ -112,10 +108,9 @@ const SpecificTrack = () => {
 
           <div className="songPage">
             <p className='lyricTitle'>{track?.title} lyrics</p>
-            <p className='lyrics' onMouseUp={handleMouseUp}>
-              {/* {annotationForm ? (<AnnoForm track={track}/>) : null} */}
+            <div className='lyrics' onMouseUp={handleMouseUp}>
               {track?.lyrics}
-            </p>
+            </div>
 
 
           </div>
