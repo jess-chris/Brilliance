@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ReactDOM from 'react-dom';
-import { useParams } from 'react-router-dom';
 import * as trackActions from '../../store/track'
 import { hideModal } from '../../store/modal';
 

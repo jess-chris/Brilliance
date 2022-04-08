@@ -8,8 +8,6 @@ const AnnoForm = () => {
     const sel = document.getSelection()
     const range = sel.getRangeAt(0)
 
-    console.log(range)
-
     let clone = range.cloneRange()
     clone.selectNodeContents(annoCont)
     clone.setEnd(range.startContainer, range.startOffset);
