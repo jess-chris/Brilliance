@@ -44,7 +44,7 @@ const SpecificTrack = () => {
 
 
         lyricsWithAnnos.push(`<span class='nonAnno'>${nonAnno}</span>`);
-        lyricsWithAnnos.push(`<span key='${curIndex}' class='annotated'>${annoLyric}</span>`);
+        lyricsWithAnnos.push(`<span onclick={} key='${curAnno.id}' class='annotated'>${annoLyric}</span>`);
         prevIndex = curAnno.finalAnnoIndex;
 
         if(curIndex === annoArr.length - 1) {
@@ -66,7 +66,6 @@ const SpecificTrack = () => {
     const openForm = () => {
         dispatch(modalActions.setCurrentModal(EditTrackForm))
         dispatch(modalActions.showModal())
-        dispatch(trackActions.getTrackThunk(trackId))
       };
 
     const handleDelete = (e) => {
@@ -82,6 +81,7 @@ const SpecificTrack = () => {
         dispatch(modalActions.setCurrentModal(AnnoForm))
         dispatch(modalActions.showModal())
         dispatch(trackActions.getTrackThunk(trackId))
+        console.log(trackId)
         history.push(`/tracks/${trackId}`)
       }
     

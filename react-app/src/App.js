@@ -14,7 +14,7 @@ import User from './components/User';
 import Comment from './components/Comments';
 import { authenticate } from './store/session';
 import AnnoModal from './components/AnnoModal/AnnoModal'
-
+import EditTrackModal from './components/EditTrackModal/EditTrackModal'
 import AnnoForm from './components/AnnoForm/AnnoForm';
 
 function App() {
@@ -37,6 +37,7 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <AnnoModal />
+      <EditTrackModal />
       <Switch>
         <Route path='/annotations/:id' exact={true}>
           <AnnoForm/>
