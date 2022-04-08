@@ -2,34 +2,65 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import * as trackActions from '../../store/track';
+import * as modalActions from '../../store/modal'
 import EditTrackForm from '../EditTrack/EditTrack';
 import AnnoForm from '../AnnoForm/AnnoForm';
 import '../SpecificTrack/specificTrack.css'
 
 
 const SpecificTrack = () => {
-
+    const [loaded, setLoaded] = useState(false);
     const dispatch = useDispatch();
     const {trackId} = useParams()
 
 
-
-
     useEffect(() => {
-      dispatch(trackActions.getTrackThunk());
-  }, [dispatch]);
+      (async() => {
+        await dispatch(trackActions.getTrackThunk(trackId));
+        setLoaded(true);
+      })();
+    }, [dispatch]);
 
     const tracksObj = useSelector(state => state.track)
     const track = Object.values(tracksObj)[0]
-    // .find(x => x.id === trackId)
 
-    console.log(track)
+
+    const setAnnotations = (track) => {
+
+      const node = track.lyrics
+      const lyricsWithAnnos = [];
+
+      const annoArr = track.annotations;
+
+      let prevIndex = 0;
+
+      for(let curIndex = 0; curIndex < annoArr.length; curIndex++){
+
+        const curAnno = annoArr[curIndex];
+
+        let nonAnno = node.slice(prevIndex, curAnno.initialAnnoIndex);
+
+        let annoLyric = node.slice(curAnno.initialAnnoIndex, curAnno.finalAnnoIndex);
+
+
+        lyricsWithAnnos.push(`<span class='nonAnno'>${nonAnno}</span>`);
+        lyricsWithAnnos.push(`<span key='${curIndex}' class='annotated'>${annoLyric}</span>`);
+        prevIndex = curAnno.finalAnnoIndex;
+
+        if(curIndex === annoArr.length - 1) {
+          nonAnno = node.slice(prevIndex, node.length)
+          lyricsWithAnnos.push(`<span class='nonAnno'>${nonAnno}</span>`);
+        }
+      }
+
+      document.querySelector('.lyrics').innerHTML = lyricsWithAnnos.join('')
+    };
+
 
 
     const [editTrackForm, showEditTrackForm] = useState(false)
     const [annotationForm, setAnnotationForm] = useState(false)
 
-    //const location = useLocation()
     const history = useHistory()
 
 
@@ -45,10 +76,31 @@ const SpecificTrack = () => {
         history.push('/tracks')
     }
 
+
+
     const handleMouseUp = () => {
-        console.log(`${window.getSelection().toString()}`)
-        setAnnotationForm(true)
+      // let newHTML = `<span key=${track.annotations.length+1}>${strObj.toString()}</span>`
+      // console.log('html', newHTML)
+      // console.log('strObj', strObj)
+      // // console.log(rect)
+      // let lyricArr = track.lyrics.split('')
+      // lyricArr.splice(initialIndex, finalIndex-initialIndex, newHTML).join('')
+      // console.log('Arr', lyricArr)
+      // const highlightedLyrics = lyricArr.join('')
+      // console.log('hiiiii', highlightedLyrics)
+      // console.log('lyrics', track.lyrics)
+
+      const strObj = window.getSelection()
+      console.log(strObj.focusOffset)
+      console.log(strObj.anchorOffset)
+
+      setAnnotationForm(true)
+      dispatch(modalActions.setCurrentModal(AnnoForm))
+      dispatch(modalActions.showModal())
+      dispatch(trackActions.getTrackThunk(trackId))
+      history.push(`/tracks/${trackId}`)
     }
+
 
 
 
@@ -56,7 +108,9 @@ const SpecificTrack = () => {
         <>
         <div>
           <div className="header">
+              <div className='image-box'>
               <img alt='' src={track?.album_image}></img>
+              </div>
               <h1>
                 {track?.title}
               </h1>
@@ -68,7 +122,7 @@ const SpecificTrack = () => {
           <div className="songPage">
             <p className='lyricTitle'>{track?.title} lyrics</p>
             <p className='lyrics' onMouseUp={handleMouseUp}>
-              {annotationForm ? (<AnnoForm track={track}/>) : null}
+              {/* {annotationForm ? (<AnnoForm track={track}/>) : null} */}
               {track?.lyrics}
             </p>
 
@@ -87,6 +141,7 @@ const SpecificTrack = () => {
           <h1>Comments</h1>
 
           </div>
+          {loaded && track.annotations.length > 0 && setAnnotations(track)}
         </div>
         </>
 

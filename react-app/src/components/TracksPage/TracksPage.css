@@ -1,12 +1,27 @@
 .allTracksContainer{
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
     flex-direction: column;
     align-items: center;
-    padding-top: 100px;
+    
 }
 
 .trackImg{
-    height: 30px;
-    width: 30px;
+    height: 60px;
+    width: 60px;
+}
+
+ul{
+    display:grid;
+    grid-template-columns: 0.5fr 1fr 2fr 2fr 1fr;
+    align-items: center;
+    justify-items: center;
+    width:100%;
+    padding:0;
+
+}
+
+.tracks-page-title{
+    display: flex;
+    justify-content: center;
 }

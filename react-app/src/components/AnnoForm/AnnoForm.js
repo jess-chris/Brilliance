@@ -3,12 +3,21 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as trackActions from '../../store/track'
 
 const AnnoForm = () => {
+
+    const strObj = window.getSelection()
+
+    console.log(strObj)
+
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const tracksObj = useSelector(state => state.track)
     const track = Object.values(tracksObj)[0]
+    const [initialAnnoIndex, setInitialAnnoIndex] = useState(strObj.focusOffset)
+    const [finalAnnoIndex, setFinalAnnoIndex] = useState(strObj.anchorOffset)
     const [content, setContent] = useState('')
-
+    
+    console.log(initialAnnoIndex)
+    console.log(finalAnnoIndex)
     const submitAnno = async (e) => {
         e.preventDefault();
         //const user_id = sessionUser?.id
@@ -16,7 +25,9 @@ const AnnoForm = () => {
         const data = {
             content,
             user_id: sessionUser?.id,
-            track_id: +id
+            track_id: +id,
+            initialAnnoIndex,
+            finalAnnoIndex
         }
 
         await dispatch(trackActions.createAnnoThunk(data))

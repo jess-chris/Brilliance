@@ -4,7 +4,7 @@
     flex-direction: column;
     align-items: center;
     color:white;
-    height:800px;
+    height:1000px;
 }
 
 .big-text{
@@ -20,6 +20,7 @@
 
 .big-text h1{
     font-size: 62px;
+    text-align: center;
 }
 
 .big-text h2{
