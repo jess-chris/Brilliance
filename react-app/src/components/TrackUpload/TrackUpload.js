@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import * as trackActions from '../../store/track'
+import '../TrackUpload/TrackUpload.css'
+
 
 const TrackUploadForm = () => {
 
@@ -37,51 +39,61 @@ const TrackUploadForm = () => {
 
 
     return (
-        <form onSubmit={trackUpload}>
-            <div>
-                <ul className="errors">
-                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                </ul>
-            </div>
+        <div className='large-container'>
 
-            <div>
-                <label>Track Title</label>
-                <input
-                type='text'
-                name='TrackTitle'
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                ></input>
-            </div>
-            <div>
-                <label>Artist Name</label>
-                <input
-                type='text'
-                name='TrackArtist'
-                value={artist}
-                onChange={(e) => setArtist(e.target.value)}
-                ></input>
-            </div>
-            <div>
-                <label>Lyrics</label>
-                <input
-                type='text'
-                name='TrackLyrics'
-                value={lyrics}
-                onChange={(e) => setLyrics(e.target.value)}
-                ></input>
-            </div>
-            <div>
-                <label>Track Album Image</label>
-                <input
-                type='text'
-                name='TrackImage'
-                value={trackImg}
-                onChange={(e) => setTrackImg(e.target.value)}
-                ></input>
-            </div>
-            <button type='Submit'>Submit</button>
-        </form>
+
+        <div className='input-contatiner'>
+            <form onSubmit={trackUpload}>
+                <div>
+                    <ul className="errors">
+                        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                    </ul>
+                </div>
+
+                <div>
+                    <label>Track Title</label>
+                    <br></br>
+                    <input
+                    type='text'
+                    name='TrackTitle'
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    ></input>
+                </div>
+                <div>
+                    <label>Artist Name</label>
+                    <br></br>
+                    <input
+                    type='text'
+                    name='TrackArtist'
+                    value={artist}
+                    onChange={(e) => setArtist(e.target.value)}
+                    ></input>
+                </div>
+                <div>
+                    <label>Lyrics</label>
+                    <br></br>
+                    <textarea
+                    type='text'
+                    name='TrackLyrics'
+                    value={lyrics}
+                    onChange={(e) => setLyrics(e.target.value)}
+                    ></textarea>
+                </div>
+                <div>
+                    <label>Track Album Image</label>
+                    <br></br>
+                    <input
+                    type='text'
+                    name='TrackImage'
+                    value={trackImg}
+                    onChange={(e) => setTrackImg(e.target.value)}
+                    ></input>
+                </div>
+                <button type='Submit'>Submit</button>
+            </form>
+        </div>
+        </div>
     )
 }
 

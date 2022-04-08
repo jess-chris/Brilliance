@@ -1,0 +1,30 @@
+.input-container div{
+    margin: 10px auto;
+    max-width: 370px;
+    width: 250px;
+}
+
+.input-container input{
+    background-color: #363636;
+    border-color: #555;
+    color: #ccc;
+    border: 1px solid #bbb;
+    min-width: 120px;
+    max-width: 100%;
+    width: 95%;
+    font-size: 15px;
+    border-radius: 2px;
+    padding: 5px;
+}
+
+button{
+    background-color: #262626;
+    color: #ccc;
+    border: 1px solid #444;
+    display: inline-block;
+    font-family: 'Kanit', sans-serif;
+    position: relative;
+    border-radius: 2px;
+    padding: 5px 9px;
+    margin: 3px 4px 5px 0;
+}
