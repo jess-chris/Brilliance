@@ -17,6 +17,7 @@ import AnnoModal from './components/AnnoModal/AnnoModal'
 import EditTrackModal from './components/EditTrackModal/EditTrackModal'
 import AnnoForm from './components/AnnoForm/AnnoForm';
 
+
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
@@ -69,6 +70,7 @@ function App() {
         <Route path='/comments' exact={true} >
           <Comment />
         </Route>
+        
       </Switch>
     </BrowserRouter>
   );

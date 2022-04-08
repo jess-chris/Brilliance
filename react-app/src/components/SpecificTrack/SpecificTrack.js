@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import * as trackActions from '../../store/track';
 import * as modalActions from '../../store/modal'
 import EditTrackForm from '../EditTrack/EditTrack';
 import AnnoForm from '../AnnoForm/AnnoForm';
+import Votes from '../Votes/index'
 import '../SpecificTrack/specificTrack.css'
 
-
 const SpecificTrack = () => {
+
     const [loaded, setLoaded] = useState(false);
     const dispatch = useDispatch();
     const {trackId} = useParams()
@@ -63,18 +64,21 @@ const SpecificTrack = () => {
     const history = useHistory()
 
 
+  const history = useHistory()
+
+
     const openForm = () => {
         dispatch(modalActions.setCurrentModal(EditTrackForm))
         dispatch(modalActions.showModal())
       };
 
-    const handleDelete = (e) => {
-        e.preventDefault()
 
-        dispatch(trackActions.deleteTrackThunk(trackId));
-        history.push('/tracks')
-    }
+  const handleDelete = (e) => {
+    e.preventDefault()
 
+    dispatch(trackActions.deleteTrackThunk(trackId));
+    history.push('/tracks')
+  }
 
 
     const handleMouseUp = () => {
@@ -100,6 +104,14 @@ const SpecificTrack = () => {
                 {track?.artist}
               </p>
           </div>
+          <h1>
+            {track?.title}
+          </h1>
+          <p>
+            {track?.artist}
+          </p>
+        </div>
+
 
           <div className="songPage">
             <p className='lyricTitle'>{track?.title} lyrics</p>
@@ -110,23 +122,36 @@ const SpecificTrack = () => {
 
           </div>
 
-          <div className='annotationsRight'>
 
-          </div>
+
+        </div>
+
 
           <button type='submit' onClick={(openForm)}>Edit</button>
           {/* {editTrackForm && (<EditTrackForm/>)} */}
           <button type='submit' onClick={handleDelete}>Delete</button>
 
-          <div className='comments'>
+
+        <div className='comments'>
           <h1>Comments</h1>
+
+          {commentsObj?.map(comment => (
+            <div>
+              <p>{comment.content}</p>
+              <p>{comment.vote_score}</p>
+              <Votes comment_id={comment.id}/>
+            </div>
+          ))}
+
 
           </div>
           {loaded && track.annotations.length > 0 && setAnnotations(track)}
-        </div>
-        </>
 
-    )
+        </div>
+      </div>
+    </>
+
+  )
 }
 
 export default SpecificTrack
