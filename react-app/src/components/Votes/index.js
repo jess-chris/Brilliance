@@ -3,68 +3,154 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import * as trackActions from '../../store/track';
 
-const Vote = () => {
+//TODO
+//limit user to one vote per comment or annotation or anno comment
+//if user has already voted on this specific comm/anno,
+//  clicking the same button will remove the vote
 
+const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
+    const commentId = comment_id
+    const annotationId = anno
     const dispatch = useDispatch();
     const userId = useSelector(state => state.session.user.id)
 
     const { trackId } = useParams()
     const tracksObj = useSelector(state => state.track)
-    const track = Object.values(tracksObj)[0];
-
+    //const track = Object.values(tracksObj)[0];
 
     useEffect(() => {
         dispatch(trackActions.getTrackThunk(trackId));
     }, [dispatch]);
 
-  
+
     const handleUpVote = async (e) => {
         e.preventDefault()
+        //if not a comment AND not a comment on an anno, it is annotation
+        if (typeof commentId === 'undefined' && typeof annoCommentId === 'undefined') {
+            const commentId = null
+            //console.log('IS ANNOTATION')
+            const annotationId = anno
 
-        //provide annotation id only if applicable
+            const newVote = {
+                userId,
+                annotationId,
+                commentId,
+                vote: true
+            }
+            //console.log(newVote)
 
-        //provide comment id only if applicable
-        
-
-        //provide both comment/anno id if applicable
-
-        //limit user to one vote per comment or annotation or anno comment
-        //if user has already voted on this specific comm/anno,
-        //  clicking the same button will remove the vote
-        const newVote = {
-            userId,
-            annotationId: null,
-            commentId: '6',
-            vote: true
+            return await dispatch(trackActions.createVoteThunk(newVote))
         }
-        console.log(newVote)
+        //if does not have commentId it is not a track comment
+        //therefore it is an annotation comment,
+        //need the annotation id as well
+        else if (typeof commentId === 'undefined') {
+            //console.log('COMMENT UNDEFINED, NOT TRACK COMMENT, IS ANNO COMMENT')
+            const commentId = null || annoCommentId
+            const annotationId = annoIdComment
 
-        return await dispatch(trackActions.createVoteThunk(newVote))
+            const newVote = {
+                userId,
+                annotationId,
+                commentId,
+                vote: true
+            }
+            //console.log(newVote)
 
+            return await dispatch(trackActions.createVoteThunk(newVote))
+        }
+        //if does not have annotationId it is not a annotation comment
+        //therefore it is a track comment
+        else if (typeof annotationId === 'undefined') {
+            //console.log('ANNOTATION UNDEFINED, TRACK COMMENT')
+            const annotationId = null
+
+            const newVote = {
+                userId,
+                annotationId,
+                commentId,
+                vote: true
+            }
+
+            //console.log(newVote)
+
+            return await dispatch(trackActions.createVoteThunk(newVote))
+        }
+        else {
+            //console.log('ELSE')
+            const annotationId = annoIdComment
+            const newVote = {
+                userId,
+                annotationId,
+                commentId,
+                vote: true
+            }
+
+            //console.log(newVote)
+
+            return await dispatch(trackActions.createVoteThunk(newVote))
+        }
     }
-
+    //downvote is same as upvote but vote:false 
     const handleDownVote = async (e) => {
         e.preventDefault()
 
-        const newVote = {
-            userId,
-            annotationId: '3',
-            commentId: null,
-            vote: false
+        if (typeof commentId === 'undefined' && typeof annoCommentId === 'undefined') {
+            const commentId = null
+            const annotationId = anno
+
+            const newVote = {
+                userId,
+                annotationId,
+                commentId,
+                vote: false
+            }
+            return await dispatch(trackActions.createVoteThunk(newVote))
         }
-        console.log(newVote)
-        return await dispatch(trackActions.createVoteThunk(newVote))
+        else if (typeof commentId === 'undefined') {
+            const commentId = null || annoCommentId
+            const annotationId = annoIdComment
+
+            const newVote = {
+                userId,
+                annotationId,
+                commentId,
+                vote: false
+            }
+            return await dispatch(trackActions.createVoteThunk(newVote))
+        }
+
+        else if (typeof annotationId === 'undefined') {
+
+            const annotationId = null
+
+            const newVote = {
+                userId,
+                annotationId,
+                commentId,
+                vote: false
+            }
+            return await dispatch(trackActions.createVoteThunk(newVote))
+        }
+        else {
+            const annotationId = annoIdComment
+            const newVote = {
+                userId,
+                annotationId,
+                commentId,
+                vote: false
+            }
+
+            console.log(newVote)
+
+            return await dispatch(trackActions.createVoteThunk(newVote))
+        }
     }
 
     return (
         <>
-            <form onSubmit={handleUpVote}>
-                <button type='submit'>Up Vote</button>
-            </form>
-            <form onSubmit={handleDownVote}>
-                <button type='submit'>Down Vote</button>
-            </form>
-
+            <button onClick={handleUpVote}>Up Vote</button>
+            <button onClick={handleDownVote}>Down Vote</button>
         </>
     )
 }

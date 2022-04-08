@@ -8,6 +8,7 @@ import Votes from '../Votes/index'
 import '../SpecificTrack/specificTrack.css'
 
 
+
 const SpecificTrack = () => {
 
   const dispatch = useDispatch();
@@ -21,7 +22,10 @@ const SpecificTrack = () => {
   const track = Object.values(tracksObj)[0]
   // .find(x => x.id === trackId)
 
-  console.log('track', track?.comments)
+  const commentsArr = track?.comments
+  //console.log(commentsArr)
+  const annoArr = track?.annotations
+  console.log(annoArr)
 
 
   const [editTrackForm, showEditTrackForm] = useState(false)
@@ -95,7 +99,23 @@ const SpecificTrack = () => {
         </div>
 
         <div className='annotationsRight'>
-
+        
+        </div>
+        <div>
+        {annoArr?.map(anno => (
+            <div>
+              <p>{anno.content}</p>
+              <p>{anno.id}</p>
+              <Votes anno={anno.id}/>
+              <div>
+                {anno.comments.map(annoComment => (
+                  <><p>{annoComment.content}</p>
+                  <Votes annoIdComment={annoComment.annotation_id} annoCommentId={annoComment.id}></Votes></>
+                  
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
 
         <button type='submit' onClick={(openForm)}>Edit</button>
@@ -104,13 +124,14 @@ const SpecificTrack = () => {
 
         <div className='comments'>
           <h1>Comments</h1>
+          {commentsArr?.map(comment => (
+            <div>
+              <p>{comment.content}</p>
+              <p>{comment.id}</p>
+              <Votes comment_id={comment.id}/>
+            </div>
+          ))}
 
-        </div>
-        <div>
-          <h2>test voting</h2>
-          <div>
-            <Votes />
-          </div>
         </div>
       </div>
     </>
