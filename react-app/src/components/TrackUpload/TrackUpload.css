@@ -4,6 +4,14 @@
     width: 250px;
 }
 
+.errors {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: red;
+
+}
+
 .input-container input{
     background-color: #363636;
     border-color: #555;
