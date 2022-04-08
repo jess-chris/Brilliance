@@ -78,7 +78,6 @@ const SpecificTrack = () => {
 
 
     const handleMouseUp = () => {
-        setAnnotationForm(true)
         dispatch(modalActions.setCurrentModal(AnnoForm))
         dispatch(modalActions.showModal())
         dispatch(trackActions.getTrackThunk(trackId))
