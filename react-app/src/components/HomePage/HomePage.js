@@ -26,7 +26,7 @@ const HomePage = () => {
   return (
     <div className='main-page'>
       
-      <h2 className='main-headers'>Featured News</h2>
+      {/* <h2 className='main-headers'>Featured News</h2>
       <div id='featured'>
 
         <div id='mainFeat'>Main</div>
@@ -38,7 +38,7 @@ const HomePage = () => {
         <div className='sub-feat'>4</div>
 
 
-      </div>
+      </div> */}
 
       <div id='topTracks'>
         <h1 className='main-headers'>Charts</h1>
