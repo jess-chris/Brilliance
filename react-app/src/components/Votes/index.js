@@ -13,17 +13,22 @@ const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
     const annotationId = anno
     const dispatch = useDispatch();
     const userId = useSelector(state => state.session.user.id)
+    const voteState = useSelector(state => state.track.votes)
+    //console.log('333', voteState)
+    
 
     const [voted, setVoted] = useState(false)
 
 
     const { trackId } = useParams()
     const tracksObj = useSelector(state => state.track)
-    //const track = Object.values(tracksObj)[0];
+    // const track = Object.values(tracksObj)[0];
+    // console.log('!!!!!!!!@@@@@@@', track)
 
     useEffect(() => {
-        dispatch(trackActions.getTrackThunk(trackId));
-    }, [dispatch]);
+        dispatch(trackActions.getTrackThunk(trackId))
+        dispatch(trackActions.getVoteThunk());
+    }, [dispatch, voteState]);
 
 
     const handleUpVote = async (e) => {
@@ -33,16 +38,18 @@ const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
             const commentId = null
             //console.log('IS ANNOTATION')
             const annotationId = anno
-
+            
             const newVote = {
                 userId,
                 annotationId,
                 commentId,
-                vote: true
+                vote: true,
             }
             //console.log(newVote)
-
-            return await dispatch(trackActions.createVoteThunk(newVote))
+            
+            await dispatch(trackActions.createVoteThunk(newVote))
+            await dispatch(trackActions.getVoteThunk())
+            await dispatch(trackActions.getTrackThunk(trackId))
         }
         //if does not have commentId it is not a track comment
         //therefore it is an annotation comment,
@@ -59,8 +66,9 @@ const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
                 vote: true
             }
             //console.log(newVote)
-
-            return await dispatch(trackActions.createVoteThunk(newVote))
+            await dispatch(trackActions.createVoteThunk(newVote))
+            await dispatch(trackActions.getVoteThunk())
+            await dispatch(trackActions.getTrackThunk(trackId))
         }
         //if does not have annotationId it is not a annotation comment
         //therefore it is a track comment
@@ -75,26 +83,14 @@ const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
                 vote: true
             }
 
-            setVoted(true)
-            console.log(voted)
-            return await dispatch(trackActions.createVoteThunk(newVote))
+            // setVoted(true)
+            // console.log(voted)
+            await dispatch(trackActions.createVoteThunk(newVote))
+            await dispatch(trackActions.getVoteThunk())
+            await dispatch(trackActions.getTrackThunk(trackId))
         }
-        // else {
-        //     //console.log('ELSE')
-        //     const annotationId = annoIdComment
-        //     const newVote = {
-        //         userId,
-        //         annotationId,
-        //         commentId,
-        //         vote: true
-        //     }
-
-        //     //console.log(newVote)
-            
-        //     console.log(voted)
-        //     return await dispatch(trackActions.createVoteThunk(newVote))
-        // }
-        setVoted(true)
+        
+        //setVoted(true)
     }
     //downvote is same as upvote but vote:false 
     const handleDownVote = async (e) => {
@@ -110,7 +106,9 @@ const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
                 commentId,
                 vote: false
             }
-            return await dispatch(trackActions.createVoteThunk(newVote))
+            await dispatch(trackActions.createVoteThunk(newVote))
+            await dispatch(trackActions.getVoteThunk())
+            await dispatch(trackActions.getTrackThunk(trackId))
         }
         else if (typeof commentId === 'undefined') {
             const commentId = null || annoCommentId
@@ -122,7 +120,9 @@ const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
                 commentId,
                 vote: false
             }
-            return await dispatch(trackActions.createVoteThunk(newVote))
+            await dispatch(trackActions.createVoteThunk(newVote))
+            await dispatch(trackActions.getVoteThunk())
+            await dispatch(trackActions.getTrackThunk(trackId))
         }
 
         else if (typeof annotationId === 'undefined') {
@@ -135,26 +135,16 @@ const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
                 commentId,
                 vote: false
             }
-            return await dispatch(trackActions.createVoteThunk(newVote))
+            await dispatch(trackActions.createVoteThunk(newVote))
+            await dispatch(trackActions.getVoteThunk())
+            await dispatch(trackActions.getTrackThunk(trackId))
         }
-        else {
-            const annotationId = annoIdComment
-            const newVote = {
-                userId,
-                annotationId,
-                commentId,
-                vote: false
-            }
-
-            console.log(newVote)
-
-            return await dispatch(trackActions.createVoteThunk(newVote))
-        }
+        
     }
 
     return (
         <>  
-            <button onClick={event => [handleUpVote, setVoted(true), console.log(voted)]}>Up Vote</button>
+            <button onClick={handleUpVote}>Up Vote</button>
             <button onClick={handleDownVote}>Down Vote</button>
         </>
     )

@@ -11,13 +11,26 @@ const SpecificTrack = () => {
 
   const dispatch = useDispatch();
   const { trackId } = useParams()
+  
+  const voteState = useSelector(state => state.track.vote)
+  console.log('VOTESTATE', voteState)
 
   useEffect(() => {
-    dispatch(trackActions.getTrackThunk(trackId));
-  }, [dispatch]);
+    (async() => {
+      await dispatch(trackActions.getTrackThunk(trackId));
+    })();
+  }, [dispatch, trackId]);
 
   const tracksObj = useSelector(state => state.track)
   const track = Object.values(tracksObj)[0]
+
+
+  useEffect(() => {
+    dispatch(trackActions.getTrackThunk(trackId))
+    dispatch(trackActions.getVoteThunk())
+  }, [dispatch, trackId, voteState]);
+
+  
   // .find(x => x.id === trackId)
 
   const commentsObj = track?.comments
@@ -36,6 +49,7 @@ const SpecificTrack = () => {
 
   const [editTrackForm, showEditTrackForm] = useState(false)
   const [annotationForm, setAnnotationForm] = useState(false)
+
   const [voted, setVoted] = useState(false)
 
   const history = useHistory()
@@ -128,8 +142,7 @@ const SpecificTrack = () => {
           {commentsObj?.map(comment => (
             <div>
               <p>{comment.content}</p>
-              <p>{comment.id}</p>
-              <p>{commentVoteScore(comment.votes)}</p>
+              <p>{comment.vote_score}</p>
               <Votes comment_id={comment.id}/>
             </div>
           ))}
@@ -138,7 +151,6 @@ const SpecificTrack = () => {
         {editTrackForm && (<EditTrackForm />)}
         <button type='submit' onClick={handleDelete}>Delete Track</button>
         </div>
-        {voted && <h1>True</h1>}
       </div>
     </>
 

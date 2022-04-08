@@ -27,7 +27,7 @@ const deleteTrack = (track) => ({
 export const getTrackThunk = (trackId) => async (dispatch) => {
     const res = await fetch(`/api/tracks/${trackId}`)
 
-    if (res.ok){
+    if (res.ok) {
         const data = await res.json()
         dispatch(getTrack(data))
     }
@@ -37,7 +37,7 @@ export const getAllTracksThunk = () => async (dispatch) => {
 
     const res = await fetch('/api/tracks')
 
-    if (res.ok){
+    if (res.ok) {
         const data = await res.json()
         dispatch(getAllTracks(data))
     }
@@ -48,7 +48,7 @@ export const addNewTrackThunk = (track) => async (dispatch) => {
 
     const res = await fetch('/api/tracks/new', {
         method: "POST",
-        headers: {"Content-Type":"application/json"},
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(track)
     });
 
@@ -63,7 +63,7 @@ export const updateTrackThunk = (track) => async (dispatch) => {
 
     const res = await fetch('/api/tracks/edit', {
         method: "PUT",
-        headers: {"Content-Type":"application/json"},
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(track)
     });
 
@@ -78,8 +78,8 @@ export const deleteTrackThunk = (trackId) => async (dispatch) => {
 
     const res = await fetch('/api/tracks/delete', {
         method: "DELETE",
-        headers: {"Content-Type":"application/json"},
-        body: JSON.stringify({trackId})
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ trackId })
     });
 
     if (res.ok) {
@@ -94,7 +94,7 @@ export const deleteTrackThunk = (trackId) => async (dispatch) => {
 export const getAnnoThunk = () => async (dispatch) => {
     const res = await fetch('/api/annotations')
     //set up api ^^
-    if (res.ok){
+    if (res.ok) {
         const data = await res.json()
         return data
     }
@@ -106,7 +106,7 @@ export const createAnnoThunk = anno_data => async dispatch => {
         headers: { "Content-Type": "application/json", },
         body: JSON.stringify(anno_data)
     })
-    if (res.ok){
+    if (res.ok) {
         const data = await res.json()
         return data;
     }
@@ -116,11 +116,13 @@ export const editAnnoThunk = (anno_data) => async dispatch => {
 
     const res = await fetch(`/api/annotations/${anno_data.track_id}`, {
         method: 'PUT',
-        headers: {'Content-Type': "application/json",
-                    'Accept': 'application/json'},
+        headers: {
+            'Content-Type': "application/json",
+            'Accept': 'application/json'
+        },
         body: JSON.stringify(anno_data)
     })
-    if (res.ok){
+    if (res.ok) {
         const updatedAnno = await res.json()
         return updatedAnno;
     }
@@ -131,9 +133,9 @@ export const deleteAnnoThunk = id => async dispatch => {
     const res = await fetch(`/api/annotations/${id}`, {
         method: 'DELETE',
     });
-    if (res.ok){
+    if (res.ok) {
         const deletedAnno = await res.json()
-        return deletedAnno 
+        return deletedAnno
     }
 }
 
@@ -143,7 +145,7 @@ export const addNewCommentThunk = (comment) => async (dispatch) => {
 
     const res = await fetch('/api/comments/new', {
         method: 'POST',
-        headers: {"Content-Type":"application/json"},
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(comment)
     });
 
@@ -159,7 +161,7 @@ export const editCommentThunk = (comment) => async (dispatch) => {
 
     const res = await fetch('/api/comments/edit', {
         method: 'PUT',
-        headers: {"Content-Type":"application/json"},
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(comment)
     });
 
@@ -175,7 +177,7 @@ export const deleteCommentThunk = (comment) => async (dispatch) => {
 
     const res = await fetch('/api/comments/delete', {
         method: 'DELETE',
-        headers: {"Content-Type":"application/json"},
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(comment)
     });
 
@@ -190,7 +192,7 @@ export const createVoteThunk = (vote) => async dispatch => {
 
     const res = await fetch('/api/votes/new', {
         method: 'POST',
-        headers: {"Content-Type":"application/json"},
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(vote)
     })
 
@@ -200,36 +202,45 @@ export const createVoteThunk = (vote) => async dispatch => {
     }
 }
 
+export const getVoteThunk = () => async dispatch => {
+    const res = await fetch('/api/votes')
+    
+    if (res.ok) {
+        const data = await res.json()
+        console.log(data)
+        return data
+    }
 
+}
 
 const initialState = {};
 
 const trackReducer = (state = initialState, action) => {
     let newState;
 
-    switch(action.type) {
+    switch (action.type) {
 
         case GET_TRACK:
             let thisState = {};
             thisState[action.payload.id] = action.payload
             return thisState
         case GET_TRACKS:
-            newState = {...state};
+            newState = { ...state };
             action.payload.tracks?.forEach((track) => newState[track.id] = track)
             return newState;
 
         case NEW_TRACK:
-            newState = {...state};
+            newState = { ...state };
             newState[action.payload.id] = action.payload
             return newState;
 
         case DEL_TACO:
-            newState = {...state};
+            newState = { ...state };
             delete newState[action.payload.id];
             return newState;
 
-        default: 
-            return state 
+        default:
+            return state
     }
 }
 
