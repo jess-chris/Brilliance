@@ -6,13 +6,14 @@ import * as trackActions from '../../store/track';
 //TODO
 //limit user to one vote per comment or annotation or anno comment
 //if user has already voted on this specific comm/anno,
-//  clicking the same button will remove the vote
+//clicking the same button will remove the vote
 
 const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
     const commentId = comment_id
     const annotationId = anno
     const dispatch = useDispatch();
     const userId = useSelector(state => state.session.user.id)
+
 
     const { trackId } = useParams()
     const tracksObj = useSelector(state => state.track)
@@ -148,7 +149,7 @@ const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
     }
 
     return (
-        <>
+        <>  
             <button onClick={handleUpVote}>Up Vote</button>
             <button onClick={handleDownVote}>Down Vote</button>
         </>

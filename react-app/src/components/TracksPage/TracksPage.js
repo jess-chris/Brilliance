@@ -15,12 +15,11 @@ const TracksPage = () => {
 
     const tracksObj = useSelector(state => state.track)
     const tracks = Object.values(tracksObj);
-    //console.log(tracks)
+    console.log(tracks)
 
     const albumImg = tracks.map(track => {
         if (track.album_image === ''){
             track.album_image = 'https://www.mcicon.com/wp-content/uploads/2021/01/Music_Music_note_1-copy-5.jpg'
-
         }
     })
         

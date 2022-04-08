@@ -22,10 +22,19 @@ const SpecificTrack = () => {
   const track = Object.values(tracksObj)[0]
   // .find(x => x.id === trackId)
 
-  const commentsArr = track?.comments
-  //console.log(commentsArr)
+  const commentsObj = track?.comments
+  //const commentsArr = Object.values(commentsObj)
   const annoArr = track?.annotations
-  console.log(annoArr)
+  //console.log(annoArr)
+
+  const commentVoteScore = arr => {
+    let sum = 0;
+    arr.forEach(vote => {
+      if (vote.vote === true) sum += 1
+      else sum -=1
+    })
+    return sum
+  }
 
 
   const [editTrackForm, showEditTrackForm] = useState(false)
@@ -70,7 +79,7 @@ const SpecificTrack = () => {
     // return highlightedLyrics
   }
 
-
+  
 
   return (
     <>
@@ -118,19 +127,21 @@ const SpecificTrack = () => {
           ))}
         </div>
 
-        <button type='submit' onClick={(openForm)}>Edit</button>
-        {editTrackForm && (<EditTrackForm />)}
-        <button type='submit' onClick={handleDelete}>Delete</button>
-
         <div className='comments'>
           <h1>Comments</h1>
-          {commentsArr?.map(comment => (
+          {commentsObj?.map(comment => (
             <div>
               <p>{comment.content}</p>
               <p>{comment.id}</p>
+              <p>{commentVoteScore(comment.votes)}</p>
               <Votes comment_id={comment.id}/>
             </div>
           ))}
+
+        <button type='submit' onClick={(openForm)}>Edit Track</button>
+        {editTrackForm && (<EditTrackForm />)}
+        <button type='submit' onClick={handleDelete}>Delete Track</button>
+
 
         </div>
       </div>
