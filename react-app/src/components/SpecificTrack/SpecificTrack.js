@@ -13,17 +13,17 @@ const SpecificTrack = () => {
     const dispatch = useDispatch();
     const {trackId} = useParams()
 
-    
+
     useEffect(() => {
       (async() => {
         await dispatch(trackActions.getTrackThunk(trackId));
         setLoaded(true);
       })();
     }, [dispatch]);
-    
+
     const tracksObj = useSelector(state => state.track)
     const track = Object.values(tracksObj)[0]
-    
+
 
     const setAnnotations = (track) => {
 
