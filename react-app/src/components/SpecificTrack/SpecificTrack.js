@@ -7,8 +7,6 @@ import AnnoForm from '../AnnoForm/AnnoForm';
 import Votes from '../Votes/index'
 import '../SpecificTrack/specificTrack.css'
 
-
-
 const SpecificTrack = () => {
 
   const dispatch = useDispatch();
@@ -24,7 +22,7 @@ const SpecificTrack = () => {
 
   const commentsObj = track?.comments
   //const commentsArr = Object.values(commentsObj)
-  const annoArr = track?.annotations
+  //const annoArr = track?.annotations
   //console.log(annoArr)
 
   const commentVoteScore = arr => {
@@ -36,13 +34,11 @@ const SpecificTrack = () => {
     return sum
   }
 
-
   const [editTrackForm, showEditTrackForm] = useState(false)
   const [annotationForm, setAnnotationForm] = useState(false)
+  const [voted, setVoted] = useState(false)
 
-  //const location = useLocation()
   const history = useHistory()
-
 
   const openForm = () => {
     if (editTrackForm) return;
@@ -110,7 +106,7 @@ const SpecificTrack = () => {
         <div className='annotationsRight'>
         
         </div>
-        <div>
+        {/* <div>
         {annoArr?.map(anno => (
             <div>
               <p>{anno.content}</p>
@@ -125,7 +121,7 @@ const SpecificTrack = () => {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
 
         <div className='comments'>
           <h1>Comments</h1>
@@ -141,9 +137,8 @@ const SpecificTrack = () => {
         <button type='submit' onClick={(openForm)}>Edit Track</button>
         {editTrackForm && (<EditTrackForm />)}
         <button type='submit' onClick={handleDelete}>Delete Track</button>
-
-
         </div>
+        {voted && <h1>True</h1>}
       </div>
     </>
 

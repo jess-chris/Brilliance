@@ -14,6 +14,8 @@ const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
     const dispatch = useDispatch();
     const userId = useSelector(state => state.session.user.id)
 
+    const [voted, setVoted] = useState(false)
+
 
     const { trackId } = useParams()
     const tracksObj = useSelector(state => state.track)
@@ -73,24 +75,26 @@ const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
                 vote: true
             }
 
-            //console.log(newVote)
-
+            setVoted(true)
+            console.log(voted)
             return await dispatch(trackActions.createVoteThunk(newVote))
         }
-        else {
-            //console.log('ELSE')
-            const annotationId = annoIdComment
-            const newVote = {
-                userId,
-                annotationId,
-                commentId,
-                vote: true
-            }
+        // else {
+        //     //console.log('ELSE')
+        //     const annotationId = annoIdComment
+        //     const newVote = {
+        //         userId,
+        //         annotationId,
+        //         commentId,
+        //         vote: true
+        //     }
 
-            //console.log(newVote)
-
-            return await dispatch(trackActions.createVoteThunk(newVote))
-        }
+        //     //console.log(newVote)
+            
+        //     console.log(voted)
+        //     return await dispatch(trackActions.createVoteThunk(newVote))
+        // }
+        setVoted(true)
     }
     //downvote is same as upvote but vote:false 
     const handleDownVote = async (e) => {
@@ -150,7 +154,7 @@ const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
 
     return (
         <>  
-            <button onClick={handleUpVote}>Up Vote</button>
+            <button onClick={event => [handleUpVote, setVoted(true), console.log(voted)]}>Up Vote</button>
             <button onClick={handleDownVote}>Down Vote</button>
         </>
     )
