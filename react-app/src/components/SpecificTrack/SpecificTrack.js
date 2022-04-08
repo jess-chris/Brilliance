@@ -6,6 +6,7 @@ import * as modalActions from '../../store/modal'
 import EditTrackForm from '../EditTrack/EditTrack';
 import AnnoForm from '../AnnoForm/AnnoForm';
 import '../SpecificTrack/specificTrack.css'
+import SpecificAnno from '../SpecificAnno/SpecificAnno';
 
 
 const SpecificTrack = () => {
@@ -44,7 +45,7 @@ const SpecificTrack = () => {
 
 
         lyricsWithAnnos.push(`<span class='nonAnno'>${nonAnno}</span>`);
-        lyricsWithAnnos.push(`<span onclick={} key='${curAnno.id}' class='annotated'>${annoLyric}</span>`);
+        lyricsWithAnnos.push(`<span key='${curAnno.id}' class='annotated'>${annoLyric} onclick='${showAnnotation()}'</span>`);
         prevIndex = curAnno.finalAnnoIndex;
 
         if(curIndex === annoArr.length - 1) {
@@ -73,6 +74,11 @@ const SpecificTrack = () => {
 
         dispatch(trackActions.deleteTrackThunk(trackId));
         history.push('/tracks')
+    }
+
+    const showAnnotation = () => {
+      dispatch(modalActions.setCurrentModal(SpecificAnno))
+      dispatch(modalActions.showModal())
     }
 
 
