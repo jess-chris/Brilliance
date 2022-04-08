@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import * as trackActions from '../../store/track'
+import '../TrackUpload/TrackUpload.css'
+
 
 const TrackUploadForm = () => {
 
@@ -50,6 +52,7 @@ const TrackUploadForm = () => {
 
                 <div>
                     <label>Track Title</label>
+                    <br></br>
                     <input
                     type='text'
                     name='TrackTitle'
@@ -59,6 +62,7 @@ const TrackUploadForm = () => {
                 </div>
                 <div>
                     <label>Artist Name</label>
+                    <br></br>
                     <input
                     type='text'
                     name='TrackArtist'
@@ -68,15 +72,17 @@ const TrackUploadForm = () => {
                 </div>
                 <div>
                     <label>Lyrics</label>
-                    <input
+                    <br></br>
+                    <textarea
                     type='text'
                     name='TrackLyrics'
                     value={lyrics}
                     onChange={(e) => setLyrics(e.target.value)}
-                    ></input>
+                    ></textarea>
                 </div>
                 <div>
                     <label>Track Album Image</label>
+                    <br></br>
                     <input
                     type='text'
                     name='TrackImage'
