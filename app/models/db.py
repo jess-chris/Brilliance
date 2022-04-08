@@ -17,7 +17,7 @@ class Track(db.Model):
   
 
   annotations = db.relationship("Annotation", backref="tracks", cascade="all, delete", order_by="Annotation.initialAnnoIndex")
-  comments = db.relationship("Comment", backref="tracks", cascade="all, delete")
+  comments = db.relationship("Comment", backref="tracks", cascade="all, delete", order_by="Comment.created_at")
 
   def to_dict(self):
     return {

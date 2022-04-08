@@ -24,6 +24,7 @@ const SpecificTrack = () => {
 
     const tracksObj = useSelector(state => state.track)
     const track = Object.values(tracksObj)[0]
+    const commentsObj = track?.comments
 
 
     const setAnnotations = (track) => {
@@ -63,10 +64,6 @@ const SpecificTrack = () => {
 
     const history = useHistory()
 
-
-  const history = useHistory()
-
-
     const openForm = () => {
         dispatch(modalActions.setCurrentModal(EditTrackForm))
         dispatch(modalActions.showModal())
@@ -92,10 +89,9 @@ const SpecificTrack = () => {
 
     return(
         <>
-        <div>
           <div className="header">
               <div className='image-box'>
-              <img alt='' src={track?.album_image}></img>
+                <img alt='' src={track?.album_image}></img>
               </div>
               <h1>
                 {track?.title}
@@ -110,7 +106,7 @@ const SpecificTrack = () => {
           <p>
             {track?.artist}
           </p>
-        </div>
+
 
 
           <div className="songPage">
@@ -122,9 +118,6 @@ const SpecificTrack = () => {
 
           </div>
 
-
-
-        </div>
 
 
           <button type='submit' onClick={(openForm)}>Edit</button>
@@ -143,15 +136,11 @@ const SpecificTrack = () => {
             </div>
           ))}
 
-
-          </div>
           {loaded && track.annotations.length > 0 && setAnnotations(track)}
 
         </div>
-      </div>
     </>
-
-  )
+    )
 }
 
 export default SpecificTrack
