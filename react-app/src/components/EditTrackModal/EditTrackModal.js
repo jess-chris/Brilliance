@@ -5,21 +5,19 @@ import { useParams } from 'react-router-dom';
 import * as trackActions from '../../store/track'
 import { hideModal } from '../../store/modal';
 
-import './AnnoModal.css'
+import './EditTrackModal.css'
 
-export const Modal = () => {
+export const EditTrackModal = () => {
 
   const dispatch = useDispatch();
 
   const mount = useSelector(state => state.modal.modalMount);
   const display = useSelector(state => state.modal.display);
   const Current = useSelector(state => state.modal.currentModal);
-  const trackObj = useSelector(state => state.track)
-  const track = Object.values(trackObj)[0]
 
   const closeModal = () => {
     dispatch(hideModal());
-    dispatch(trackActions.getTrackThunk(track.id));
+    dispatch(trackActions.getAllTracksThunk());
   }
 
 
@@ -32,4 +30,4 @@ export const Modal = () => {
     , mount)
 }
 
-export default Modal;
+export default EditTrackModal;

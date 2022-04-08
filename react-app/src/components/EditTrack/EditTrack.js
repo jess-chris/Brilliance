@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useDispatch} from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { useDispatch, useSelector} from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import * as trackActions from '../../store/track';
 
 
@@ -14,8 +14,11 @@ const EditTrackForm = () => {
 
 
     const dispatch = useDispatch()
-    const {trackId} = useParams()
     const history = useHistory()
+
+    const tracksObj = useSelector(state => state.track)
+    const track = Object.values(tracksObj)[0]
+    const trackId = track.id
 
     const trackUpdate = e => {
         e.preventDefault()
@@ -23,13 +26,12 @@ const EditTrackForm = () => {
 
         if(artist && title && lyrics) {
             setErrors([]);
-            history.push('/tracks')
-            return dispatch(trackActions.updateTrackThunk(newTrack))
+            dispatch(trackActions.updateTrackThunk(newTrack))
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors)
             })
-
+            history.push('/tracks')
         }
         return setErrors(["Artist, Title, or Lyrics cannot be empty"])
 
