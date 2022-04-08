@@ -18,14 +18,15 @@ const SpecificTrack = () => {
 
 
     useEffect(() => {
-      // (async() => {
+      (async() => {
         dispatch(trackActions.getTrackThunk(trackId));
-        // setLoaded(true);
-      // })();
+        setLoaded(true);
+      })();
     }, [dispatch, trackId]);
 
     const tracksObj = useSelector(state => state.track)
     const track = Object.values(tracksObj)[0]
+
 
 
     const setAnnotations = (track) => {
@@ -47,7 +48,7 @@ const SpecificTrack = () => {
 
 
         lyricsWithAnnos.push(`<span class='nonAnno'>${nonAnno}</span>`);
-        lyricsWithAnnos.push(`<span key='${curAnno.id}' class='annotated'>${annoLyric} onclick='${setViewAnnotation(true)}'</span>`);
+        lyricsWithAnnos.push(`<span key='${curAnno.id}' class='annotated' onclick='${setViewAnnotation(true)}'>${annoLyric}</span>`);
         prevIndex = curAnno.finalAnnoIndex;
 
         if(curIndex === annoArr.length - 1) {
@@ -77,9 +78,8 @@ const SpecificTrack = () => {
         history.push('/tracks')
     }
 
-      if(viewAnnotation){
-      dispatch(modalActions.setCurrentModal(SpecificAnno))
-      dispatch(modalActions.showModal())
+    if(viewAnnotation){
+      <SpecificAnno/>
       }
 
 
