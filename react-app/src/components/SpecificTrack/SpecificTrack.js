@@ -34,10 +34,10 @@ const SpecificTrack = () => {
 
   const history = useHistory()
 
-  const openForm = () => {
-    if (editTrackForm) return;
-    showEditTrackForm(true);
-  };
+  // const openForm = () => {
+  //   if (editTrackForm) return;
+  //   showEditTrackForm(true);
+  // };
 
   const handleDelete = (e) => {
     e.preventDefault()
@@ -45,31 +45,6 @@ const SpecificTrack = () => {
     dispatch(trackActions.deleteTrackThunk(trackId));
     history.push('/tracks')
   }
-
-  const handleMouseUp = () => {
-    // console.log(`${window.getSelection().toString()}`)
-    let strObj = window.getSelection()
-    // let paras = document.getElementsByTagName('p')[0]
-    // let rect = strObj.getBoundingClientRect()
-    let initialIndex = strObj.anchorOffset
-    let finalIndex = strObj.focusOffset
-    console.log('ind2', finalIndex)
-    console.log('ind1', initialIndex)
-    let newHTML = `<span key=${track.annotations.length + 1}>${strObj.toString()}</span>`
-    console.log('html', newHTML)
-    console.log('strObj', strObj)
-    // console.log(rect)
-    let lyricArr = track.lyrics.split('')
-    lyricArr.splice(initialIndex, finalIndex - initialIndex, newHTML).join('')
-    console.log('Arr', lyricArr)
-    const highlightedLyrics = lyricArr.join('')
-    console.log('hiiiii', highlightedLyrics)
-    console.log('lyrics', track.lyrics)
-    setAnnotationForm(true)
-    // return highlightedLyrics
-  }
-
-  
 
   return (
     <>
@@ -88,11 +63,11 @@ const SpecificTrack = () => {
 
         <div className="songPage">
           <p className='lyricTitle'>{track?.title} lyrics</p>
-          <p className='lyrics' onMouseUp={handleMouseUp}>
+          { <p className='lyrics'> 
             {annotationForm ? (<AnnoForm track={track} />) : null}
-            {track?.lyrics}
+            {track?.lyrics} 
             {/* {highlightedLyrics} */}
-          </p>
+           </p>}
 
 
         </div>
@@ -111,9 +86,9 @@ const SpecificTrack = () => {
             </div>
           ))}
 
-        <button type='submit' onClick={(openForm)}>Edit Track</button>
+        {/* <button type='submit' onClick={(openForm)}>Edit Track</button>
         {editTrackForm && (<EditTrackForm />)}
-        <button type='submit' onClick={handleDelete}>Delete Track</button>
+        <button type='submit' onClick={handleDelete}>Delete Track</button> */}
         </div>
       </div>
     </>
