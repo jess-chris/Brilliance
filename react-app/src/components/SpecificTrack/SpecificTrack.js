@@ -6,6 +6,7 @@ import EditTrackForm from '../EditTrack/EditTrack';
 import AnnoForm from '../AnnoForm/AnnoForm';
 import Votes from '../Votes/index'
 import '../SpecificTrack/specificTrack.css'
+import Comment from '../Comments';
 
 const SpecificTrack = () => {
 
@@ -75,7 +76,7 @@ const SpecificTrack = () => {
     // return highlightedLyrics
   }
 
-  
+
 
   return (
     <>
@@ -104,7 +105,7 @@ const SpecificTrack = () => {
         </div>
 
         <div className='annotationsRight'>
-        
+
         </div>
         {/* <div>
         {annoArr?.map(anno => (
@@ -116,13 +117,13 @@ const SpecificTrack = () => {
                 {anno.comments.map(annoComment => (
                   <><p>{annoComment.content}</p>
                   <Votes annoIdComment={annoComment.annotation_id} annoCommentId={annoComment.id}></Votes></>
-                  
+
                 ))}
               </div>
             </div>
           ))}
         </div> */}
-
+        <Comment/>
         <div className='comments'>
           <h1>Comments</h1>
           {commentsObj?.map(comment => (

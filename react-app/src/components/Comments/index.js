@@ -1,6 +1,6 @@
 import React, { useState, } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import * as trackActions from '../../store/track';
 
 
@@ -8,8 +8,13 @@ const Comment = () => {
 
   const dispatch = useDispatch();
   const userId = useSelector(state => state.session.user.id)
+  const tracksObj = useSelector(state => state.track)
   const [commentContent, setCommentContent] = useState('');
   const history = useHistory();
+  const track_id = useParams()
+  // console.log('trackObj', tracksObj)
+  const track = Object.values(track_id)[0]
+  // console.log('trackid', track)
 
   const handlePost = e => {
 
@@ -17,7 +22,8 @@ const Comment = () => {
 
     const newComment = {
       userId,
-      annotationId: '1',
+      track_id: track,
+      annotationId: null,
       content: commentContent
     }
 
@@ -39,7 +45,7 @@ const Comment = () => {
 
         <button type='Submit'>Submit</button>
       </form>
-    
+
     </>
   )
 
