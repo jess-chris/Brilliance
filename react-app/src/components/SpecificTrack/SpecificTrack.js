@@ -11,9 +11,6 @@ const SpecificTrack = () => {
 
   const dispatch = useDispatch();
   const { trackId } = useParams()
-  
-  const voteState = useSelector(state => state.track.vote)
-  console.log('VOTESTATE', voteState)
 
   useEffect(() => {
     (async() => {
@@ -24,33 +21,16 @@ const SpecificTrack = () => {
   const tracksObj = useSelector(state => state.track)
   const track = Object.values(tracksObj)[0]
 
-
   useEffect(() => {
     dispatch(trackActions.getTrackThunk(trackId))
     dispatch(trackActions.getVoteThunk())
-  }, [dispatch, trackId, voteState]);
+  }, [dispatch, trackId,]);
 
-  
-  // .find(x => x.id === trackId)
 
   const commentsObj = track?.comments
-  //const commentsArr = Object.values(commentsObj)
-  //const annoArr = track?.annotations
-  //console.log(annoArr)
-
-  const commentVoteScore = arr => {
-    let sum = 0;
-    arr.forEach(vote => {
-      if (vote.vote === true) sum += 1
-      else sum -=1
-    })
-    return sum
-  }
 
   const [editTrackForm, showEditTrackForm] = useState(false)
   const [annotationForm, setAnnotationForm] = useState(false)
-
-  const [voted, setVoted] = useState(false)
 
   const history = useHistory()
 
@@ -120,22 +100,6 @@ const SpecificTrack = () => {
         <div className='annotationsRight'>
         
         </div>
-        {/* <div>
-        {annoArr?.map(anno => (
-            <div>
-              <p>{anno.content}</p>
-              <p>{anno.id}</p>
-              <Votes anno={anno.id}/>
-              <div>
-                {anno.comments.map(annoComment => (
-                  <><p>{annoComment.content}</p>
-                  <Votes annoIdComment={annoComment.annotation_id} annoCommentId={annoComment.id}></Votes></>
-                  
-                ))}
-              </div>
-            </div>
-          ))}
-        </div> */}
 
         <div className='comments'>
           <h1>Comments</h1>

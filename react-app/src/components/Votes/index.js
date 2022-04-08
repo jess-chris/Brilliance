@@ -14,22 +14,16 @@ const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
     const dispatch = useDispatch();
     const userId = useSelector(state => state.session.user.id)
     const voteState = useSelector(state => state.track.votes)
-    //console.log('333', voteState)
-    
 
     const [voted, setVoted] = useState(false)
 
-
     const { trackId } = useParams()
     const tracksObj = useSelector(state => state.track)
-    // const track = Object.values(tracksObj)[0];
-    // console.log('!!!!!!!!@@@@@@@', track)
-
+   
     useEffect(() => {
         dispatch(trackActions.getTrackThunk(trackId))
         dispatch(trackActions.getVoteThunk());
     }, [dispatch, voteState]);
-
 
     const handleUpVote = async (e) => {
         e.preventDefault()
@@ -65,7 +59,7 @@ const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
                 commentId,
                 vote: true
             }
-            //console.log(newVote)
+            
             await dispatch(trackActions.createVoteThunk(newVote))
             await dispatch(trackActions.getVoteThunk())
             await dispatch(trackActions.getTrackThunk(trackId))
@@ -73,7 +67,6 @@ const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
         //if does not have annotationId it is not a annotation comment
         //therefore it is a track comment
         else if (typeof annotationId === 'undefined') {
-            //console.log('ANNOTATION UNDEFINED, TRACK COMMENT')
             const annotationId = null
 
             const newVote = {
@@ -83,14 +76,11 @@ const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
                 vote: true
             }
 
-            // setVoted(true)
-            // console.log(voted)
             await dispatch(trackActions.createVoteThunk(newVote))
             await dispatch(trackActions.getVoteThunk())
             await dispatch(trackActions.getTrackThunk(trackId))
         }
         
-        //setVoted(true)
     }
     //downvote is same as upvote but vote:false 
     const handleDownVote = async (e) => {
