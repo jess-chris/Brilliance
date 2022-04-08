@@ -79,20 +79,11 @@ const SpecificTrack = () => {
 
 
     const handleMouseUp = () => {
-      // let newHTML = `<span key=${track.annotations.length+1}>${strObj.toString()}</span>`
-      // console.log('html', newHTML)
-      // console.log('strObj', strObj)
-      // // console.log(rect)
-      // let lyricArr = track.lyrics.split('')
-      // lyricArr.splice(initialIndex, finalIndex-initialIndex, newHTML).join('')
-      // console.log('Arr', lyricArr)
-      // const highlightedLyrics = lyricArr.join('')
-      // console.log('hiiiii', highlightedLyrics)
-      // console.log('lyrics', track.lyrics)
 
-      const strObj = window.getSelection()
-      console.log(strObj.focusOffset)
-      console.log(strObj.anchorOffset)
+
+      //const strObj = window.getSelection()
+      //console.log(strObj.focusOffset)
+      //console.log(strObj.anchorOffset)
 
       setAnnotationForm(true)
       dispatch(modalActions.setCurrentModal(AnnoForm))
