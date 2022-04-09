@@ -18,3 +18,14 @@
   align-items: center;
   justify-items: center;
 }
+
+#anno-btn-bar button {
+  border: 1px solid rgb(0, 0, 0);
+  margin: 5px;
+  font-size: 1rem;
+  font-weight: 100;
+  width: 30%;
+  cursor: pointer;
+  display: block;
+  color: inherit;
+}

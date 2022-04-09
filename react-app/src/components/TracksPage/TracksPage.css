@@ -11,9 +11,9 @@
     width: 60px;
 }
 
-ul{
+.allTracksContainer ul{
     display:grid;
-    grid-template-columns: 0.5fr 1fr 2fr 2fr 1fr;
+    grid-template-columns: 0.5fr 1fr 2fr 2fr;
     align-items: center;
     justify-items: center;
     width:100%;

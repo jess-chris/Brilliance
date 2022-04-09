@@ -45,7 +45,7 @@ const TracksPage = () => {
                                     {title}
                                 </NavLink>
                                 <p>{artist}</p>
-                                <div>TODO: likes</div>
+                                
                             </ul>
                         )
                     })}

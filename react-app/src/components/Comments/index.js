@@ -5,6 +5,17 @@ import * as trackActions from '../../store/track';
 
 import './Comments.css'
 
+const buttonStyle = {
+  border: '1px solid rgb(0, 0, 0)',
+  fontSize: '1rem',
+  padding: '5px',
+  fontWeight: '100',
+  width: '50%',
+  cursor: 'pointer',
+  display: 'block',
+  color: 'inherit',
+}
+
 const Comment = () => {
 
   const dispatch = useDispatch();
@@ -45,7 +56,7 @@ const Comment = () => {
         required
         ></textarea>
 
-        <button type='Submit'>Submit</button>
+        <button style={buttonStyle} type='Submit'><i class="fa-regular fa-circle-check"></i> Submit</button>
       </form>
     
     </div>

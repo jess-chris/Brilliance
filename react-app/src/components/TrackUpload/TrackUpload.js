@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import * as trackActions from '../../store/track'
-import '../TrackUpload/TrackUpload.css'
+import './TrackUpload.css'
 
 
 const TrackUploadForm = () => {
@@ -21,9 +21,9 @@ const TrackUploadForm = () => {
 
     const trackUpload = e => {
         e.preventDefault()
-        const newTrack = { artist, trackImg, title, lyrics, userId}
+        const newTrack = { artist, trackImg, title, lyrics, userId }
 
-        if(artist && title && lyrics) {
+        if (artist && title && lyrics) {
             setErrors([]);
             history.push('/tracks')
             return dispatch(trackActions.addNewTrackThunk(newTrack))
@@ -39,60 +39,71 @@ const TrackUploadForm = () => {
 
 
     return (
-        <div className='large-container'>
+        <div className='upload-large-container'>
+            <div className='upload-track'>
+                <h1> Upload Track </h1>
+            </div>
 
+            <div className='upload-input-container'>
+                <form onSubmit={trackUpload}>
+                    <div>
+                        <ul className="errors">
+                            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                        </ul>
+                    </div>
 
-        <div className='input-contatiner'>
-            <form onSubmit={trackUpload}>
-                <div>
-                    <ul className="errors">
-                        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                    </ul>
-                </div>
+                    <div>
+                        <label>Track Title</label>
+                        <div>
+                            <input
+                                style={{ width: '400px', margin: '10px 0px 10px 0px' }}
+                                type='text'
+                                name='TrackTitle'
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
+                            ></input>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Artist Name</label>
+                        <div>
+                            <input
+                                style={{ width: '400px', margin: '10px 0px 10px 0px' }}
+                                type='text'
+                                name='TrackArtist'
+                                value={artist}
+                                onChange={(e) => setArtist(e.target.value)}
+                            ></input>
+                        </div>
 
-                <div>
-                    <label>Track Title</label>
-                    <br></br>
-                    <input
-                    type='text'
-                    name='TrackTitle'
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    ></input>
-                </div>
-                <div>
-                    <label>Artist Name</label>
-                    <br></br>
-                    <input
-                    type='text'
-                    name='TrackArtist'
-                    value={artist}
-                    onChange={(e) => setArtist(e.target.value)}
-                    ></input>
-                </div>
-                <div>
-                    <label>Lyrics</label>
-                    <br></br>
-                    <textarea
-                    type='text'
-                    name='TrackLyrics'
-                    value={lyrics}
-                    onChange={(e) => setLyrics(e.target.value)}
-                    ></textarea>
-                </div>
-                <div>
-                    <label>Track Album Image</label>
-                    <br></br>
-                    <input
-                    type='text'
-                    name='TrackImage'
-                    value={trackImg}
-                    onChange={(e) => setTrackImg(e.target.value)}
-                    ></input>
-                </div>
-                <button type='Submit'>Submit</button>
-            </form>
-        </div>
+                    </div>
+                    <div id='lyrics-textarea'>
+                        <label>Lyrics</label>
+                        <div>
+                            <textarea
+                                style={{ height: '500px', width: '400px', margin: '10px 0px 10px 0px' }}
+                                type='text'
+                                name='TrackLyrics'
+                                value={lyrics}
+                                onChange={(e) => setLyrics(e.target.value)}
+                            ></textarea>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Track Album Image</label>
+                        <div>
+                            <input
+                                style={{ width: '400px', margin: '10px 0px 10px 0px' }}
+                                type='text'
+                                name='TrackImage'
+                                value={trackImg}
+                                onChange={(e) => setTrackImg(e.target.value)}
+                            ></input>
+                        </div>
+                    </div>
+                    <button type='Submit'>Submit</button>
+                </form>
+            </div>
         </div>
     )
 }

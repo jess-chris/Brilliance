@@ -19,8 +19,11 @@ const NavBar = () => {
             <NavLink to='/' exact={true} activeClassName='active'>
               Home
             </NavLink>
+            <NavLink to='/about' exact={true} activeClassName='active'>
+              About Us
+            </NavLink>
             <NavLink to='/login' exact={true} activeClassName='active'>
-              Login
+              Log In
             </NavLink>
             <NavLink to='/sign-up' exact={true} activeClassName='active'>
               Sign Up
@@ -38,6 +41,9 @@ const NavBar = () => {
             </NavLink>
             <NavLink to='/users' exact={true} activeClassName='active'>
               Users
+            </NavLink>
+            <NavLink to='/about' exact={true} activeClassName='active'>
+              About Us
             </NavLink>
             <NavLink to='/' className='navBarTitle'>
               BRILLIANCE

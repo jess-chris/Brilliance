@@ -8,6 +8,14 @@ import * as trackActions from '../../store/track';
 //if user has already voted on this specific comm/anno,
 //clicking the same button will remove the vote
 
+const voteButtonStyle = {
+    backgroundColor: 'white',
+    border: 'none',
+    color: 'black',
+    margin: '10px',
+
+}
+
 const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
     const commentId = comment_id
     const annotationId = anno
@@ -134,8 +142,8 @@ const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
 
     return (
         <>  
-            <button onClick={handleUpVote}>Up Vote</button>
-            <button onClick={handleDownVote}>Down Vote</button>
+            <button style={voteButtonStyle} onClick={handleUpVote}><i class="fa-regular fa-thumbs-up"></i></button>
+            <button style={voteButtonStyle} onClick={handleDownVote}><i class="fa-regular fa-thumbs-down"></i></button>
         </>
     )
 }

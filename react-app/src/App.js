@@ -14,6 +14,7 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import AnnoModal from './components/AnnoModal/AnnoModal'
 import EditTrackModal from './components/EditTrackModal/EditTrackModal'
+import AboutLinks from './components/About/AboutLinks'
 
 
 function App() {
@@ -61,7 +62,10 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <HomePage />
-        </ProtectedRoute>     
+        </ProtectedRoute>
+        <ProtectedRoute path='/about' exact={true} >
+          <AboutLinks />
+          </ProtectedRoute>     
       </Switch>
     </BrowserRouter>
   );

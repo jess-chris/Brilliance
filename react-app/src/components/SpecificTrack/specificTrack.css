@@ -1,11 +1,17 @@
 .lyrics {
     white-space: pre-line;
-    text-align: center;
+    text-align: left;
+    margin-left: 50px;
+}
+
+h4 {
+    margin-left: 50px;
 }
 
 .header {
     background-image: linear-gradient(whitesmoke, grey);
     padding: 10px;
+    display:flex;
 }
 
 
@@ -22,6 +28,10 @@
 img{
     height:320px;
     width:320px;
+}
+
+#artist-info{
+    margin-left: 20px;
 }
 
 h1{
@@ -73,6 +83,7 @@ h1{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    border-bottom: 1px solid black;
 }
 
 #comment-footer {
@@ -80,12 +91,32 @@ h1{
     justify-content: space-between;
     align-items: center;
     margin-top: 5px;
-
     width: 400px;
-    border: 1px solid black;
+    
 }
 
 .comment-delete {
     width: 400px;
 
+}
+
+#vote-buttons {
+    display:flex;
+    align-items: center;
+    margin:10px;
+}
+
+#single-comment button {
+    border: 1px solid rgb(0, 0, 0);
+    font-size: 1rem;
+    font-weight: 100;
+    width: 30%;
+    cursor: pointer;
+    display: block;
+    color: inherit;
+}
+
+#edit-delete-buttons {
+    margin-top:20px;
+    display: flex;
 }
