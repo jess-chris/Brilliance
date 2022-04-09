@@ -12,21 +12,25 @@ import Comment from '../Comments';
 const SpecificTrack = () => {
 
     const [loaded, setLoaded] = useState(false);
+    const [comms, setComms] = useState([])
     const dispatch = useDispatch();
     const {trackId} = useParams()
+
+    const tracksObj = useSelector(state => state.track)
+    const track = Object.values(tracksObj)[0]
+    const commentsObj = track?.comments
+    console.log('commmmmObj', commentsObj)
+
 
 
     useEffect(() => {
       (async() => {
         await dispatch(trackActions.getTrackThunk(trackId));
         setLoaded(true);
+
       })();
-    }, [dispatch, trackId]);
+    }, [dispatch, trackId, commentsObj]);
 
-    const tracksObj = useSelector(state => state.track)
-    const track = Object.values(tracksObj)[0]
-
-    const commentsObj = track?.comments
 
 
     const setAnnotations = (track) => {
@@ -158,6 +162,7 @@ const SpecificTrack = () => {
           {commentsObj?.map(comment => (
             <div>
               <button onClick={() => dispatch(trackActions.deleteCommentThunk(comment.id))}>Delete Comment</button>
+
               <p>{comment.content}</p>
               <p>{comment.vote_score}</p>
               <Votes comment_id={comment.id}/>

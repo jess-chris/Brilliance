@@ -3,6 +3,9 @@ const GET_TRACKS = 'track/GET_TRACKS'
 const NEW_TRACK = 'track/NEW_TRACK'
 const DEL_TACO = 'track/DEL_TACO'
 
+const DEL_COMMENT = 'comment/DEL_COMMENT'
+
+
 const getTrack = (track) => ({
     type: GET_TRACK,
     payload: track
@@ -22,6 +25,12 @@ const deleteTrack = (track) => ({
     type: DEL_TACO,
     payload: track
 })
+
+export const deleteComment = toDelete => ({
+    type: DEL_COMMENT,
+    payload: toDelete
+})
+
 
 
 export const getTrackThunk = (trackId) => async (dispatch) => {
@@ -151,7 +160,6 @@ export const addNewCommentThunk = (comment) => async (dispatch) => {
 
     if (res.ok) {
         const newComment = await res.json();
-        dispatch(deleteTrack(newComment));
         return newComment;
     }
 
@@ -184,6 +192,7 @@ export const deleteCommentThunk = (id) => async (dispatch) => {
 
     if (res.ok) {
         const deletedComment = await res.json();
+        // dispatch(deleteComment(deletedComment));
         return deletedComment;
     }
 
@@ -236,6 +245,11 @@ const trackReducer = (state = initialState, action) => {
             return newState;
 
         case DEL_TACO:
+            newState = { ...state };
+            delete newState[action.payload.id];
+            return newState;
+
+        case DEL_COMMENT:
             newState = { ...state };
             delete newState[action.payload.id];
             return newState;

@@ -69,7 +69,7 @@ export const deleteAnnoThunk = id => async dispatch => {
     if (res.ok){
         const deletedAnno = await res.json()
         dispatch(deleteAnno(deletedAnno))
-        return deletedAnno 
+        return deletedAnno
     }
 }
 
@@ -81,7 +81,7 @@ const annoReducer = (state = initialState, action) => {
     let newState
 
     switch(action.type) {
-        
+
         case GET_ANNO:
             newState = {...state}
             action.payload.annotations?.forEach((anno) => newState[anno.id] = anno)
@@ -98,7 +98,7 @@ const annoReducer = (state = initialState, action) => {
         //     newEntries[action.editedAnno.id] = action.editedAnno;
         //     newState.entries = newEntries
         //     return newState
-        
+
         case DEL_ANNO:
             newState = {...state};
             delete newState[action.payload.id]
