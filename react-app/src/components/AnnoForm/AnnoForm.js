@@ -5,6 +5,17 @@ import * as modalActions from '../../store/modal';
 
 import './AnnoForm.css'
 
+const buttonStyle = {
+    border: '1px solid rgb(0, 0, 0)',
+    fontSize: '1rem',
+    padding: '5px',
+    fontWeight: '100',
+    width: '50%',
+    cursor: 'pointer',
+    display: 'block',
+    color: 'inherit',
+  }
+
 const AnnoForm = () => {
 
     const annoCont = document.querySelector('.lyrics')
@@ -82,9 +93,9 @@ const AnnoForm = () => {
                 >
                 </textarea >
                 <div id='anno-btn-bar'>
-                    <button type='submit'>Submit</button>
-                    <button onClick={editAnno} type='submit'>Edit</button>
-                    <button onClick={deleteAnno}>Delete</button>
+                    <button style={buttonStyle} type='submit'>Submit</button>
+                    <button style={buttonStyle} onClick={editAnno} type='submit'>Edit</button>
+                    <button style={buttonStyle} onClick={deleteAnno}>Delete</button>
                 </div>
             </form>
         </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import * as trackActions from '../../store/track';
@@ -23,10 +23,10 @@ const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
     const userId = useSelector(state => state.session.user.id)
     const voteState = useSelector(state => state.track.votes)
 
-    const [voted, setVoted] = useState(false)
+    // const [voted, setVoted] = useState(false)
 
     const { trackId } = useParams()
-    const tracksObj = useSelector(state => state.track)
+    // const tracksObj = useSelector(state => state.track)
    
     useEffect(() => {
         dispatch(trackActions.getTrackThunk(trackId))

@@ -22,14 +22,14 @@ const NavBar = () => {
             <NavLink to='/about' exact={true} activeClassName='active'>
               About Us
             </NavLink>
+            <NavLink to='/' className='navBarTitle'>
+              BRILLIANCE
+            </NavLink>
             <NavLink to='/login' exact={true} activeClassName='active'>
               Log In
             </NavLink>
             <NavLink to='/sign-up' exact={true} activeClassName='active'>
               Sign Up
-            </NavLink>
-            <NavLink to='/' className='navBarTitle'>
-              BRILLIANCE
             </NavLink>
           </div>
         )}

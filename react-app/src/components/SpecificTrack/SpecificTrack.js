@@ -12,15 +12,14 @@ import SpecificAnno from '../SpecificAnno/SpecificAnno';
 
 const buttonStyle = {
   border: '1px solid rgb(0, 0, 0)',
-  fontSize: '1rem',
+  fontSize: '0.9rem',
   padding: '5px',
   fontWeight: '100',
-  marginLeft:'50px',
+  width: '80px',
   cursor: 'pointer',
   display: 'block',
   color: 'inherit',
 }
-
 const SpecificTrack = () => {
 
   const [loaded, setLoaded] = useState(false);
@@ -147,9 +146,9 @@ const SpecificTrack = () => {
     <>
       <div className="header">
         <div className='image-box'>
-          <img onError={e => e.target.src = 'https://www.mcicon.com/wp-content/uploads/2021/01/Music_Music_note_1-copy-5.jpg'} alt='' src={track?.album_image}></img>
+          <img alt='' src={track?.album_image}></img>
         </div>
-        <div id = 'artist-info'>
+        <div id='artist-info'>
           <h1>
             {track?.title}
           </h1>
@@ -157,10 +156,12 @@ const SpecificTrack = () => {
             {track?.artist}
           </h3>
         </div>
+
       </div>
 
 
       <div className="songPage">
+        <h4>Highlight lyrics to leave an annotation!</h4>
         <h4 className='lyricTitle'>{track?.title} lyrics:</h4>
 
         <div className='lyricAnnoCont'>
@@ -177,8 +178,8 @@ const SpecificTrack = () => {
 
       {track?.user_id === userId && (
         <div id='edit-delete-buttons'>
-          <button style={buttonStyle} type='submit' onClick={(openForm)}><i class="fa-regular fa-pen-to-square"></i> Edit </button>
-          <button style={buttonStyle} type='submit' onClick={handleDelete}><i class="fa-regular fa-trash-can"></i> Delete </button>
+          <button style={buttonStyle} type='submit' onClick={(openForm)}><i class="fa-regular fa-pen-to-square"></i> Edit</button>
+          <button style={buttonStyle} type='submit' onClick={handleDelete}><i class="fa-regular fa-trash-can"></i> Delete</button>
         </div>
       )}
 
@@ -192,16 +193,11 @@ const SpecificTrack = () => {
             <div id='single-comment' key={comment.id}>
               <p>{comment.content}</p>
               <div id='comment-footer'>
-                
-                <div id='vote-buttons'>
-                  
-                {comment?.vote_score}<Votes comment_id={comment?.id} />
-                  </div>
+                Vote Score: {comment?.vote_score}
+                <Votes comment_id={comment?.id} />
               </div>
               {comment.user_id === userId && (
-                <button style={buttonStyle} onClick={deleteComment} className='comment-delete' id={comment.id}>
-                  <i class="fa-regular fa-trash-can"></i> Delete
-                  </button>
+                <button onClick={deleteComment} className='comment-delete' id={comment.id}><i class="fa-regular fa-trash-can"></i> Delete</button>
               )}
             </div>
           ))}

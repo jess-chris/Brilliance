@@ -119,4 +119,7 @@ h1{
 #edit-delete-buttons {
     margin-top:20px;
     display: flex;
+    width:25%;
+    justify-content: space-evenly;
 }
+
