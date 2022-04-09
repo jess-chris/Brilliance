@@ -15,9 +15,8 @@ def create_vote():
     user_id=request.json['userId']
     annotation_id=request.json['annotationId']
     comment_id=request.json['commentId']
-    #print('COMMENTIDDDDDD', comment_id)
     vote=request.json['vote']
-    #print('!!!1', vote)
+    
 
     if comment_id != None:
         comment_score = Comment.query.get(comment_id)
@@ -47,6 +46,6 @@ def create_vote():
     db.session.add(vote)
     db.session.commit()
     
-    #double check return below
+    
     return vote.to_dict()
      

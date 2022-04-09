@@ -36,7 +36,10 @@ const TracksPage = () => {
                         return (
                             <ul key={id}>
                                 <div>{id}</div>
-                                <img alt='' src={album_image} className='trackImg' />
+                                <img alt='album cover' 
+                                src={album_image} 
+                                onError = {e => e.target.src = 'https://www.mcicon.com/wp-content/uploads/2021/01/Music_Music_note_1-copy-5.jpg'}
+                                className='trackImg' />
                                 <NavLink to={{ pathname: `/tracks/${id}`, state: { id, lyrics, title, artist, userId, album_image } }}>
                                     {title}
                                 </NavLink>

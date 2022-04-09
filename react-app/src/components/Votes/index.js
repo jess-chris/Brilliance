@@ -13,17 +13,14 @@ const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
     const annotationId = anno
     const dispatch = useDispatch();
     const userId = useSelector(state => state.session.user.id)
-    const voteState = useSelector(state => state.track.votes)
-
-    const [voted, setVoted] = useState(false)
+    
 
     const { trackId } = useParams()
     const tracksObj = useSelector(state => state.track)
    
-    useEffect(() => {
-        dispatch(trackActions.getTrackThunk(trackId))
-        dispatch(trackActions.getVoteThunk());
-    }, [dispatch, voteState]);
+    // useEffect(() => {
+    //     dispatch(trackActions.getTrackThunk(trackId))
+    // }, [dispatch, ]);
 
     const handleUpVote = async (e) => {
         e.preventDefault()
@@ -42,7 +39,7 @@ const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
             //console.log(newVote)
             
             await dispatch(trackActions.createVoteThunk(newVote))
-            await dispatch(trackActions.getVoteThunk())
+            // await dispatch(trackActions.getVoteThunk())
             await dispatch(trackActions.getTrackThunk(trackId))
         }
         //if does not have commentId it is not a track comment
@@ -61,7 +58,7 @@ const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
             }
             
             await dispatch(trackActions.createVoteThunk(newVote))
-            await dispatch(trackActions.getVoteThunk())
+            // await dispatch(trackActions.getVoteThunk())
             await dispatch(trackActions.getTrackThunk(trackId))
         }
         //if does not have annotationId it is not a annotation comment
@@ -77,7 +74,7 @@ const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
             }
 
             await dispatch(trackActions.createVoteThunk(newVote))
-            await dispatch(trackActions.getVoteThunk())
+            // await dispatch(trackActions.getVoteThunk())
             await dispatch(trackActions.getTrackThunk(trackId))
         }
         
@@ -97,7 +94,7 @@ const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
                 vote: false
             }
             await dispatch(trackActions.createVoteThunk(newVote))
-            await dispatch(trackActions.getVoteThunk())
+            //  await dispatch(trackActions.getVoteThunk())
             await dispatch(trackActions.getTrackThunk(trackId))
         }
         else if (typeof commentId === 'undefined') {
@@ -111,7 +108,7 @@ const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
                 vote: false
             }
             await dispatch(trackActions.createVoteThunk(newVote))
-            await dispatch(trackActions.getVoteThunk())
+            // await dispatch(trackActions.getVoteThunk())
             await dispatch(trackActions.getTrackThunk(trackId))
         }
 
@@ -126,7 +123,7 @@ const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
                 vote: false
             }
             await dispatch(trackActions.createVoteThunk(newVote))
-            await dispatch(trackActions.getVoteThunk())
+            // await dispatch(trackActions.getVoteThunk())
             await dispatch(trackActions.getTrackThunk(trackId))
         }
         
