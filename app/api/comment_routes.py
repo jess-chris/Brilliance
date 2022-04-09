@@ -48,12 +48,12 @@ def update_comment():
   return comment.to_dict()
 
 
-@comment_routes.route('/delete', methods=['DELETE'])
-def delete_comment():
+@comment_routes.route('/<int:id>', methods=['DELETE'])
+def delete_comment(id):
 
-  comment_id=request.json['commentId']
+  # comment_id=request.json['commentId']
 
-  comment = Comment.query.get(comment_id)
+  comment = Comment.query.get(id)
 
   db.session.delete(comment)
   db.session.commit()

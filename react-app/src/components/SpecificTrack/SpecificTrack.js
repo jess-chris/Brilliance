@@ -157,6 +157,7 @@ const SpecificTrack = () => {
 
           {commentsObj?.map(comment => (
             <div>
+              <button onClick={() => dispatch(trackActions.deleteCommentThunk(comment.id))}>Delete Comment</button>
               <p>{comment.content}</p>
               <p>{comment.vote_score}</p>
               <Votes comment_id={comment.id}/>

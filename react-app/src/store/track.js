@@ -151,6 +151,7 @@ export const addNewCommentThunk = (comment) => async (dispatch) => {
 
     if (res.ok) {
         const newComment = await res.json();
+        dispatch(deleteTrack(newComment));
         return newComment;
     }
 
@@ -172,18 +173,18 @@ export const editCommentThunk = (comment) => async (dispatch) => {
 
 };
 
-export const deleteCommentThunk = (comment) => async (dispatch) => {
+export const deleteCommentThunk = (id) => async (dispatch) => {
 
 
-    const res = await fetch('/api/comments/delete', {
+    const res = await fetch(`/api/comments/${id}`, {
         method: 'DELETE',
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(comment)
+        body: JSON.stringify({id})
     });
 
     if (res.ok) {
-        const newComment = await res.json();
-        return newComment;
+        const deletedComment = await res.json();
+        return deletedComment;
     }
 
 };
@@ -204,7 +205,7 @@ export const createVoteThunk = (vote) => async dispatch => {
 
 export const getVoteThunk = () => async dispatch => {
     const res = await fetch('/api/votes')
-    
+
     if (res.ok) {
         const data = await res.json()
         console.log(data)
