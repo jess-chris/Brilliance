@@ -35,8 +35,21 @@ const SpecificTrack = () => {
 
     
     const handleMouseUp = () => {
-      dispatch(modalActions.setCurrentModal(AnnoForm))
-      dispatch(modalActions.showModal())
+      const annoCont = document.querySelector('.lyrics')
+      const sel = document.getSelection()
+      const range = sel.getRangeAt(0)
+
+      let clone = range.cloneRange()
+      clone.selectNodeContents(annoCont)
+      clone.setEnd(range.startContainer, range.startOffset);
+      const initialIndex = clone.toString().length;
+      clone.setEnd(range.endContainer, range.endOffset);
+      const finalIndex = clone.toString().length;
+
+      if(initialIndex != finalIndex) {
+        dispatch(modalActions.setCurrentModal(AnnoForm))
+        dispatch(modalActions.showModal())
+      }
     }
 
     const openForm = () => {
