@@ -11,11 +11,10 @@ import SpecificTrack from './components/SpecificTrack/SpecificTrack'
 import TrackUploadForm from './components/TrackUpload/TrackUpload';
 import HomePage from './components/HomePage/HomePage';
 import User from './components/User';
-import Comment from './components/Comments';
 import { authenticate } from './store/session';
 import AnnoModal from './components/AnnoModal/AnnoModal'
 import EditTrackModal from './components/EditTrackModal/EditTrackModal'
-import AnnoForm from './components/AnnoForm/AnnoForm';
+
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -39,24 +38,21 @@ function App() {
       <AnnoModal />
       <EditTrackModal />
       <Switch>
-        <Route path='/annotations/:id' exact={true}>
-          <AnnoForm/>
-        </Route>
         <Route path='/login' exact={true}>
           <LoginForm />
         </Route>
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
-        <Route path='/tracks' exact={true}>
+        <ProtectedRoute path='/tracks' exact={true}>
           <TracksPage/>
-        </Route>
-        <Route path='/tracks/new' exact={true}>
+        </ProtectedRoute>
+        <ProtectedRoute path='/tracks/new' exact={true}>
           <TrackUploadForm/>
-        </Route>
-        <Route path='/tracks/:trackId' exact={true}>
+        </ProtectedRoute>
+        <ProtectedRoute path='/tracks/:trackId' exact={true}>
           <SpecificTrack/>
-        </Route>
+        </ProtectedRoute>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
         </ProtectedRoute>
@@ -65,10 +61,7 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <HomePage />
-        </ProtectedRoute>
-        <Route path='/comments' exact={true} >
-          <Comment />
-        </Route>
+        </ProtectedRoute>     
       </Switch>
     </BrowserRouter>
   );

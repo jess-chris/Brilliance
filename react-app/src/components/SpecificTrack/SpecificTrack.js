@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import * as trackActions from '../../store/track';
 import * as modalActions from '../../store/modal'
 import EditTrackForm from '../EditTrack/EditTrack';
 import AnnoForm from '../AnnoForm/AnnoForm';
+import Votes from '../Votes/index'
 import '../SpecificTrack/specificTrack.css'
 import SpecificAnno from '../SpecificAnno/SpecificAnno';
 
-
 const SpecificTrack = () => {
+
     const [loaded, setLoaded] = useState(false);
     const dispatch = useDispatch();
     const history = useHistory();
@@ -19,6 +20,7 @@ const SpecificTrack = () => {
 
     const tracksObj = useSelector(state => state.track)
     const track = Object.values(tracksObj)[0]
+    const commentsObj = track?.comments
 
     useEffect(() => {
       (async() => {
@@ -45,8 +47,6 @@ const SpecificTrack = () => {
       dispatch(trackActions.deleteTrackThunk(trackId));
       history.push('/tracks')
   }
-
-
 
     const setAnnotations = (track) => {
 
@@ -89,6 +89,7 @@ const SpecificTrack = () => {
             handleMouseUp()
           });
 
+
         } else {
 
           annotations[ind].addEventListener("click", function() {
@@ -105,13 +106,11 @@ const SpecificTrack = () => {
     };
 
 
-
     return(
         <>
-        <div>
           <div className="header">
               <div className='image-box'>
-              <img alt='' src={track?.album_image}></img>
+                <img alt='' src={track?.album_image}></img>
               </div>
               <h1>
                 {track?.title}
@@ -120,6 +119,14 @@ const SpecificTrack = () => {
                 {track?.artist}
               </p>
           </div>
+          <h1>
+            {track?.title}
+          </h1>
+          <p>
+            {track?.artist}
+          </p>
+
+
 
           <div className="songPage">
             <p className='lyricTitle'>{track?.title} lyrics</p>
@@ -136,19 +143,25 @@ const SpecificTrack = () => {
             </div>
           </div>
 
-          
-
           <button type='submit' onClick={(openForm)}>Edit</button>
           <button type='submit' onClick={handleDelete}>Delete</button>
 
-          <div className='comments'>
+
+        <div className='comments'>
           <h1>Comments</h1>
 
-          </div>
-          {loaded && setAnnotations(track)}
-        </div>
-        </>
+          {commentsObj?.map(comment => (
+            <div>
+              <p>{comment.content}</p>
+              <p>{comment.vote_score}</p>
+              <Votes comment_id={comment.id}/>
+            </div>
+          ))}
 
+          {loaded  && setAnnotations(track)}
+
+        </div>
+    </>
     )
 }
 
