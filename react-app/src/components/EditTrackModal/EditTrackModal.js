@@ -17,7 +17,7 @@ export const EditTrackModal = () => {
 
   const closeModal = () => {
     dispatch(hideModal());
-    dispatch(trackActions.getAllTracksThunk());
+    //dispatch(trackActions.getAllTracksThunk());
   }
 
 

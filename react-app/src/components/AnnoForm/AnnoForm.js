@@ -38,7 +38,7 @@ const AnnoForm = () => {
         }
 
         await dispatch(trackActions.createAnnoThunk(data))
-
+        await dispatch(trackActions.getTrackThunk(track.id));
     }
 
     const editAnno = async (e) => {
@@ -53,11 +53,13 @@ const AnnoForm = () => {
 
 
         await dispatch(trackActions.editAnnoThunk(updatedAnno))
+        await dispatch(trackActions.getTrackThunk(track.id));
     }
 
     const deleteAnno = async (e) => {
         e.preventDefault();
         await dispatch(trackActions.deleteAnnoThunk(track.annotations.id))
+        await dispatch(trackActions.getTrackThunk(track.id));
     }
 
     return (
