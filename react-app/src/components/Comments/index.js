@@ -9,7 +9,10 @@ const Comment = () => {
   const dispatch = useDispatch();
   const userId = useSelector(state => state.session.user.id)
   const tracksObj = useSelector(state => state.track)
+
   const [commentContent, setCommentContent] = useState('');
+  const [errors, setErrors] = useState([])
+
   const history = useHistory();
   const track_id = useParams()
   // console.log('trackObj', tracksObj)
@@ -27,14 +30,29 @@ const Comment = () => {
       content: commentContent
     }
 
-    dispatch(trackActions.addNewCommentThunk(newComment))
-    history.push(`/tracks/`);
+    if(commentContent) {
+      setErrors([]);
+      history.push(`/tracks/${+track}`);
+      return dispatch(trackActions.addNewCommentThunk(newComment))
+        .catch(async (res) => {
+          const data = await res.json();
+          if (data && data.errors) setErrors(data.errors)
+        })
+    }
+    return setErrors(["Content cannot be empty"])
+
 
   };
 
   return (
     <>
       <form onSubmit={handlePost}>
+      <div>
+            <ul className="errors">
+                  {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+            </ul>
+      </div>
+
         <label>Comment:</label>
         <input
         type='textarea'
