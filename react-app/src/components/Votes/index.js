@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import * as trackActions from '../../store/track';
@@ -13,24 +13,20 @@ const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
     const annotationId = anno
     const dispatch = useDispatch();
     const userId = useSelector(state => state.session.user.id)
-    const voteState = useSelector(state => state.track.votes)
 
-    const [voted, setVoted] = useState(false)
 
     const { trackId } = useParams()
-    const tracksObj = useSelector(state => state.track)
    
     useEffect(() => {
         dispatch(trackActions.getTrackThunk(trackId))
         dispatch(trackActions.getVoteThunk());
-    }, [dispatch, voteState]);
+    }, [dispatch, trackId]);
 
     const handleUpVote = async (e) => {
         e.preventDefault()
         //if not a comment AND not a comment on an anno, it is annotation
         if (typeof commentId === 'undefined' && typeof annoCommentId === 'undefined') {
             const commentId = null
-            //console.log('IS ANNOTATION')
             const annotationId = anno
             
             const newVote = {
@@ -39,7 +35,6 @@ const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
                 commentId,
                 vote: true,
             }
-            //console.log(newVote)
             
             await dispatch(trackActions.createVoteThunk(newVote))
             await dispatch(trackActions.getVoteThunk())

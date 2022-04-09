@@ -29,7 +29,7 @@ const SpecificTrack = () => {
         await dispatch(trackActions.getTrackThunk(trackId));
         setLoaded(true);
       })();
-    }, [dispatch]);
+    }, [dispatch, trackId]);
 
 
 
@@ -46,7 +46,7 @@ const SpecificTrack = () => {
       clone.setEnd(range.endContainer, range.endOffset);
       const finalIndex = clone.toString().length;
 
-      if(initialIndex != finalIndex) {
+      if(initialIndex !== finalIndex) {
         dispatch(modalActions.setCurrentModal(AnnoForm))
         dispatch(modalActions.showModal())
       }
@@ -167,7 +167,7 @@ const SpecificTrack = () => {
                 {track?.lyrics}
               </div>
               <div className='annotationsRight'>
-                {viewAnnotation != 0 && (
+                {viewAnnotation !== 0 && (
                 <SpecificAnno viewAnnotation={viewAnnotation}/>
                 )}
               </div>
