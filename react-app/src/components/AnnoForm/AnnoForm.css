@@ -1,0 +1,20 @@
+#annoForm {
+  display: flex;
+}
+
+#annoForm textarea {
+  
+  padding: 10px;
+  align-self: center;
+  align-items: center;
+  justify-items: center;
+  right: 0;
+}
+
+#anno-btn-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}

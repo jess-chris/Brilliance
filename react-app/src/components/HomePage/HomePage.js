@@ -56,13 +56,14 @@ const HomePage = () => {
 
         <div id='track-cont'>
         {tracks?.map(({id, lyrics, title, artist, userId, album_image}) => {
+          if(!album_image) album_image = 'https://www.mcicon.com/wp-content/uploads/2021/01/Music_Music_note_1-copy-5.jpg'
           return(
             <NavLink key={id} to={{pathname: `/tracks/${id}`, state: {id, lyrics, title, artist, userId, album_image}}}>
               <div className='single-track-list'>
-                <div className='track-id'>{id}</div>
+                <div className='track-id'><img alt='' src={album_image} /></div>
                 <div className='track-title'>{title}</div>
                 <div className='track-artist'>{artist}</div>
-                <div className='track-likes'>Likes?</div>
+                <div className='track-likes'>🔥</div>
               </div>
             </NavLink>
           )

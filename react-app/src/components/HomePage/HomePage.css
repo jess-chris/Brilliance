@@ -1,3 +1,9 @@
+textarea {
+  resize: none;
+}
+
+
+
 .main-page {
   display: block;
   margin: 0 60px;
@@ -10,9 +16,7 @@
   padding: 4.5rem 60px;
   display: block;
   box-sizing: border-box;
-  border: 1px solid black;
   margin-top: 5px;
-  margin-bottom: 5px;
 
   grid-column: grid-start / grid-end;
 
@@ -54,6 +58,11 @@
   align-self: flex-start;
   margin-top: 20px;
   text-align: center;
+}
+
+.track-id img {
+  height: 60px;
+  width: 60px;
 }
 
 .track-title {

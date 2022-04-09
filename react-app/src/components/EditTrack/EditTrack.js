@@ -2,23 +2,24 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import * as trackActions from '../../store/track';
+import * as modalActions from '../../store/modal';
 
 
 const EditTrackForm = () => {
-
-    const [artist, setArtist] = useState('')
-    const [trackImg, setTrackImg] = useState('')
-    const [title, setTitle] = useState('')
-    const [lyrics, setLyrics] = useState('')
-    const [errors, setErrors] = useState([]);
-
-
     const dispatch = useDispatch()
-    const history = useHistory()
-
     const tracksObj = useSelector(state => state.track)
     const track = Object.values(tracksObj)[0]
     const trackId = track.id
+
+    const [artist, setArtist] = useState(track.artist)
+    const [trackImg, setTrackImg] = useState(track.album_image)
+    const [title, setTitle] = useState(track.title)
+    const [lyrics, setLyrics] = useState(track.lyrics)
+    const [errors, setErrors] = useState([]);
+
+
+    const history = useHistory()
+
 
     const trackUpdate = e => {
         e.preventDefault()
@@ -26,12 +27,13 @@ const EditTrackForm = () => {
 
         if(artist && title && lyrics) {
             setErrors([]);
+            history.push('/tracks')
+            dispatch(modalActions.hideModal())
             dispatch(trackActions.updateTrackThunk(newTrack))
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors)
             })
-            history.push('/tracks')
         }
         return setErrors(["Artist, Title, or Lyrics cannot be empty"])
 
@@ -67,12 +69,13 @@ const EditTrackForm = () => {
             </div>
             <div>
                 <label>Lyrics</label>
-                <input
-                type='text'
+                <textarea
                 name='TrackLyrics'
+                rows='15'
+                cols='75'
                 value={lyrics}
                 onChange={(e) => setLyrics(e.target.value)}
-                ></input>
+                ></textarea>
             </div>
             <div>
                 <label>Track Album Image</label>

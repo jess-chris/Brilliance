@@ -6,6 +6,7 @@ import * as modalActions from '../../store/modal'
 import EditTrackForm from '../EditTrack/EditTrack';
 import AnnoForm from '../AnnoForm/AnnoForm';
 import Votes from '../Votes/index'
+import Comments from '../Comments/index'
 import '../SpecificTrack/specificTrack.css'
 import SpecificAnno from '../SpecificAnno/SpecificAnno';
 
@@ -18,6 +19,7 @@ const SpecificTrack = () => {
 
     const [viewAnnotation, setViewAnnotation] = useState(0);
 
+    const userId = useSelector(state => state.session.user.id)
     const tracksObj = useSelector(state => state.track)
     const track = Object.values(tracksObj)[0]
     const commentsObj = track?.comments
@@ -45,13 +47,26 @@ const SpecificTrack = () => {
     const handleDelete = (e) => {
       e.preventDefault()
       history.push('/tracks')
-      return dispatch(trackActions.deleteTrackThunk(trackId))
+      dispatch(trackActions.deleteTrackThunk(trackId))
       .catch(async (res) => {
         const data = await res.json();
         await dispatch(trackActions.getAllTracksThunk());
         if (data && data.errors) return(data.errors)
       })
   }
+
+    const deleteComment = async (e) => {
+      e.preventDefault()
+
+      const comment = {
+        commentId: e.target.id
+      }
+
+      await dispatch(trackActions.deleteCommentThunk(comment))
+      await dispatch(trackActions.getTrackThunk(trackId));
+      history.push(`/tracks/${trackId}`)
+
+    }
 
     const setAnnotations = (track) => {
 
@@ -126,21 +141,14 @@ const SpecificTrack = () => {
               <h1>
                 {track?.title}
               </h1>
-              <p>
+              <h3>
                 {track?.artist}
-              </p>
+              </h3>
           </div>
-          <h1>
-            {track?.title}
-          </h1>
-          <p>
-            {track?.artist}
-          </p>
-
 
 
           <div className="songPage">
-            <p className='lyricTitle'>{track?.title} Lyrics</p>
+            <h4 className='lyricTitle'>{track?.title} Lyrics:</h4>
 
             <div className='lyricAnnoCont'>
               <div className='lyrics'>
@@ -154,20 +162,32 @@ const SpecificTrack = () => {
             </div>
           </div>
 
-          <button type='submit' onClick={(openForm)}>Edit</button>
-          <button type='submit' onClick={handleDelete}>Delete</button>
-
+          {track?.user_id === userId && (
+          <>
+            <button type='submit' onClick={(openForm)}>Edit</button>
+            <button type='submit' onClick={handleDelete}>Delete</button>
+          </>
+          )}
 
         <div className='comments'>
           <h1>Comments</h1>
 
-          {commentsObj?.map(comment => (
-            <div>
-              <p>{comment.content}</p>
-              <p>{comment.vote_score}</p>
-              <Votes comment_id={comment.id}/>
-            </div>
-          ))}
+          <Comments />
+
+          <div id='users-comments'>
+            {commentsObj?.map(comment => (
+              <div id='single-comment' key={comment.id}>
+                <p>{comment.content}</p>
+                <div id='comment-footer'>
+                  Vote Score: {comment?.vote_score}
+                  <Votes comment_id={comment?.id}/>
+                </div>
+                {comment.user_id === userId && (
+                <button  onClick={deleteComment} className='comment-delete' id={comment.id}>Delete</button>
+                )}
+              </div>
+            ))}
+          </div>
 
           {loaded && setAnnotations(track)}
 

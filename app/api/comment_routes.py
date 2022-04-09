@@ -8,25 +8,15 @@ def create_comment():
   
   user_id=request.json['userId']
   content=request.json['content']
+  track_id=request.json['trackId']
   
+  comment = Comment(
+    user_id = user_id,
+    track_id = track_id,
+    content = content,
+    vote_score = 0
+  )
   
-  try:
-    track_id=request.json['trackId']
-    comment = Comment(
-      user_id = user_id,
-      track_id = track_id,
-      content = content,
-      vote_score = 0
-    )
-  except:
-    annotation_id=request.json['annotationId']
-    comment = Comment(
-      user_id = user_id,
-      annotation_id = annotation_id,
-      content = content,
-      vote_score = 0
-    )
-    
   db.session.add(comment)
   db.session.commit()
   

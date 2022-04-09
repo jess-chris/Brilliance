@@ -25,7 +25,7 @@ img{
 }
 
 h1{
-    text-align: left;
+    text-align: center;
 }
 
 .lyricAnnoCont {
@@ -58,4 +58,34 @@ h1{
 
 #deleteBtn {
     width: 300px;
+}
+
+#users-comments {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#single-comment {
+    width: 400px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#comment-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+
+    width: 400px;
+    border: 1px solid black;
+}
+
+.comment-delete {
+    width: 400px;
+
 }

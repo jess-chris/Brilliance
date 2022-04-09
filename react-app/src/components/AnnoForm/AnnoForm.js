@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as trackActions from '../../store/track'
+import * as modalActions from '../../store/modal';
+
+import './AnnoForm.css'
 
 const AnnoForm = () => {
 
@@ -39,6 +42,7 @@ const AnnoForm = () => {
 
         await dispatch(trackActions.createAnnoThunk(data))
         await dispatch(trackActions.getTrackThunk(track.id));
+        await dispatch(modalActions.hideModal())
     }
 
     const editAnno = async (e) => {
@@ -54,27 +58,34 @@ const AnnoForm = () => {
 
         await dispatch(trackActions.editAnnoThunk(updatedAnno))
         await dispatch(trackActions.getTrackThunk(track.id));
+        await dispatch(modalActions.hideModal())
     }
 
     const deleteAnno = async (e) => {
         e.preventDefault();
         await dispatch(trackActions.deleteAnnoThunk(track.annotations.id))
         await dispatch(trackActions.getTrackThunk(track.id));
+        await dispatch(modalActions.hideModal())
     }
 
     return (
-        <div>
+        <div id='annoForm'>
             <form onSubmit={submitAnno}>
                 <textarea
+                rows='15'
+                cols='75'
                 onChange={(e) => setContent(e.target.value)}
                 value={content}
                 placeholder='Content'
                 name='content'
+                required
                 >
                 </textarea >
-                <button type='submit'>Submit</button>
-                <button onClick={editAnno} type='submit'>Edit</button>
-                <button onClick={deleteAnno}>Delete</button>
+                <div id='anno-btn-bar'>
+                    <button type='submit'>Submit</button>
+                    <button onClick={editAnno} type='submit'>Edit</button>
+                    <button onClick={deleteAnno}>Delete</button>
+                </div>
             </form>
         </div>
     )
