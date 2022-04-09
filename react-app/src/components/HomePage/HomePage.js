@@ -42,7 +42,7 @@ const HomePage = () => {
 
       <div id='topTracks'>
         <h1 className='main-headers'>Charts</h1>
-        <p className='main-headers'>Trending on </p>
+        <p className='main-headers'>Trending on Brilliance</p>
 
         <div id='typeOfTracks'>
 

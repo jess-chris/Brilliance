@@ -131,12 +131,11 @@ const SpecificTrack = () => {
       }
     };
 
-
     return(
         <>
           <div className="header">
               <div className='image-box'>
-                <img alt='' src={track?.album_image}></img>
+                <img alt='' src={track?.album_image || 'https://www.mcicon.com/wp-content/uploads/2021/01/Music_Music_note_1-copy-5.jpg'}></img>
               </div>
               <h1>
                 {track?.title}

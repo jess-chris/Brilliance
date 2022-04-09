@@ -58,6 +58,7 @@ const TrackUploadForm = () => {
                     name='TrackTitle'
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
+                    required
                     ></input>
                 </div>
                 <div>
@@ -68,6 +69,7 @@ const TrackUploadForm = () => {
                     name='TrackArtist'
                     value={artist}
                     onChange={(e) => setArtist(e.target.value)}
+                    required
                     ></input>
                 </div>
                 <div>
@@ -78,16 +80,18 @@ const TrackUploadForm = () => {
                     name='TrackLyrics'
                     value={lyrics}
                     onChange={(e) => setLyrics(e.target.value)}
+                    required
                     ></textarea>
                 </div>
                 <div>
-                    <label>Track Album Image</label>
+                    <label>Track Album Image Url</label>
                     <br></br>
                     <input
                     type='text'
                     name='TrackImage'
                     value={trackImg}
                     onChange={(e) => setTrackImg(e.target.value)}
+                    placeholder='Optional'
                     ></input>
                 </div>
                 <button type='Submit'>Submit</button>
