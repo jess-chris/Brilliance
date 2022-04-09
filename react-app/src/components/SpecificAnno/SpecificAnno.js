@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import * as trackActions from '../../store/track';
-
+import Votes from '../Votes/index'
 
 const SpecificAnno = ({viewAnnotation}) => {
 
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     const tracksObj = useSelector(state => state.track)
     const track = Object.values(tracksObj)[0]
@@ -13,18 +15,21 @@ const SpecificAnno = ({viewAnnotation}) => {
     const currentAnnotation = track?.annotations.find(anno => anno.id == viewAnnotation)
 
 
-    // useEffect(() => {
-    //     dispatch(trackActions.getAnnoThunk())
-    // }, [dispatch])
+    const deleteAnno = async (e) => {
+        e.preventDefault();
+        await dispatch(trackActions.deleteAnnoThunk(currentAnnotation.id))
+        await dispatch(trackActions.getTrackThunk(track.id));
+        history.push(`/tracks/${track.id}`)
+    }
 
     return(
         <div className='annotationsRight'>
             <div id='annoCont'>{currentAnnotation?.content}</div>
             <div id='annoFooter'>
-                <button>Upvote</button>
                 Vote Score: {currentAnnotation?.vote_score}
-                <button>Downvote</button>
+                <Votes anno={currentAnnotation?.id}/>
             </div>
+            <button id='deleteBtn' onClick={deleteAnno}>Delete</button>
         </div>
     )
 }

@@ -44,8 +44,13 @@ const SpecificTrack = () => {
 
     const handleDelete = (e) => {
       e.preventDefault()
-      dispatch(trackActions.deleteTrackThunk(trackId));
       history.push('/tracks')
+      return dispatch(trackActions.deleteTrackThunk(trackId))
+      .catch(async (res) => {
+        const data = await res.json();
+        await dispatch(trackActions.getAllTracksThunk());
+        if (data && data.errors) return(data.errors)
+      })
   }
 
     const setAnnotations = (track) => {
@@ -135,7 +140,7 @@ const SpecificTrack = () => {
 
 
           <div className="songPage">
-            <p className='lyricTitle'>{track?.title} lyrics</p>
+            <p className='lyricTitle'>{track?.title} Lyrics</p>
 
             <div className='lyricAnnoCont'>
               <div className='lyrics'>

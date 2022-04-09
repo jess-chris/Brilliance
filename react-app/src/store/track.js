@@ -130,8 +130,10 @@ export const editAnnoThunk = (anno_data) => async dispatch => {
 
 export const deleteAnnoThunk = id => async dispatch => {
 
-    const res = await fetch(`/api/annotations/${id}`, {
+    const res = await fetch(`/api/annotations/new`, {
         method: 'DELETE',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(id)
     });
     if (res.ok) {
         const deletedAnno = await res.json()

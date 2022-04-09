@@ -64,10 +64,8 @@ def post_annotations():
         return found.anno_to_dict()
     
     elif request.method == 'DELETE':
-        data = request.get_json()
-        something = 'ok'
+        id = request.get_json(['id'])
         to_delete = Annotation.query.get(id) 
-        #print('in delete req method', to_delete)
         db.session.delete(to_delete)
         db.session.commit()
         return to_delete.anno_to_dict()

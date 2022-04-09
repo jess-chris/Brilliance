@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import * as trackActions from '../../store/track';
@@ -8,14 +8,18 @@ import './TracksPage.css'
 
 const TracksPage = () => {
     const dispatch = useDispatch();
-
+    const [loaded, setLoaded] = useState(false);
+    
+    
     useEffect(() => {
-        dispatch(trackActions.getAllTracksThunk());
-    }, [dispatch])
-
+        (async() => {
+            await dispatch(trackActions.getAllTracksThunk());
+            setLoaded(true);
+        })();
+    }, [dispatch]);
+    
     const tracksObj = useSelector(state => state.track)
-    const tracks = Object.values(tracksObj);
-    console.log(tracks)
+    const tracks = Object.values(tracksObj)
 
     const albumImg = tracks.map(track => {
         if (track.album_image === ''){
