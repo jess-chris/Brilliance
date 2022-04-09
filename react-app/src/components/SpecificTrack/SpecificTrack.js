@@ -55,28 +55,34 @@ const SpecificTrack = () => {
 
       const annoArr = track.annotations;
 
-      let prevIndex = 0;
+      if(annoArr.length > 0) {
 
-      for(let curIndex = 0; curIndex < annoArr.length; curIndex++){
+        let prevIndex = 0;
 
-        const curAnno = annoArr[curIndex];
+        for(let curIndex = 0; curIndex < annoArr.length; curIndex++){
 
-        let nonAnno = node.slice(prevIndex, curAnno.initialAnnoIndex);
+          const curAnno = annoArr[curIndex];
 
-        let annoLyric = node.slice(curAnno.initialAnnoIndex, curAnno.finalAnnoIndex);
+          let nonAnno = node.slice(prevIndex, curAnno.initialAnnoIndex);
+
+          let annoLyric = node.slice(curAnno.initialAnnoIndex, curAnno.finalAnnoIndex);
 
 
-        lyricsWithAnnos.push(`<span class='nonAnno'>${nonAnno}</span>`);
-        lyricsWithAnnos.push(`<span id='${curAnno.id}' key='${curAnno.id}' class='annotated'>${annoLyric}</span>`);
-        prevIndex = curAnno.finalAnnoIndex;
-
-        if(curIndex === annoArr.length - 1) {
-          nonAnno = node.slice(prevIndex, node.length)
           lyricsWithAnnos.push(`<span class='nonAnno'>${nonAnno}</span>`);
+          lyricsWithAnnos.push(`<span id='${curAnno.id}' key='${curAnno.id}' class='annotated'>${annoLyric}</span>`);
+          prevIndex = curAnno.finalAnnoIndex;
+
+          if(curIndex === annoArr.length - 1) {
+            nonAnno = node.slice(prevIndex, node.length)
+            lyricsWithAnnos.push(`<span class='nonAnno'>${nonAnno}</span>`);
+          }
         }
+      } else {
+        lyricsWithAnnos.push(`<span class='nonAnno'>${node}</span>`);
       }
 
       document.querySelector('.lyrics').innerHTML = lyricsWithAnnos.join('')
+
       let newLyrics = document.querySelector('.lyrics');
       const annotations = newLyrics.querySelectorAll("span");
 
@@ -158,7 +164,7 @@ const SpecificTrack = () => {
             </div>
           ))}
 
-          {loaded  && setAnnotations(track)}
+          {loaded && setAnnotations(track)}
 
         </div>
     </>
