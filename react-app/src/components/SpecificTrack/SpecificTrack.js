@@ -7,25 +7,46 @@ import EditTrackForm from '../EditTrack/EditTrack';
 import AnnoForm from '../AnnoForm/AnnoForm';
 import Votes from '../Votes/index'
 import '../SpecificTrack/specificTrack.css'
+import SpecificAnno from '../SpecificAnno/SpecificAnno';
 
 const SpecificTrack = () => {
 
     const [loaded, setLoaded] = useState(false);
     const dispatch = useDispatch();
-    const {trackId} = useParams()
+    const history = useHistory();
+    const {trackId} = useParams();
 
+    const [viewAnnotation, setViewAnnotation] = useState(0);
+
+    const tracksObj = useSelector(state => state.track)
+    const track = Object.values(tracksObj)[0]
+    const commentsObj = track?.comments
 
     useEffect(() => {
       (async() => {
         await dispatch(trackActions.getTrackThunk(trackId));
         setLoaded(true);
       })();
-    }, [dispatch, trackId]);
+    }, [dispatch]);
 
-    const tracksObj = useSelector(state => state.track)
-    const track = Object.values(tracksObj)[0]
-    const commentsObj = track?.comments
 
+
+    
+    const handleMouseUp = () => {
+      dispatch(modalActions.setCurrentModal(AnnoForm))
+      dispatch(modalActions.showModal())
+    }
+
+    const openForm = () => {
+      dispatch(modalActions.setCurrentModal(EditTrackForm))
+      dispatch(modalActions.showModal())
+    };
+
+    const handleDelete = (e) => {
+      e.preventDefault()
+      dispatch(trackActions.deleteTrackThunk(trackId));
+      history.push('/tracks')
+  }
 
     const setAnnotations = (track) => {
 
@@ -46,7 +67,7 @@ const SpecificTrack = () => {
 
 
         lyricsWithAnnos.push(`<span class='nonAnno'>${nonAnno}</span>`);
-        lyricsWithAnnos.push(`<span onclick={} key='${curAnno.id}' class='annotated'>${annoLyric}</span>`);
+        lyricsWithAnnos.push(`<span id='${curAnno.id}' key='${curAnno.id}' class='annotated'>${annoLyric}</span>`);
         prevIndex = curAnno.finalAnnoIndex;
 
         if(curIndex === annoArr.length - 1) {
@@ -56,36 +77,34 @@ const SpecificTrack = () => {
       }
 
       document.querySelector('.lyrics').innerHTML = lyricsWithAnnos.join('')
+      let newLyrics = document.querySelector('.lyrics');
+      const annotations = newLyrics.querySelectorAll("span");
+
+      for (let ind = 0; ind < annotations.length; ind++) {
+
+
+        if (annotations[ind].className.includes('nonAnno')) {
+
+          annotations[ind].addEventListener("mouseup", function() {
+            handleMouseUp()
+          });
+
+
+        } else {
+
+          annotations[ind].addEventListener("click", function() {
+
+            try {
+              document.querySelector('.currentAnno').classList.remove('currentAnno');
+            } catch {}
+
+            annotations[ind].classList.add('currentAnno');
+            setViewAnnotation(annotations[ind].getAttribute("id"));
+          })
+        }
+      }
     };
 
-
-
-    const [editTrackForm, showEditTrackForm] = useState(false)
-
-    const history = useHistory()
-
-    const openForm = () => {
-        dispatch(modalActions.setCurrentModal(EditTrackForm))
-        dispatch(modalActions.showModal())
-      };
-
-
-  const handleDelete = (e) => {
-    e.preventDefault()
-
-    dispatch(trackActions.deleteTrackThunk(trackId));
-    history.push('/tracks')
-  }
-
-
-    const handleMouseUp = () => {
-        dispatch(modalActions.setCurrentModal(AnnoForm))
-        dispatch(modalActions.showModal())
-        dispatch(trackActions.getTrackThunk(trackId))
-        console.log(trackId)
-        history.push(`/tracks/${trackId}`)
-      }
-    
 
     return(
         <>
@@ -111,17 +130,20 @@ const SpecificTrack = () => {
 
           <div className="songPage">
             <p className='lyricTitle'>{track?.title} lyrics</p>
-            <div className='lyrics' onMouseUp={handleMouseUp}>
-              {track?.lyrics}
+
+            <div className='lyricAnnoCont'>
+              <div className='lyrics'>
+                {track?.lyrics}
+              </div>
+              <div className='annotationsRight'>
+                {viewAnnotation != 0 && (
+                <SpecificAnno viewAnnotation={viewAnnotation}/>
+                )}
+              </div>
             </div>
-
-
           </div>
 
-
-
           <button type='submit' onClick={(openForm)}>Edit</button>
-          {/* {editTrackForm && (<EditTrackForm/>)} */}
           <button type='submit' onClick={handleDelete}>Delete</button>
 
 
@@ -136,7 +158,7 @@ const SpecificTrack = () => {
             </div>
           ))}
 
-          {loaded && track.annotations.length > 0 && setAnnotations(track)}
+          {loaded  && setAnnotations(track)}
 
         </div>
     </>

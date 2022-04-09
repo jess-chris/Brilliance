@@ -10,7 +10,7 @@ import annoModalReducer from './modal';
 
 const rootReducer = combineReducers({
   session,
-  annotation: annoReducer,
+  // annotation: annoReducer,
   track: trackReducer,
   modal: annoModalReducer
 });

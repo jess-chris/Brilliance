@@ -6,9 +6,11 @@ import { hideModal } from '../../store/modal';
 
 import './AnnoModal.css'
 
+
 export const AnnoModal = () => {
 
   const dispatch = useDispatch();
+
 
   const mount = useSelector(state => state.modal.modalMount);
   const display = useSelector(state => state.modal.display);
@@ -16,14 +18,16 @@ export const AnnoModal = () => {
   const trackObj = useSelector(state => state.track)
   const track = Object.values(trackObj)[0]
 
-  const closeAnnoModal = () => {
+
+
+  const closeModal = () => {
     dispatch(hideModal());
     dispatch(trackActions.getTrackThunk(track.id));
   }
 
 
   return display && mount && ReactDOM.createPortal(
-    <div className='modal-background' onClick={closeAnnoModal}>
+    <div className='modal-background' onClick={closeModal}>
       <div className='modal-content' onClick={(e) => e.stopPropagation()}>
         <Current />
       </div>
