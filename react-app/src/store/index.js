@@ -2,7 +2,6 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import session from './session'
 
-import annoReducer from './annotation';
 import trackReducer from './track'
 import annoModalReducer from './modal';
 
@@ -10,7 +9,6 @@ import annoModalReducer from './modal';
 
 const rootReducer = combineReducers({
   session,
-  // annotation: annoReducer,
   track: trackReducer,
   modal: annoModalReducer
 });

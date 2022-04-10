@@ -34,20 +34,34 @@ const SpecificTrack = () => {
   const track = Object.values(tracksObj)[0]
   const commentsObj = track?.comments
 
-  useEffect(() => {
-    (async () => {
-      await dispatch(trackActions.getTrackThunk(trackId));
-      setLoaded(true);
-    })();
-  }, [dispatch]);
+
+    useEffect(() => {
+      (async() => {
+        await dispatch(trackActions.getTrackThunk(trackId));
+        setLoaded(true);
+      })();
+    }, [dispatch, trackId]);
 
 
 
+    
+    const handleMouseUp = () => {
+      const annoCont = document.querySelector('.lyrics')
+      const sel = document.getSelection()
+      const range = sel.getRangeAt(0)
 
-  const handleMouseUp = () => {
-    dispatch(modalActions.setCurrentModal(AnnoForm))
-    dispatch(modalActions.showModal())
-  }
+      let clone = range.cloneRange()
+      clone.selectNodeContents(annoCont)
+      clone.setEnd(range.startContainer, range.startOffset);
+      const initialIndex = clone.toString().length;
+      clone.setEnd(range.endContainer, range.endOffset);
+      const finalIndex = clone.toString().length;
+
+      if(initialIndex !== finalIndex) {
+        dispatch(modalActions.setCurrentModal(AnnoForm))
+        dispatch(modalActions.showModal())
+      }
+    }
 
   const openForm = () => {
     dispatch(modalActions.setCurrentModal(EditTrackForm))
@@ -142,11 +156,12 @@ const SpecificTrack = () => {
   };
 
 
+
   return (
     <>
       <div className="header">
         <div className='image-box'>
-          <img alt='' src={track?.album_image}></img>
+          <img alt='' src={track?.album_image || 'https://www.mcicon.com/wp-content/uploads/2021/01/Music_Music_note_1-copy-5.jpg'}></img>
         </div>
         <div id='artist-info'>
           <h1>
@@ -156,25 +171,23 @@ const SpecificTrack = () => {
             {track?.artist}
           </h3>
         </div>
-
       </div>
-
 
       <div className="songPage">
         <h4>Highlight lyrics to leave an annotation!</h4>
         <h4 className='lyricTitle'>{track?.title} lyrics:</h4>
 
-        <div className='lyricAnnoCont'>
-          <div className='lyrics'>
-            {track?.lyrics}
+            <div className='lyricAnnoCont'>
+              <div className='lyrics'>
+                {track?.lyrics}
+              </div>
+              <div className='annotationsRight'>
+                {viewAnnotation !== 0 && (
+                <SpecificAnno viewAnnotation={viewAnnotation}/>
+                )}
+              </div>
+            </div>
           </div>
-          <div className='annotationsRight'>
-            {viewAnnotation != 0 && (
-              <SpecificAnno viewAnnotation={viewAnnotation} />
-            )}
-          </div>
-        </div>
-      </div>
 
       {track?.user_id === userId && (
         <div id='edit-delete-buttons'>

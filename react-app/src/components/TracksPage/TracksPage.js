@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import * as trackActions from '../../store/track';
@@ -8,20 +8,18 @@ import './TracksPage.css'
 
 const TracksPage = () => {
     const dispatch = useDispatch();
-    const [loaded, setLoaded] = useState(false);
     
     
     useEffect(() => {
         (async() => {
             await dispatch(trackActions.getAllTracksThunk());
-            setLoaded(true);
         })();
     }, [dispatch]);
     
     const tracksObj = useSelector(state => state.track)
     const tracks = Object.values(tracksObj)
 
-    const albumImg = tracks.map(track => {
+    tracks.forEach(track => {
         if (track.album_image === ''){
             track.album_image = 'https://www.mcicon.com/wp-content/uploads/2021/01/Music_Music_note_1-copy-5.jpg'
         }

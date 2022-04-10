@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, NavLink, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
@@ -63,9 +63,16 @@ function App() {
         <ProtectedRoute path='/' exact={true} >
           <HomePage />
         </ProtectedRoute>
+
         <ProtectedRoute path='/about' exact={true} >
           <AboutLinks />
-          </ProtectedRoute>     
+        </ProtectedRoute>     
+        <Route path=''>
+          <div className='not-found'>
+            <h1>404 - Page not found!</h1>
+            <NavLink to='/'><h3>Take me home!</h3></NavLink>
+          </div>
+        </Route>     
       </Switch>
     </BrowserRouter>
   );

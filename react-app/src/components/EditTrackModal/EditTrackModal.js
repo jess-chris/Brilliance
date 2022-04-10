@@ -1,8 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ReactDOM from 'react-dom';
-import { useParams } from 'react-router-dom';
-import * as trackActions from '../../store/track'
 import { hideModal } from '../../store/modal';
 
 import './EditTrackModal.css'
@@ -17,7 +15,7 @@ export const EditTrackModal = () => {
 
   const closeModal = () => {
     dispatch(hideModal());
-    //dispatch(trackActions.getAllTracksThunk());
+    // dispatch(trackActions.getAllTracksThunk());
   }
 
 
