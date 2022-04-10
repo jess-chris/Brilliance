@@ -92,46 +92,6 @@ def seed_comments():
         created_at = today.strftime("%B %d, %Y"),
         updated_at = today.strftime("%B %d, %Y")
     )
-    test_comment12 = Comment(
-        user_id = 4,
-        annotation_id = 7,
-        content = 'i find this very very NOT offensive',
-        vote_score = 0,
-        created_at = today.strftime("%B %d, %Y"),
-        updated_at = today.strftime("%B %d, %Y")
-    )
-    test_comment13 = Comment(
-        user_id = 3,
-        annotation_id = 7,
-        content = 'this is whack',
-        vote_score = 0,
-        created_at = today.strftime("%B %d, %Y"),
-        updated_at = today.strftime("%B %d, %Y")
-    )
-    test_comment14 = Comment(
-        user_id = 3,
-        annotation_id = 1,
-        content = 'fire',
-        vote_score = 0,
-        created_at = today.strftime("%B %d, %Y"),
-        updated_at = today.strftime("%B %d, %Y")
-    )
-    test_comment15 = Comment(
-        user_id = 3,
-        annotation_id = 2,
-        content = 'lmao',
-        vote_score = 0,
-        created_at = today.strftime("%B %d, %Y"),
-        updated_at = today.strftime("%B %d, %Y")
-    )
-    test_comment16 = Comment(
-        user_id = 3,
-        annotation_id = 3,
-        content = 'nick is so cool and smart',
-        vote_score = 0,
-        created_at = today.strftime("%B %d, %Y"),
-        updated_at = today.strftime("%B %d, %Y")
-    )
 
     db.session.add(test_comment1)
     db.session.add(test_comment2)
@@ -144,11 +104,7 @@ def seed_comments():
     db.session.add(test_comment9)
     db.session.add(test_comment10)
     db.session.add(test_comment11)
-    db.session.add(test_comment12)
-    db.session.add(test_comment13)
-    db.session.add(test_comment14)
-    db.session.add(test_comment15)
-    db.session.add(test_comment16)
+    
 
     db.session.commit()
 

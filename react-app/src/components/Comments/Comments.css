@@ -11,3 +11,8 @@
   margin-left: 100px;
   width: 200px;
 }
+
+#comment-footer {
+  display:flex;
+  justify-content: normal;
+}

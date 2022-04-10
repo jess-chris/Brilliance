@@ -135,9 +135,14 @@ const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
     }
 
     return (
-        <>  
+        <>
+        
+        <div id='thumbs-up'>  
             <button style={voteButtonStyle} onClick={handleUpVote}><i class="fa-regular fa-thumbs-up"></i></button>
+            </div>
+            <div>
             <button style={voteButtonStyle} onClick={handleDownVote}><i class="fa-regular fa-thumbs-down"></i></button>
+        </div>
         </>
     )
 }

@@ -174,7 +174,7 @@ const SpecificTrack = () => {
       </div>
 
       <div className="songPage">
-        <h4>Highlight lyrics to leave an annotation!</h4>
+        <h4>Highlight lyrics and click them to leave an annotation!</h4>
         <h4 className='lyricTitle'>{track?.title} lyrics:</h4>
 
             <div className='lyricAnnoCont'>
