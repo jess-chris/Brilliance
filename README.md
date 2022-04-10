@@ -59,6 +59,12 @@ For full details on our features see our GitHub Wiki: [Feature List](https://git
 
 TO DO
 
+### Future Features
+* Search - search for specific songs/lyrics/artist
+* Music player - hear the song while reading the lyrics
+* User Profiles
+
+
 
 ## Installation Instructions
 ### Dev Containers (M1 Users, follow this guide)
