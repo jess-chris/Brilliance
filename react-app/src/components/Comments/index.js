@@ -56,7 +56,7 @@ const Comment = () => {
         required
         ></textarea>
 
-        <button style={buttonStyle} type='Submit'><i class="fa-regular fa-circle-check"></i> Submit</button>
+        <button style={buttonStyle} type='Submit'><i className="fa-regular fa-circle-check"></i> Submit</button>
       </form>
     
     </div>

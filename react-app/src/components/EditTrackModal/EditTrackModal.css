@@ -1,4 +1,4 @@
-.modal-background {
+.modal-background-track {
     position: fixed;
     top: 0;
     left: 0;
@@ -11,9 +11,9 @@
     align-items: center;
   }
   
-  .modal-content {
-    height: 40vh;
-    width: 40vw;
+  .modal-content-track {
+    height: 60vh;
+    width: 60vw;
     background-color: white;
     display: flex;
     justify-content: center;

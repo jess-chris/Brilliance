@@ -145,9 +145,10 @@ const SpecificTrack = () => {
         annotations[ind].addEventListener("click", function () {
 
           try {
-            document.querySelector('.currentAnno').classList.remove('currentAnno');
+            document.querySelector(`#${viewAnnotation}`).classList.remove('currentAnno');
           } catch { }
-
+          
+          document.getElementById('annotation-cont').style.visibility = "visible"
           annotations[ind].classList.add('currentAnno');
           setViewAnnotation(annotations[ind].getAttribute("id"));
         })
@@ -181,7 +182,7 @@ const SpecificTrack = () => {
               <div className='lyrics'>
                 {track?.lyrics}
               </div>
-              <div className='annotationsRight'>
+              <div className='annotationsRight' id='annotation-cont'>
                 {viewAnnotation !== 0 && (
                 <SpecificAnno viewAnnotation={viewAnnotation}/>
                 )}
@@ -191,8 +192,8 @@ const SpecificTrack = () => {
 
       {track?.user_id === userId && (
         <div id='edit-delete-buttons'>
-          <button style={buttonStyle} type='submit' onClick={(openForm)}><i class="fa-regular fa-pen-to-square"></i> Edit</button>
-          <button style={buttonStyle} type='submit' onClick={handleDelete}><i class="fa-regular fa-trash-can"></i> Delete</button>
+          <button style={buttonStyle} type='submit' onClick={(openForm)}><i className="fa-regular fa-pen-to-square"></i> Edit</button>
+          <button style={buttonStyle} type='submit' onClick={handleDelete}><i className="fa-regular fa-trash-can"></i> Delete</button>
         </div>
       )}
 
@@ -210,7 +211,7 @@ const SpecificTrack = () => {
                 <Votes comment_id={comment?.id} />
               </div>
               {comment.user_id === userId && (
-                <button onClick={deleteComment} className='comment-delete' id={comment.id}><i class="fa-regular fa-trash-can"></i> Delete</button>
+                <button onClick={deleteComment} className='comment-delete' id={comment.id}><i className="fa-regular fa-trash-can"></i> Delete</button>
               )}
             </div>
           ))}

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as trackActions from '../../store/track'
 import * as modalActions from '../../store/modal';
 
-import './AnnoForm.css'
+import '../AnnoForm/AnnoForm.css'
 
 const buttonStyle = {
     border: '1px solid rgb(0, 0, 0)',
@@ -16,49 +16,42 @@ const buttonStyle = {
     color: 'inherit',
   }
 
-const AnnoForm = () => {
-
-    const annoCont = document.querySelector('.lyrics')
-    const sel = document.getSelection()
-    const range = sel.getRangeAt(0)
-
-    let clone = range.cloneRange()
-    clone.selectNodeContents(annoCont)
-    clone.setEnd(range.startContainer, range.startOffset);
-    const initialIndex = clone.toString().length;
-    clone.setEnd(range.endContainer, range.endOffset);
-    const finalIndex = clone.toString().length;
+const EditAnnoForm = () => {
 
 
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const tracksObj = useSelector(state => state.track)
     const track = Object.values(tracksObj)[0]
-    const [initialAnnoIndex] = useState(initialIndex)
-    const [finalAnnoIndex] = useState(finalIndex)
     const [content, setContent] = useState('')
-    
+    const id = document.querySelector('.annoCont').getAttribute('id')
 
-    const submitAnno = async (e) => {
+    const editAnno = async (e) => {
         e.preventDefault();
-        //const user_id = sessionUser?.id
-        const id = track.id
-        const data = {
+
+        const updatedAnno = {
+            annotation_id: id,
             content,
             user_id: sessionUser?.id,
-            track_id: +id,
-            initialAnnoIndex,
-            finalAnnoIndex
         }
 
-        await dispatch(trackActions.createAnnoThunk(data))
+
+        await dispatch(trackActions.editAnnoThunk(updatedAnno))
         await dispatch(trackActions.getTrackThunk(track.id));
         await dispatch(modalActions.hideModal())
     }
 
+    // const deleteAnno = async (e) => {
+    //     e.preventDefault();
+    //     await dispatch(trackActions.deleteAnnoThunk(track.annotations.id))
+    //     await dispatch(trackActions.getTrackThunk(track.id));
+    //     await dispatch(modalActions.hideModal())
+    // }
+
+
     return (
         <div id='annoForm'>
-            <form onSubmit={submitAnno}>
+            <form onSubmit={editAnno}>
                 <textarea
                 rows='15'
                 cols='75'
@@ -70,10 +63,10 @@ const AnnoForm = () => {
                 >
                 </textarea >
                 <div id='anno-btn-bar'>
-                    <button style={buttonStyle} type='Submit'><i className="fa-regular fa-circle-check"></i> Submit</button>
+                  <button style={buttonStyle} type='Submit'><i className="fa-regular fa-circle-check"></i> Submit</button>
                 </div>
             </form>
         </div>
     )
 }
-export default AnnoForm
+export default EditAnnoForm

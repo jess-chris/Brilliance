@@ -27,8 +27,8 @@ export const AnnoModal = () => {
 
 
   return display && mount && ReactDOM.createPortal(
-    <div className='modal-background' onClick={closeModal}>
-      <div className='modal-content' onClick={(e) => e.stopPropagation()}>
+    <div className='modal-background-anno' onClick={closeModal}>
+      <div className='modal-content-anno' onClick={(e) => e.stopPropagation()}>
         <Current />
       </div>
     </div>
