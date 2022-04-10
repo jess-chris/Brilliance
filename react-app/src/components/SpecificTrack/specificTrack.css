@@ -123,3 +123,7 @@ h1{
     justify-content: space-evenly;
 }
 
+
+.hide-anno {
+    display: none;
+}

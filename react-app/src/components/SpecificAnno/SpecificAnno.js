@@ -2,6 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import * as trackActions from '../../store/track';
+import * as modalActions from '../../store/modal'
+import EditAnnoForm from './EditAnnoForm';
 import Votes from '../Votes/index'
 
 const SpecificAnno = ({viewAnnotation}) => {
@@ -15,10 +17,18 @@ const SpecificAnno = ({viewAnnotation}) => {
     const currentAnnotation = track?.annotations.find(anno => anno.id == viewAnnotation)
 
 
+    const editAnno = async (e) => {
+        e.preventDefault();
+
+        dispatch(modalActions.setCurrentModal(EditAnnoForm))
+        dispatch(modalActions.showModal())
+    }
+
     const deleteAnno = async (e) => {
         e.preventDefault();
         await dispatch(trackActions.deleteAnnoThunk(currentAnnotation.id))
         await dispatch(trackActions.getTrackThunk(track.id));
+        document.getElementById('annotation-cont').style.visibility = "hidden"
         history.push(`/tracks/${track.id}`)
     }
 
@@ -30,6 +40,7 @@ const SpecificAnno = ({viewAnnotation}) => {
                 <Votes anno={currentAnnotation?.id}/>
             </div>
             <button id='deleteBtn' onClick={deleteAnno}>Delete</button>
+            <button id='deleteBtn' onClick={editAnno}>Edit</button>
         </div>
     )
 }

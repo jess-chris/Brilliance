@@ -145,9 +145,10 @@ const SpecificTrack = () => {
         annotations[ind].addEventListener("click", function () {
 
           try {
-            document.querySelector('.currentAnno').classList.remove('currentAnno');
+            document.querySelector(`#${viewAnnotation}`).classList.remove('currentAnno');
           } catch { }
-
+          
+          document.getElementById('annotation-cont').style.visibility = "visible"
           annotations[ind].classList.add('currentAnno');
           setViewAnnotation(annotations[ind].getAttribute("id"));
         })
@@ -181,7 +182,7 @@ const SpecificTrack = () => {
               <div className='lyrics'>
                 {track?.lyrics}
               </div>
-              <div className='annotationsRight'>
+              <div className='annotationsRight' id='annotation-cont'>
                 {viewAnnotation !== 0 && (
                 <SpecificAnno viewAnnotation={viewAnnotation}/>
                 )}
