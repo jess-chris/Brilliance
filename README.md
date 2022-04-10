@@ -55,11 +55,11 @@ For full details on our features see our GitHub Wiki: [Feature List](https://git
 
 * Upvotes/Downvotes
 
-### Technical Details
+# Technical Details
 
 TO DO
 
-### Future Features
+# Future Features
 * Search - search for specific songs/lyrics/artist
 * Music player - hear the song while reading the lyrics
 * User Profiles
