@@ -25,20 +25,6 @@ const HomePage = () => {
 
   return (
     <div className='main-page'>
-      
-      {/* <h2 className='main-headers'>Featured News</h2>
-      <div id='featured'>
-
-        <div id='mainFeat'>Main</div>
-        <div id='mainFeatLink'>Some img</div>
-
-        <div className='sub-feat'>1</div>
-        <div className='sub-feat'>2</div>
-        <div className='sub-feat'>3</div>
-        <div className='sub-feat'>4</div>
-
-
-      </div> */}
 
       <div id='topTracks'>
         <h1 className='main-headers'>Charts</h1>

@@ -34,7 +34,7 @@ const SpecificAnno = ({viewAnnotation}) => {
 
     return(
         <div className='annotationsRight'>
-            <div id='annoCont'>{currentAnnotation?.content}</div>
+            <div className='annoCont' id={currentAnnotation?.id}>{currentAnnotation?.content}</div>
             <div id='annoFooter'>
                 Vote Score: {currentAnnotation?.vote_score}
                 <Votes anno={currentAnnotation?.id}/>

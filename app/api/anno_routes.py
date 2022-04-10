@@ -52,14 +52,12 @@ def post_annotations():
     
     elif request.method == 'PUT':
 
-        data = request.get_json()
+        id = request.json['annotation_id']
         found = Annotation.query.get(id)
         content = request.json['content']
-        updatedContent = Annotation(
-            content=content
-        )
+        found.content = content
         
-        found.content = updatedContent.content
+        db.session.add(found)
         db.session.commit()
         return found.anno_to_dict()
     

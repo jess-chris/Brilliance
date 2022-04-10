@@ -24,14 +24,13 @@ const EditAnnoForm = () => {
     const tracksObj = useSelector(state => state.track)
     const track = Object.values(tracksObj)[0]
     const [content, setContent] = useState('')
-    
+    const id = document.querySelector('.annoCont').getAttribute('id')
 
     const editAnno = async (e) => {
         e.preventDefault();
 
-        const annotations_id = track.annotations.id
         const updatedAnno = {
-            annotations_id,
+            annotation_id: id,
             content,
             user_id: sessionUser?.id,
         }
@@ -49,6 +48,7 @@ const EditAnnoForm = () => {
     //     await dispatch(modalActions.hideModal())
     // }
 
+
     return (
         <div id='annoForm'>
             <form onSubmit={editAnno}>
@@ -63,7 +63,7 @@ const EditAnnoForm = () => {
                 >
                 </textarea >
                 <div id='anno-btn-bar'>
-                    <button style={buttonStyle} type='submit'>Submit</button>
+                  <button style={buttonStyle} type='Submit'><i className="fa-regular fa-circle-check"></i> Submit</button>
                 </div>
             </form>
         </div>

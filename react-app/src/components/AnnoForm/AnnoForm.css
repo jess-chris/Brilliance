@@ -8,6 +8,7 @@
   align-self: center;
   align-items: center;
   justify-items: center;
+  border-radius: 2px;
   right: 0;
 }
 
@@ -19,7 +20,7 @@
   justify-items: center;
 }
 
-#anno-btn-bar button {
+/* #anno-btn-bar button {
   border: 1px solid rgb(0, 0, 0);
   margin: 5px;
   font-size: 1rem;
@@ -28,4 +29,4 @@
   cursor: pointer;
   display: block;
   color: inherit;
-}
+} */

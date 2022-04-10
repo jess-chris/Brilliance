@@ -114,12 +114,9 @@ export const createAnnoThunk = anno_data => async dispatch => {
 
 export const editAnnoThunk = (anno_data) => async dispatch => {
 
-    const res = await fetch(`/api/annotations/${anno_data.track_id}`, {
+    const res = await fetch(`/api/annotations/new`, {
         method: 'PUT',
-        headers: {
-            'Content-Type': "application/json",
-            'Accept': 'application/json'
-        },
+        headers: {'Content-Type': "application/json"},
         body: JSON.stringify(anno_data)
     })
     if (res.ok) {

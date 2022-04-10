@@ -56,29 +56,6 @@ const AnnoForm = () => {
         await dispatch(modalActions.hideModal())
     }
 
-    const editAnno = async (e) => {
-        e.preventDefault();
-
-        const annotations_id = track.annotations.id
-        const updatedAnno = {
-            annotations_id,
-            content,
-            user_id: sessionUser?.id,
-        }
-
-
-        await dispatch(trackActions.editAnnoThunk(updatedAnno))
-        await dispatch(trackActions.getTrackThunk(track.id));
-        await dispatch(modalActions.hideModal())
-    }
-
-    const deleteAnno = async (e) => {
-        e.preventDefault();
-        await dispatch(trackActions.deleteAnnoThunk(track.annotations.id))
-        await dispatch(trackActions.getTrackThunk(track.id));
-        await dispatch(modalActions.hideModal())
-    }
-
     return (
         <div id='annoForm'>
             <form onSubmit={submitAnno}>
@@ -93,7 +70,7 @@ const AnnoForm = () => {
                 >
                 </textarea >
                 <div id='anno-btn-bar'>
-                    <button style={buttonStyle} type='submit'>Submit</button>
+                    <button style={buttonStyle} type='Submit'><i className="fa-regular fa-circle-check"></i> Submit</button>
                 </div>
             </form>
         </div>

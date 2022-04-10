@@ -1,4 +1,4 @@
-.modal-background {
+.modal-background-anno {
     position: fixed;
     top: 0;
     left: 0;
@@ -11,7 +11,7 @@
     align-items: center;
   }
   
-  .modal-content {
+  .modal-content-anno {
     height: 40vh;
     width: 40vw;
     background-color: white;
