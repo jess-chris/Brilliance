@@ -1,10 +1,38 @@
-.input-container div{
-    margin: 10px auto;
-    max-width: 370px;
-    width: 250px;
+body{
+    margin: 0;
+    padding: 0;
+    
+    
 }
 
-.input-container input{
+.upload-large-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color:white;
+    height:1100px;
+    background-color: black;
+    
+}
+
+.upload-input-container{
+    background-color: rgba(153,153,153,.09);
+    color: #ede8e9;
+    padding: 10px;
+    margin: 10px auto;
+    max-width: 500px;
+    width:100%;
+    font-family: 'Kanit', sans-serif;
+    border-top: 1px solid rgba(153,153,153,.18);
+}
+
+.upload-input-container div{
+    margin: 0px auto;
+    max-width: 500px;
+    width: 450px;
+}
+
+.upload-input-container input{
     background-color: #363636;
     border-color: #555;
     color: #ccc;
@@ -17,7 +45,20 @@
     padding: 5px;
 }
 
-button{
+.upload-input-container textarea{
+    background-color: #363636;
+    border-color: #555;
+    color: #ccc;
+    border: 1px solid #bbb;
+    min-width: 120px;
+    max-width: 100%;
+    width: 95%;
+    font-size: 15px;
+    border-radius: 2px;
+    padding: 5px;
+}
+
+.upload-input-container button{
     background-color: #262626;
     color: #ccc;
     border: 1px solid #444;
@@ -28,3 +69,8 @@ button{
     padding: 5px 9px;
     margin: 3px 4px 5px 0;
 }
+
+
+
+
+

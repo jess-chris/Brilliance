@@ -14,6 +14,7 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import AnnoModal from './components/AnnoModal/AnnoModal'
 import EditTrackModal from './components/EditTrackModal/EditTrackModal'
+import AboutLinks from './components/About/AboutLinks'
 
 
 function App() {
@@ -62,6 +63,10 @@ function App() {
         <ProtectedRoute path='/' exact={true} >
           <HomePage />
         </ProtectedRoute>
+
+        <ProtectedRoute path='/about' exact={true} >
+          <AboutLinks />
+        </ProtectedRoute>     
         <Route path=''>
           <div className='not-found'>
             <h1>404 - Page not found!</h1>

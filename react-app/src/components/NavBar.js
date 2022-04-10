@@ -19,14 +19,17 @@ const NavBar = () => {
             <NavLink to='/' exact={true} activeClassName='active'>
               Home
             </NavLink>
-            <NavLink to='/login' exact={true} activeClassName='active'>
-              Login
-            </NavLink>
-            <NavLink to='/sign-up' exact={true} activeClassName='active'>
-              Sign Up
+            <NavLink to='/about' exact={true} activeClassName='active'>
+              About Us
             </NavLink>
             <NavLink to='/' className='navBarTitle'>
               BRILLIANCE
+            </NavLink>
+            <NavLink to='/login' exact={true} activeClassName='active'>
+              Log In
+            </NavLink>
+            <NavLink to='/sign-up' exact={true} activeClassName='active'>
+              Sign Up
             </NavLink>
           </div>
         )}
@@ -38,6 +41,9 @@ const NavBar = () => {
             </NavLink>
             <NavLink to='/users' exact={true} activeClassName='active'>
               Users
+            </NavLink>
+            <NavLink to='/about' exact={true} activeClassName='active'>
+              About Us
             </NavLink>
             <NavLink to='/' className='navBarTitle'>
               BRILLIANCE

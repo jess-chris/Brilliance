@@ -1,0 +1,12 @@
+#about-container{
+    display: flex;
+    
+}
+
+#about-container ul {
+    display: flex;
+}
+
+#about-container a{
+    color:rgb(61, 161, 255);
+}
