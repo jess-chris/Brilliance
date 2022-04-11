@@ -30,7 +30,7 @@ def create_vote():
         if prev_comment_vote.vote == vote:
             if vote == False:
                 comment_score.vote_score = (comment_score.vote_score + 1)
-            else:
+            elif vote == True:
                 comment_score.vote_score = (comment_score.vote_score - 1)
             db.session.delete(prev_comment_vote)
             db.session.add(comment_score)
@@ -56,7 +56,7 @@ def create_vote():
         if prev_anno_vote.vote == vote:
             if vote == False:
                 annotation_score.vote_score = (annotation_score.vote_score + 1)
-            else:
+            elif vote == True:
                 annotation_score.vote_score = (annotation_score.vote_score - 1)
             db.session.delete(prev_anno_vote)
             db.session.add(annotation_score)
