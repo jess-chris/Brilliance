@@ -1,3 +1,4 @@
+from mimetypes import init
 from flask import Blueprint, jsonify, request, redirect
 from app.models import db, Annotation
 # from app.forms import AnnotationForm
@@ -24,7 +25,6 @@ def annotations():
 @anno_routes.route('/new', methods=['POST', 'PUT', 'DELETE'])
 def post_annotations():
     if request.method == 'POST':
-        data = request.get_json()
         #print('\nDAAATA\n', data)
 
         user_id = request.json['user_id']
@@ -34,6 +34,17 @@ def post_annotations():
         initialAnnoIndex = request.json['initialAnnoIndex']
         finalAnnoIndex = request.json['finalAnnoIndex']
 
+        current_annotations = Annotation.query.filter_by(track_id=track_id).all()
+        
+        for anno in current_annotations:
+            
+            ini = anno.initialAnnoIndex
+            fin = anno.finalAnnoIndex
+            
+            if ini <= finalAnnoIndex and ini >= initialAnnoIndex:
+                return {'errors': ['Highlighted lyrics have already been annotated!']}
+            elif fin <= finalAnnoIndex and fin >= initialAnnoIndex:
+                return {'errors': ['Highlighted lyrics have already been annotated!']}
 
 
         annotation = Annotation(
