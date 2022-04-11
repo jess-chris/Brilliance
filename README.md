@@ -57,7 +57,31 @@ For full details on our features see our GitHub Wiki: [Feature List](https://git
 
 # Technical Details
 
-TO DO
+When first going into this project we didn't think the way we wanted annotations to display would be that difficult, but it ended up being quite the challenge to get it correct. For all of us it was really the first time we had to deal with exact ranges of a seclection on a given container, and it got more complicated the more we thought about it.
+
+```
+const annoCont = document.querySelector('.lyrics')
+const sel = document.getSelection()
+let initialIndex; 
+let finalIndex;
+
+if (sel.rangeCount > 0) {
+    const range = sel.getRangeAt(0)
+    let clone = range.cloneRange()
+    clone.selectNodeContents(annoCont)
+    clone.setEnd(range.startContainer, range.startOffset);
+    initialIndex = clone.toString().length;
+    clone.setEnd(range.endContainer, range.endOffset);
+    finalIndex = clone.toString().length;
+}
+```
+Figuring out this part was probably one of the biggest challenges we faced. At first we were able to get approximate ranges, and it seemed to work, but soon enough we realized that it was causing more issues. So the code here being able to first get the container, find a starting index for our current selection, and ending index, and measuring that based upon the length of the lyrics to then store in our database for correct positioning.
+
+We ended up having ranges stored that looked like this:
+
+![Capture](https://user-images.githubusercontent.com/94084333/162674782-b128f7a3-08b6-4f80-baea-ac8fd5895da8.PNG)
+
+In the end it was a very interesting problem to solve, and one we really didn't think too much about at first.
 
 # Future Features
 * Search - search for specific songs/lyrics/artist
