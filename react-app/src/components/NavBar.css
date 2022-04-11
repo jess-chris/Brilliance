@@ -10,7 +10,7 @@
 }
 
 .navLinks{
-    font-family: 'Programme Regular';
+    font-family: 'Kanit', sans-serif;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -30,7 +30,7 @@ a{
 
 body {
     margin: 0px;
-    font-family: 'Programme Regular'
+    font-family: 'Kanit', sans-serif;
 }
 
 button{

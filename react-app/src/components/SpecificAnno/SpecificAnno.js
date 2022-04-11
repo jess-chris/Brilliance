@@ -15,7 +15,7 @@ const SpecificAnno = ({viewAnnotation}) => {
     const track = Object.values(tracksObj)[0]
 
     const currentAnnotation = track?.annotations.find(anno => anno.id === Number(viewAnnotation))
-
+    const userId = useSelector(state => state.session.user.id)
 
     const editAnno = async (e) => {
         e.preventDefault();
@@ -39,8 +39,13 @@ const SpecificAnno = ({viewAnnotation}) => {
                 Vote Score: {currentAnnotation?.vote_score}
                 <Votes anno={currentAnnotation?.id}/>
             </div>
+            {currentAnnotation?.user_id === userId && (
+            <>
             <button id='deleteBtn' onClick={deleteAnno}>Delete</button>
             <button id='deleteBtn' onClick={editAnno}>Edit</button>
+            </>
+            )}
+            
         </div>
     )
 }

@@ -2,7 +2,9 @@ textarea {
   resize: none;
 }
 
-
+* {
+  font-family: 'Kanit', sans-serif;
+}
 
 .main-page {
   display: block;
@@ -22,11 +24,10 @@ textarea {
 
 }
 
-
-#typeOfTracks {
-  grid-column: grid-start / grid-end;
+.main-headers {
   text-align: center;
 }
+
 
 .track-selector {
   z-index: 1;
@@ -89,67 +90,6 @@ textarea {
 }
 
 
-.load-more-cont {
-  grid-column: center-start / center-end;
-  text-align: center;
-}
-
-.load-more {
-  border-color: rgb(0, 0, 0);
-  color: rgb(0, 0, 0);
-  border-width: 2px;
-  border-style: solid;
-  border-radius: 0px;
-  cursor: pointer;
-  display: inline-block;
-  font-family: Programme, Arial, sans-serif;
-  font-size: 0.875rem;
-  line-height: 1;
-  margin: 0px;
-  text-align: center;
-  padding: 0.75rem 1.313rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-
-#featured {
-
-  display: grid;
-  justify-content: center;
-  grid-template-columns: [grid-start] repeat(3, minmax(14px, 44px)) [center-start] repeat(6, minmax(14px, 44px)) [center-end] repeat(3, minmax(14px, 44px)) [grid-end];
-  gap: 40px 60px;
-
-  width: 100%;
-  /* height: 600px; */
-
-  border: 1px solid black;
-
-}
-
-.main-headers {
-  text-align: center;
-}
-
-#mainFeat {
-  grid-column: span 5 / auto;
-
-  display: block;
-  box-sizing: border-box;
-
-}
-
-#mainFeatLink {
-  grid-column: span 7 / auto;
-}
-
-.sub-feat {
-
-  grid-column: span 3 / auto;
-  min-height: 400px;
-  position: relative;
-
-}
 
 .not-found {
   display: flex;
