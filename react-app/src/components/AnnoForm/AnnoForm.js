@@ -29,9 +29,6 @@ const AnnoForm = () => {
     clone.setEnd(range.endContainer, range.endOffset);
     const finalIndex = clone.toString().length;
 
-    console.log(initialIndex)
-    console.log(finalIndex)
-
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const tracksObj = useSelector(state => state.track)
@@ -53,9 +50,9 @@ const AnnoForm = () => {
             finalAnnoIndex
         }
 
+        await dispatch(modalActions.hideModal())
         await dispatch(trackActions.createAnnoThunk(data))
         await dispatch(trackActions.getTrackThunk(track.id));
-        await dispatch(modalActions.hideModal())
     }
 
     return (
