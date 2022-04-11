@@ -1,1 +1,31 @@
 /* TODO Add site wide styles */
+#spacing{
+    display: flex;
+    position: absolute;
+    height: 100px;
+    width: 100%;
+}
+
+#footer{
+    display: flex;
+    position: fixed;
+    height: 30px;
+    background-color: black;
+    bottom: 0;
+    width: 100%;
+    justify-content: space-evenly;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+
+.githubImg{
+    width: 30px;
+    z-index: 50;
+    height: 30px;
+    background-color: black;
+}
+
+label{
+    padding-top: 2px;
+    color: white;
+}
