@@ -19,18 +19,21 @@ const buttonStyle = {
 const AnnoForm = () => {
 
     const annoCont = document.querySelector('.lyrics')
+
+    let initialIndex; 
+    let finalIndex;
+
     const sel = document.getSelection()
-    const range = sel.getRangeAt(0)
 
-    let clone = range.cloneRange()
-    clone.selectNodeContents(annoCont)
-    clone.setEnd(range.startContainer, range.startOffset);
-    const initialIndex = clone.toString().length;
-    clone.setEnd(range.endContainer, range.endOffset);
-    const finalIndex = clone.toString().length;
-
-    console.log(initialIndex)
-    console.log(finalIndex)
+    if (sel.rangeCount > 0) {
+        const range = sel.getRangeAt(0)
+        let clone = range.cloneRange()
+        clone.selectNodeContents(annoCont)
+        clone.setEnd(range.startContainer, range.startOffset);
+        initialIndex = clone.toString().length;
+        clone.setEnd(range.endContainer, range.endOffset);
+        finalIndex = clone.toString().length;
+    }
 
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
@@ -45,7 +48,7 @@ const AnnoForm = () => {
         e.preventDefault();
         //const user_id = sessionUser?.id
         const id = track.id
-        const data = {
+        const newAnno = {
             content,
             user_id: sessionUser?.id,
             track_id: +id,
@@ -53,10 +56,13 @@ const AnnoForm = () => {
             finalAnnoIndex
         }
 
-        await dispatch(trackActions.createAnnoThunk(data))
-        await dispatch(trackActions.getTrackThunk(track.id));
+
         await dispatch(modalActions.hideModal())
-    }
+        await dispatch(trackActions.createAnnoThunk(newAnno))
+        await dispatch(trackActions.getTrackThunk(track.id));
+        }
+
+    
 
     return (
         <div id='annoForm'>

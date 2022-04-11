@@ -19,6 +19,11 @@ h4 {
     background-color: yellow;
 }
 
+.annotated:hover {
+    background-color: gold;
+    cursor: pointer;
+}
+
 
 .image-box{
     height:320px;

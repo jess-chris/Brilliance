@@ -43,8 +43,8 @@ const EditTrackForm = () => {
         }
         if(errors.length > 0) return setErrors(["Artist, Title, or Lyrics cannot be empty"]);
 
-        await dispatch(trackActions.getTrackThunk(track.id));
         await dispatch(modalActions.hideModal())
+        await dispatch(trackActions.getTrackThunk(track.id));
 
     }
 

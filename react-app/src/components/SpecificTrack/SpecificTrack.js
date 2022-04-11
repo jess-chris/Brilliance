@@ -28,6 +28,7 @@ const SpecificTrack = () => {
   const { trackId } = useParams();
 
   const [viewAnnotation, setViewAnnotation] = useState(0);
+  const [users, setUsers] = useState([]);
 
   const userId = useSelector(state => state.session.user.id)
   const tracksObj = useSelector(state => state.track)
@@ -41,6 +42,15 @@ const SpecificTrack = () => {
         setLoaded(true);
       })();
     }, [dispatch, trackId]);
+
+    useEffect(() => {
+      async function fetchData() {
+        const response = await fetch('/api/users/');
+        const responseData = await response.json();
+        setUsers(responseData.users);
+      }
+      fetchData();
+    }, []);
 
 
 
@@ -205,7 +215,12 @@ const SpecificTrack = () => {
         <div id='users-comments'>
           {commentsObj?.map(comment => (
             <div id='single-comment' key={comment.id}>
-              <p>{comment.content}</p>
+              {users?.map(user => (
+                 user.id === comment.user_id && (
+                      <p>{user.username}</p>
+                 )
+              ))}
+              <p>&nbsp;&nbsp;&nbsp;{comment.content}</p>
               <div id='comment-footer'>
                 Vote Score: {comment?.vote_score}
                 <Votes comment_id={comment?.id} />
