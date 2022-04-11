@@ -215,11 +215,13 @@ const SpecificTrack = () => {
         <div id='users-comments'>
           {commentsObj?.map(comment => (
             <div id='single-comment' key={comment.id}>
+              <div>
               {users?.map(user => (
                  user.id === comment.user_id && (
                       <p>{user.username}</p>
                  )
               ))}
+              </div>
               <p>&nbsp;&nbsp;&nbsp;{comment.content}</p>
               <div id='comment-footer'>
                 Vote Score: {comment?.vote_score}
