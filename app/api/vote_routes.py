@@ -28,8 +28,11 @@ def create_vote():
     if prev_comment_vote != None:
         comment_score = Comment.query.get(comment_id)
         if prev_comment_vote.vote == vote:
+            if vote == False:
+                comment_score.vote_score = (comment_score.vote_score + 1)
+            else:
+                comment_score.vote_score = (comment_score.vote_score - 1)
             db.session.delete(prev_comment_vote)
-            comment_score.vote_score = (comment_score.vote_score + 1, comment_score.vote_score - 1)[vote]
             db.session.add(comment_score)
             db.session.commit()
             return prev_comment_vote.to_dict()
@@ -51,9 +54,12 @@ def create_vote():
     elif prev_anno_vote != None:
         annotation_score = Annotation.query.get(annotation_id)
         if prev_anno_vote.vote == vote:
-            annotation_score.vote_score = (annotation_score.vote_score + 1, annotation_score.vote_score - 1)[vote]
-            db.session.add(annotation_score)
+            if vote == False:
+                annotation_score.vote_score = (annotation_score.vote_score + 1)
+            else:
+                annotation_score.vote_score = (annotation_score.vote_score - 1)
             db.session.delete(prev_anno_vote)
+            db.session.add(annotation_score)
             db.session.commit()
             return prev_anno_vote.to_dict()
         elif vote == True:

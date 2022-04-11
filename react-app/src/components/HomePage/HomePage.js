@@ -32,12 +32,6 @@ const HomePage = () => {
 
         <div id='typeOfTracks'>
 
-          <div className='track-selector'>
-            <select>
-              <option value="">Songs / All Genres / Today</option>
-            </select>
-          </div>
-
         </div>
 
         <div id='track-cont'>
@@ -57,10 +51,6 @@ const HomePage = () => {
         </div>
 
       </div>
-
-        <div className='load-more-cont'>
-          <div className='load-more'>Load More</div>
-        </div>
 
     </div>
     
