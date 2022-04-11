@@ -220,7 +220,7 @@ const SpecificTrack = () => {
                       <p>{user.username}</p>
                  )
               ))}
-              <p>{comment.content}</p>
+              <p>&nbsp;&nbsp;&nbsp;{comment.content}</p>
               <div id='comment-footer'>
                 Vote Score: {comment?.vote_score}
                 <Votes comment_id={comment?.id} />
