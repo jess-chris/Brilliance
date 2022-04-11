@@ -51,7 +51,6 @@ const Vote = ({ comment_id, anno, annoIdComment, annoCommentId }) => {
         //therefore it is an annotation comment,
         //need the annotation id as well
         else if (typeof commentId === 'undefined') {
-            //console.log('COMMENT UNDEFINED, NOT TRACK COMMENT, IS ANNO COMMENT')
             const commentId = null || annoCommentId
             const annotationId = annoIdComment
 
