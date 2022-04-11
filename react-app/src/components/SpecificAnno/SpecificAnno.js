@@ -14,7 +14,7 @@ const SpecificAnno = ({viewAnnotation}) => {
     const tracksObj = useSelector(state => state.track)
     const track = Object.values(tracksObj)[0]
 
-    const currentAnnotation = track?.annotations.find(anno => anno.id == viewAnnotation)
+    const currentAnnotation = track?.annotations.find(anno => anno.id === Number(viewAnnotation))
 
 
     const editAnno = async (e) => {
