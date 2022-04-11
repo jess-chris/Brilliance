@@ -36,9 +36,9 @@ const EditAnnoForm = () => {
         }
 
 
+        await dispatch(modalActions.hideModal())
         await dispatch(trackActions.editAnnoThunk(updatedAnno))
         await dispatch(trackActions.getTrackThunk(track.id));
-        await dispatch(modalActions.hideModal())
     }
 
     // const deleteAnno = async (e) => {
