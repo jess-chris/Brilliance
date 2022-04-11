@@ -108,6 +108,10 @@ export const createAnnoThunk = anno_data => async dispatch => {
     })
     if (res.ok) {
         const data = await res.json()
+        if (data.errors) {
+            console.log(data)
+            return data.errors;
+          }
         return data;
     }
 }
