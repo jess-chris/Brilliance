@@ -8,51 +8,50 @@ def seed_tracks():
     test_track = Track(
         user_id = 1,
         title = 'Mr.Brightside',
-        lyrics =
-    '''
-    Coming out of my cage and I've been doing just fine
-    Gotta, gotta be down, because I want it all
-    It started out with a kiss, how did it end up like this?
-    It was only a kiss, it was only a kiss
-    Now I'm falling asleep and she's calling a cab
-    While he's having a smoke and she's taking a drag
-    Now they're going to bed and my stomach is sick
-    And it's all in my head, but she's touching his
+        lyrics = '''
+            Coming out of my cage and I've been doing just fine
+            Gotta, gotta be down, because I want it all
+            It started out with a kiss, how did it end up like this?
+            It was only a kiss, it was only a kiss
+            Now I'm falling asleep and she's calling a cab
+            While he's having a smoke and she's taking a drag
+            Now they're going to bed and my stomach is sick
+            And it's all in my head, but she's touching his
 
-    Chest now, he takes off her
-    Dress now, let me go
-    And I just can't look, it's killing me
-    They're taking control
+            Chest now, he takes off her
+            Dress now, let me go
+            And I just can't look, it's killing me
+            They're taking control
 
-    Jealousy, turning saints into the sea
-    Swimming through sick lullabies, choking on your alibis
-    But it's just the price I pay, destiny is calling me
-    Open up my eager eyes, 'cause I'm Mr. Brightside
+            Jealousy, turning saints into the sea
+            Swimming through sick lullabies, choking on your alibis
+            But it's just the price I pay, destiny is calling me
+            Open up my eager eyes, 'cause I'm Mr. Brightside
 
-    I'm coming out of my cage and I've been doing just fine
-    Gotta, gotta be down, because I want it all
-    It started out with a kiss, how did it end up like this?
-    It was only a kiss, it was only a kiss
-    Now I'm falling asleep and she's calling a cab
-    While he's having a smoke and she's taking a drag
-    Now they're going to bed and my stomach is sick
-    And it's all in my head, but she's touching his
+            I'm coming out of my cage and I've been doing just fine
+            Gotta, gotta be down, because I want it all
+            It started out with a kiss, how did it end up like this?
+            It was only a kiss, it was only a kiss
+            Now I'm falling asleep and she's calling a cab
+            While he's having a smoke and she's taking a drag
+            Now they're going to bed and my stomach is sick
+            And it's all in my head, but she's touching his
 
-    Chest now, he takes off her
-    Dress now, let me go
-    'Cause I just can't look, it's killing me
-    They're taking control
+            Chest now, he takes off her
+            Dress now, let me go
+            'Cause I just can't look, it's killing me
+            They're taking control
 
-    Jealousy, turning saints into the sea
-    Swimming through sick lullabies, choking on your alibis
-    But it's just the price I pay, destiny is calling me
-    Open up my eager eyes, 'cause I'm Mr. Brightside
+            Jealousy, turning saints into the sea
+            Swimming through sick lullabies, choking on your alibis
+            But it's just the price I pay, destiny is calling me
+            Open up my eager eyes, 'cause I'm Mr. Brightside
 
-    I never...
-    I never...
-    I never...
-    I never...
-    ''',
+            I never...
+            I never...
+            I never...
+            I never...
+            ''',
         artist = 'The Killers',
         album_image = 'https://media.pitchfork.com/photos/5929bc3513d197565213b27f/1:1/w_320,c_limit/192293f3.jpg',
         created_at = today.strftime("%B %d, %Y"),
@@ -131,7 +130,7 @@ def seed_tracks():
             Oh it's what you do to me
             Oh it's what you do to me
             What you do to me
-        ''',
+            ''',
         artist = "The Plain White T's",
         album_image = 'https://www.udiscovermusic.com/wp-content/uploads/2020/04/Plain-White-Ts-All-That-We-Needed.jpg',
         created_at = today.strftime("%B %d, %Y"),
@@ -142,87 +141,87 @@ def seed_tracks():
         user_id = 3,
         title = 'Semi-Charmed Life',
         lyrics = '''
-                        Doo doo doo, doo doo-doo doo...
+            Doo doo doo, doo doo-doo doo...
 
-                I'm packed and I'm holding
-                I'm smiling, she's living, she's golden
-                She lives for me, says she lives for me
-                Ovation, her own motivation
-                She comes round and she goes down on me
+            I'm packed and I'm holding
+            I'm smiling, she's living, she's golden
+            She lives for me, says she lives for me
+            Ovation, her own motivation
+            She comes round and she goes down on me
 
-                And I make her smile, like a drug for you
-                Do ever what you wanna do, coming over you
-                Keep on smiling, what we go through
-                One stop to the rhythm that divides you
+            And I make her smile, like a drug for you
+            Do ever what you wanna do, coming over you
+            Keep on smiling, what we go through
+            One stop to the rhythm that divides you
 
-                And I speak to you like the chorus to the verse
-                Chop another line like a coda with a curse
-                Come on like a freak show takes the stage
-                We give them the games we play, she said...
+            And I speak to you like the chorus to the verse
+            Chop another line like a coda with a curse
+            Come on like a freak show takes the stage
+            We give them the games we play, she said...
 
-                I want something else to get me through this
-                Semi-charmed kinda life, baby, baby
-                I want something else, I'm not listening when you say good-bye
+            I want something else to get me through this
+            Semi-charmed kinda life, baby, baby
+            I want something else, I'm not listening when you say good-bye
 
-                Doo doo doo, doo doo-doo doo...
+            Doo doo doo, doo doo-doo doo...
 
-                The sky was gold, it was rose
-                I was taking sips of it through my nose
-                And I wish I could get back there, someplace back there
-                Smiling in the pictures you would take
-                Doing crystal meth, will lift you up until you break
+            The sky was gold, it was rose
+            I was taking sips of it through my nose
+            And I wish I could get back there, someplace back there
+            Smiling in the pictures you would take
+            Doing crystal meth, will lift you up until you break
 
-                It won't stop, I won't come down
-                I keep stock with a tick-tock rhythm, a bump for the drop
-                And then I bumped up, I took the hit that I was given
-                Then I bumped again, then I bumped again
-                I said...
+            It won't stop, I won't come down
+            I keep stock with a tick-tock rhythm, a bump for the drop
+            And then I bumped up, I took the hit that I was given
+            Then I bumped again, then I bumped again
+            I said...
 
-                How do I get back there to the place where I fell asleep inside you
-                How do I get myself back to the place where you said...
+            How do I get back there to the place where I fell asleep inside you
+            How do I get myself back to the place where you said...
 
-                I want something else to get me through this
-                Semi-charmed kinda life, baby, baby
-                I want something else, I'm not listening when you say good-bye
+            I want something else to get me through this
+            Semi-charmed kinda life, baby, baby
+            I want something else, I'm not listening when you say good-bye
 
-                I believe in the sand beneath my toes
-                The beach gives a feeling, an earthy feeling
-                I believe in the faith that grows
-                And the four right chords can make me cry
-                When I'm with you I feel like I could die
-                And that would be alright, alright
+            I believe in the sand beneath my toes
+            The beach gives a feeling, an earthy feeling
+            I believe in the faith that grows
+            And the four right chords can make me cry
+            When I'm with you I feel like I could die
+            And that would be alright, alright
 
-                And when the plane came in, she said she was crashing
-                The velvet it rips in the city, we tripped on the urge to feel alive
-                Now I'm struggling to survive,
-                Those days you were wearing that velvet dress
-                You're the priestess, I must confess
-                Those little red panties they pass the test
-                Slide up around the belly, face down on the mattress one
+            And when the plane came in, she said she was crashing
+            The velvet it rips in the city, we tripped on the urge to feel alive
+            Now I'm struggling to survive,
+            Those days you were wearing that velvet dress
+            You're the priestess, I must confess
+            Those little red panties they pass the test
+            Slide up around the belly, face down on the mattress one
 
-                And you hold me, and we're broken
-                Still it's all that I wanna do, just a little now
-                Feel myself, heading off the ground
-                I'm scared, I'm not coming down
-                No, no
-                And I won't run for my life
-                She's got her jaws now locked down in a smile
-                But nothing is alright, alright
+            And you hold me, and we're broken
+            Still it's all that I wanna do, just a little now
+            Feel myself, heading off the ground
+            I'm scared, I'm not coming down
+            No, no
+            And I won't run for my life
+            She's got her jaws now locked down in a smile
+            But nothing is alright, alright
 
-                And I want something else to get me through this life
-                Baby, I want something else
-                Not listening when you say
-                Good-bye, good-bye, good-bye, good-bye
+            And I want something else to get me through this life
+            Baby, I want something else
+            Not listening when you say
+            Good-bye, good-bye, good-bye, good-bye
 
-                Doo doo doo, doo doo-doo doo...
+            Doo doo doo, doo doo-doo doo...
 
-                The sky was gold, it was rose (Doo doo doo, doo doo-doo doo...)
-                I was taking sips of it through my nose (Doo doo doo, doo doo-doo doo...)
-                And I wish I could get back there (Doo doo doo, doo doo-doo doo...)
-                Someplace back there, in the place we used to start (Doo doo doo, doo doo-doo doo...)
+            The sky was gold, it was rose (Doo doo doo, doo doo-doo doo...)
+            I was taking sips of it through my nose (Doo doo doo, doo doo-doo doo...)
+            And I wish I could get back there (Doo doo doo, doo doo-doo doo...)
+            Someplace back there, in the place we used to start (Doo doo doo, doo doo-doo doo...)
 
-                I want something else (Doo doo doo, doo doo-doo doo...) 
-                 ''',
+            I want something else (Doo doo doo, doo doo-doo doo...) 
+            ''',
         artist = 'Third Eye Blind',
         album_image = 'https://m.media-amazon.com/images/I/71ihm3HSaML._SS500_.jpg',
         created_at = today.strftime("%B %d, %Y"),
@@ -236,7 +235,7 @@ def seed_tracks():
             Tequila!
             Tequila!
             Tequila!
-                 ''',
+            ''',
         artist = 'The Champs',
         album_image = '',
         created_at = today.strftime("%B %d, %Y"),
@@ -247,58 +246,58 @@ def seed_tracks():
         user_id = 5,
         title = 'All Star',
         lyrics = '''
-        Somebody once told me the world is gonna roll me
-                I ain't the sharpest tool in the shed
-                She was looking kind of dumb with her finger and her thumb
-                In the shape of an "L" on her forehead
-                Well the years start coming and they don't stop coming
-                Fed to the rules and I hit the ground running
-                Didn't make sense not to live for fun
-                Your brain gets smart but your head gets dumb
-                So much to do, so much to see
-                So what's wrong with taking the back streets?
-                You'll never know if you don't go
-                You'll never shine if you don't glow
-                Hey now, you're an all-star, get your game on, go play
-                Hey now, you're a rock star, get the show on, get paid
-                And all that glitters is gold
-                Only shooting stars break the mold
-                It's a cool place and they say it gets colder
-                You're bundled up now, wait 'til you get older
-                But the meteor men beg to differ
-                Judging by the hole in the satellite picture
-                The ice we skate is getting pretty thin
-                The water's getting warm so you might as well swim
-                My world's on fire, how about yours?
-                That's the way I like it and I'll never get bored
-                Hey now, you're an all-star, get your game on, go play
-                Hey now, you're a rock star, get the show on, get paid
-                All that glitters is gold
-                Only shooting stars break the mold
-                Hey now, you're an all-star, get your game on, go play
-                Hey now, you're a rock star, get the show, on get paid
-                And all that glitters is gold
-                Only shooting stars
-                Somebody once asked could I spare some change for gas?
-                I need to get myself away from this place
-                I said, "Yup" what a concept
-                I could use a little fuel myself
-                And we could all use a little change
-                Well, the years start coming and they don't stop coming
-                Fed to the rules and I hit the ground running
-                Didn't make sense not to live for fun
-                Your brain gets smart but your head gets dumb
-                So much to do, so much to see
-                So what's wrong with taking the back streets?
-                You'll never know if you don't go (go!)
-                You'll never shine if you don't glow
-                Hey now, you're an all-star, get your game on, go play
-                Hey now, you're a rock star, get the show on, get paid
-                And all that glitters is gold
-                Only shooting stars break the mold
-                And all that glitters is gold
-                Only shooting stars break the mold
-                 ''',
+            Somebody once told me the world is gonna roll me
+            I ain't the sharpest tool in the shed
+            She was looking kind of dumb with her finger and her thumb
+            In the shape of an "L" on her forehead
+            Well the years start coming and they don't stop coming
+            Fed to the rules and I hit the ground running
+            Didn't make sense not to live for fun
+            Your brain gets smart but your head gets dumb
+            So much to do, so much to see
+            So what's wrong with taking the back streets?
+            You'll never know if you don't go
+            You'll never shine if you don't glow
+            Hey now, you're an all-star, get your game on, go play
+            Hey now, you're a rock star, get the show on, get paid
+            And all that glitters is gold
+            Only shooting stars break the mold
+            It's a cool place and they say it gets colder
+            You're bundled up now, wait 'til you get older
+            But the meteor men beg to differ
+            Judging by the hole in the satellite picture
+            The ice we skate is getting pretty thin
+            The water's getting warm so you might as well swim
+            My world's on fire, how about yours?
+            That's the way I like it and I'll never get bored
+            Hey now, you're an all-star, get your game on, go play
+            Hey now, you're a rock star, get the show on, get paid
+            All that glitters is gold
+            Only shooting stars break the mold
+            Hey now, you're an all-star, get your game on, go play
+            Hey now, you're a rock star, get the show, on get paid
+            And all that glitters is gold
+            Only shooting stars
+            Somebody once asked could I spare some change for gas?
+            I need to get myself away from this place
+            I said, "Yup" what a concept
+            I could use a little fuel myself
+            And we could all use a little change
+            Well, the years start coming and they don't stop coming
+            Fed to the rules and I hit the ground running
+            Didn't make sense not to live for fun
+            Your brain gets smart but your head gets dumb
+            So much to do, so much to see
+            So what's wrong with taking the back streets?
+            You'll never know if you don't go (go!)
+            You'll never shine if you don't glow
+            Hey now, you're an all-star, get your game on, go play
+            Hey now, you're a rock star, get the show on, get paid
+            And all that glitters is gold
+            Only shooting stars break the mold
+            And all that glitters is gold
+            Only shooting stars break the mold
+            ''',
         artist = 'Smash Mouth',
         album_image = '',
         created_at = today.strftime("%B %d, %Y"),
@@ -357,7 +356,7 @@ def seed_tracks():
             Ba-dee-ya, dee-ya, dee-ya
             Ba-dee-ya, dee-ya, dee-ya
             Ba-dee-ya, dee-ya, dee-ya, dee-ya!
-                 ''',
+            ''',
         artist = 'Earth, Wind & Fire',
         album_image = '',
         created_at = today.strftime("%B %d, %Y"),
@@ -487,7 +486,7 @@ def seed_tracks():
             Now watch me (Crank that Soulja Boy)
             Now watch me (Crank that Soulja Boy)
             Now watch
-                 ''',
+            ''',
         artist = 'Soulja Boy',
         album_image = 'https://img.discogs.com/WHcssBxzecK10nOKmsOq5U_Jp2Q=/fit-in/300x300/filters:strip_icc():format(webp):mode_rgb():quality(40)/discogs-images/R-1263083-1494598925-8726.jpeg.jpg',
         created_at = today.strftime("%B %d, %Y"),
@@ -542,7 +541,7 @@ def seed_tracks():
             Everybody look at me 'cause I'm sailing on a boat (whoa)
             I'm on a boat, I'm on a boat
             Take a good hard look at the motherfuckin' boat (shorty, shorty, yeah)
-                 ''',
+            ''',
         artist = 'The Lonely Island',
         album_image = '',
         created_at = today.strftime("%B %d, %Y"),
@@ -624,7 +623,7 @@ def seed_tracks():
             Hey ya! (Uh oh) Hey ya! (Uh oh)
             Hey ya! (Uh oh) Hey ya! (Uh oh)
             Hey ya! (Uh oh) Hey ya! (Uh oh)
-                 ''',
+            ''',
         artist = 'OutKast',
         album_image = 'https://i.discogs.com/Txt_sMh4sbtWv7NdrzGKgzCNmlZUOYNpMPzDZrB-9io/rs:fit/g:sm/q:90/h:600/w:589/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTMxNTE4/OS0xMjQ2MjgyODUx/LmpwZWc.jpeg',
         created_at = today.strftime("%B %d, %Y"),
@@ -779,7 +778,7 @@ def seed_tracks():
             Used to dream of outer space
             But now they're laughing at our face saying
             "Wake up, you need to make money", yeah
-                 ''',
+            ''',
         artist = 'Twenty One Pilots',
         album_image = 'https://i.discogs.com/yxX98Rjw5_KL2ykk4wXLOn-A-zPbq4Ri12XK_i_80ws/rs:fit/g:sm/q:90/h:591/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTcyMjEz/NDYtMTQ1MjMyNDU5/MS00MjY1LmpwZWc.jpeg',
         created_at = today.strftime("%B %d, %Y"),
@@ -854,7 +853,7 @@ def seed_tracks():
             Oh-oh!
             Oh-oh!
             Oh-oh!
-                 ''',
+            ''',
         artist = 'Sean Paul',
         album_image = '',
         created_at = today.strftime("%B %d, %Y"),
