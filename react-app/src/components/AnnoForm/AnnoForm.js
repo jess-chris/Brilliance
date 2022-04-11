@@ -29,6 +29,8 @@ const AnnoForm = () => {
     clone.setEnd(range.endContainer, range.endOffset);
     const finalIndex = clone.toString().length;
 
+    console.log(initialIndex)
+    console.log(finalIndex)
 
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
