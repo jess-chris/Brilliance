@@ -85,6 +85,7 @@ class Comment(db.Model):
   def to_dict(self):
     return {
       'id': self.id,
+      'created_at': self.created_at,
       'user_id': self.user_id,
       'annotation_id': self.annotation_id,
       'track_id': self.track_id,

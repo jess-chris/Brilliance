@@ -33,7 +33,10 @@ const SpecificTrack = () => {
   const userId = useSelector(state => state.session.user.id)
   const tracksObj = useSelector(state => state.track)
   const track = Object.values(tracksObj)[0]
-  const commentsObj = track?.comments
+  const commentsObj = track?.comments.sort((a, b) => (b.id - a.id))
+
+  console.log(commentsObj)
+
 
 
     useEffect(() => {
